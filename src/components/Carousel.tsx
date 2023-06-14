@@ -16,7 +16,7 @@ function ControlledCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="/bag banner.jpg"
+          src="/banners/bag_banner.jpg"
           alt="First slide"
         />
         <Carousel.Caption>
@@ -27,7 +27,7 @@ function ControlledCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="/keyring banner.jpg"
+          src="/banners/keyring_banner.jpg"
           alt="Second slide"
         />
 
@@ -39,7 +39,7 @@ function ControlledCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="/nuigurumi banner.jpg"
+          src="/banners/nuigurumi_banner.jpg"
           alt="Third slide"
         />
 
