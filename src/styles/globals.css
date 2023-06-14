@@ -32,11 +32,21 @@ body {
   height: 10px;
   left: -15px;
   top: 8px;
-  content: "안녕";
   border-right: 1px solid rgb(204, 204, 204);
 }
 
 .carousel-control-prev,
 .carousel-control-next {
   width: 5% !important;
+}
+
+.after-won::after {
+  position: absolute;
+  content: "원";
+  font-size: 13px;
+  margin-left: 3px;
+}
+
+.flex-item-propduct:nth-child(5n) {
+  margin-right: 0;
 }
