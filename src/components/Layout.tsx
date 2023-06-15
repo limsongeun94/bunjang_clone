@@ -1,12 +1,9 @@
 import Header from "./Header";
-<<<<<<< HEAD
 import Footer from "./Footer";
-=======
-import { ReactNode } from "react"
->>>>>>> a976f96ec95030efe48111d6e2a07efce4ac348b
+import { ReactNode } from "react";
 
 interface LayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
