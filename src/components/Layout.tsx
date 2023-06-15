@@ -1,6 +1,11 @@
 import Header from "./Header";
+import { ReactNode } from "react"
 
-export default function Layout({ children }) {
+type LayoutProps = {
+  children: ReactNode
+}
+
+export default function Layout({ children }: LayoutProps) {
   return (
     <div className="w-[1024px] mx-auto">
       <Header />
