@@ -1,6 +1,6 @@
 import Carousel from "@/components/Carousel";
 import axios from "@/libs/axios";
-import product from "./api/product";
+import type { Banner } from '@/interface'
 
 interface Product {
   product_image: string;
@@ -10,8 +10,7 @@ interface Product {
   pid: number;
 }
 
-type Banner = { url: string }[];
-
+// type Banner = { url: string }[];
 export default ({ data }: any) => {
   console.log(data);
   console.log("야호", data.init.banners);
@@ -19,7 +18,8 @@ export default ({ data }: any) => {
     .get("/product", { params: { page: 2, size: 100 } })
     .then((res) => console.log(res.data));
 
-  const banner_img: Banner = data.init.banners;
+  // const banner_img: Banner = data.init.banners;
+  const banner_img: Banner[] = data.init.banners;
 
   return (
     <div className="w-[1024px] mx-auto">
