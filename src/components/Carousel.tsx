@@ -6,7 +6,11 @@ import Carousel from "react-bootstrap/Carousel";
 
 type Banner = { url: string }[];
 
-function ControlledCarousel({ banner_img }: Banner) {
+interface CarouselProps {
+  banner_img: Banner
+}
+
+function ControlledCarousel({ banner_img }: CarouselProps) {
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex: any) => {
