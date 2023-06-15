@@ -34,12 +34,12 @@ const Header = () => {
               <div>판매하기</div>
             </div>
             <div className="flex ml-[30px] relative">
-              <div className="after-bar" />
+              <div className="after-bar-header" />
               <img className="mr-[5px]" src="/icons/icon_my_shop.png" />
               <div>내상점</div>
             </div>
             <div className="flex ml-[30px] relative">
-              <div className="after-bar" />
+              <div className="after-bar-header" />
               <img className="mr-[5px]" src="/icons/icon_talk.png" />
               <div>번개톡</div>
             </div>
