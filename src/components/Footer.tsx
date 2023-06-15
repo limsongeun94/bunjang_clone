@@ -38,7 +38,7 @@ const Footer = () => {
                   주소 : 서울특별시 서초구 서초대로 38길 12, 7, 10층(서초동,
                   마제스타시티, 힐스테이트 서리풀)
                 </p>
-                <p className="mb-0">사업자정보 확인</p>
+                <p className="mb-0 underline cursor-pointer">사업자정보 확인</p>
               </div>
             </div>
             <div className="mt-[24px] text-[12px] text-[#7f7f7f] leading-loose">
