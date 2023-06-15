@@ -4,7 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 
-function ControlledCarousel() {
+type Banner = { url: string }[];
+
+function ControlledCarousel({ banner_img }: Banner) {
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex: any) => {
@@ -18,27 +20,13 @@ function ControlledCarousel() {
       indicators={false}
       interval={2000}
     >
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="/banners/bag_banner.jpg"
-          alt="First slide"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="/banners/keyring_banner.jpg"
-          alt="Second slide"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="/banners/nuigurumi_banner.jpg"
-          alt="Third slide"
-        />
-      </Carousel.Item>
+      {banner_img.map((item) => {
+        return (
+          <Carousel.Item>
+            <img className="d-block w-100" src={item.url} />
+          </Carousel.Item>
+        );
+      })}
     </Carousel>
   );
 }
