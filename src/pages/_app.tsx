@@ -27,13 +27,13 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default ({ Component, pageProps }: any) => {
   return (
-    <div>
+    <div className="font-['Noto-Sans']">
       <Layout>
-        <style jsx global>{`
+        {/* <style jsx global>{`
           html {
-            font-family: ${notoSansKr.style.fontFamily};
+            font-family: ${notoSansKr.style.fontFamily} !important;
           }
-        `}</style>
+        `}</style> */}
         <Component {...pageProps} />
       </Layout>
     </div>

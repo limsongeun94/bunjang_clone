@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Noto-Sans";
+  src: url("/fonts/NotoSansKR-Regular.otf");
+}
+
 /* 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -26,6 +31,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 } */
+
+* {
+  letter-spacing: -0.5px;
+}
 
 .after-bar-header {
   position: absolute;
