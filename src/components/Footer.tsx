@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="text-[13px] px-[25px]">광고제휴</div>
       </div>
       <div className="mt-[40px] mb-[45px]">
-        <div className="grid grid-col-2">
+        <div className="grid grid-cols-[1fr_1fr]">
           <div className="col-start-1 col-end-2 row-start-1 row-end-2">
             <div>
               <div className="text-sm font-bold text-[#666666]">
@@ -120,7 +120,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="col-start-2 col-end-2 row-start-3 row-end-4 text-[11px] text-[#999999]">
+          <div className="col-start-2 col-end-3 row-start-3 row-end-4 text-[11px] text-[#999999]">
             번개장터㈜는 통신판매중개자이며, 통신판매의 당사자가 아닙니다.
             전자상거래 등에서의 소비자보호에 관한 법률 등 관련 법령 및
             번개장터㈜의 약관에 따라 상품, 상품정보, 거래에 관한 책임은 개별
