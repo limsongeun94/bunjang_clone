@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <header>
+    <header className="sticky top-0 bg-white z-50">
       <div className="flex justify-between items-center h-[40px] border-b-[1px]">
         <div className="flex">
           <div className="flex  px-[15px]">
@@ -45,7 +45,19 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className="h-[70px]" />
+        <div className="h-[70px] flex flex-row align-middle">
+          <img
+            src="/icons/icon_hamburger.png"
+            width="20px"
+            height="16px"
+            className=" object-contain mr-[20px]"
+          />
+          <div>
+            <b className="text-sm leading-[70px] ml-[10px]">
+              번개장터 판매자센터
+            </b>
+          </div>
+        </div>
       </div>
     </header>
   );
