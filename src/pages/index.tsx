@@ -1,6 +1,6 @@
 import Carousel from "@/components/Carousel";
 import axios from "@/libs/axios";
-import type { Banner } from '@/interface'
+import type { Banner } from "@/interface";
 
 interface Product {
   product_image: string;
@@ -13,10 +13,8 @@ interface Product {
 // type Banner = { url: string }[];
 export default ({ data }: any) => {
   console.log(data);
-  console.log("야호", data.init.banners);
-  axios
-    .get("/product", { params: { page: 2, size: 100 } })
-    .then((res) => console.log(res.data));
+  axios.get("/product", { params: { page: 2, size: 100 } });
+  // .then((res) => console.log(res.data));
 
   // const banner_img: Banner = data.init.banners;
   const banner_img: Banner[] = data.init.banners;
@@ -40,10 +38,8 @@ export default ({ data }: any) => {
                   />
                 </div>
                 <div className="w-[194px] h-[80px] py-[15px] px-[10px] flex flex-col justify-between">
-                  <div className="text-sm">
-                    {product.name.length > 16
-                      ? `${product.name.slice(0, 16)}...`
-                      : product.name}
+                  <div className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">
+                    {product.name}
                   </div>
                   <div className="flex justify-between items-center">
                     <div className="text-base font-semibold after-won">
