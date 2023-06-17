@@ -1,4 +1,5 @@
-import Header from "./Header";
+import TopHeader from "./TopHeader";
+import StickyHeader from "./StickyHeader";
 import Footer from "./Footer";
 import { ReactNode } from "react";
 
@@ -9,7 +10,8 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className="w-[1024px] mx-auto">
-      <Header />
+      <TopHeader />
+      <StickyHeader />
       <main>{children}</main>
       <Footer />
     </div>
