@@ -80,6 +80,14 @@ const StickyHeader = () => {
             <div className="w-full h-[40px] font-bold text-sm leading-[40px] pl-[30px] border-b-[1px] border-[#eeeeee]">
               전체카테고리
             </div>
+            <div className="pt-[20px] pb-[25px] flex flex-col justify-start ">
+              <a className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px]">
+                여성의류
+              </a>
+              <a className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px]">
+                여성의류
+              </a>
+            </div>
           </div>
         </div>
       </div>

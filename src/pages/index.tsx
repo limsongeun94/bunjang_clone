@@ -16,7 +16,6 @@ export default ({ data }: any) => {
   axios.get("/product", { params: { page: 2, size: 100 } });
   // .then((res) => console.log(res.data));
 
-  // const banner_img: Banner = data.init.banners;
   const banner_img: Banner[] = data.init.banners;
 
   return (
