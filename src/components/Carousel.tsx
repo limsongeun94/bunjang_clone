@@ -23,9 +23,9 @@ function ControlledCarousel({ banner_img }: CarouselProps) {
       indicators={false}
       interval={2000}
     >
-      {banner_img.map((item) => {
+      {banner_img.map((item, index) => {
         return (
-          <Carousel.Item>
+          <Carousel.Item key={index}>
             <img className="d-block w-100" src={item.url} />
           </Carousel.Item>
         );
