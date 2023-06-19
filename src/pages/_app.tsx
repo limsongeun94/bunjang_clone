@@ -1,7 +1,4 @@
 import "@/styles/globals.css";
-import { Noto_Sans_KR } from "next/font/google";
-import { Inter } from "next/font/google";
-import Layout from "@/components/Layout";
 
 // export const cls = (...classnames: string[]) => {
 //   return classnames.join(" ");
@@ -18,9 +15,7 @@ import Layout from "@/components/Layout";
 export default ({ Component, pageProps }: any) => {
   return (
     <div className="font-['Noto-Sans']">
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <Component {...pageProps} />
     </div>
   );
 };

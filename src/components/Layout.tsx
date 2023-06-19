@@ -1,26 +1,25 @@
-import TopHeader from "./TopHeader";
-import StickyHeader from "./StickyHeader";
-import Footer from "./Footer";
-import { ReactNode } from "react";
-import axios from "@/libs/axios";
+// !!!!!!!!!!!deprecated
 
-interface LayoutProps {
-  children: ReactNode;
-  init: any;
-}
+// import TopHeader from "./TopHeader";
+// import StickyHeader from "./StickyHeader";
+// import Footer from "./Footer";
+// import { ReactNode } from "react";
+// import { Category } from '@/interface'
 
-export default function Layout({ children, init }: LayoutProps) {
-  return (
-    <div className="w-[1024px] mx-auto">
-      <TopHeader />
-      <StickyHeader />
-      <main>{children}</main>
-      <Footer />
-    </div>
-  );
-}
+// interface LayoutProps {
+//   children?: ReactNode;
+//   categories: Array<Category>
+// }
 
-export const getServerSideProps = async () => {
-  const init = (await axios.get("/landing")).data;
-  return { props: { data: { init } } };
-};
+// export default function Layout({ children, categories }: LayoutProps) {
+
+//   console.log('layout', categories)
+//   return (
+//     <div className="w-[1024px] mx-auto">
+//       <TopHeader />
+//       <StickyHeader />
+//       <main>{children}</main>
+//       <Footer />
+//     </div>
+//   );
+// }
