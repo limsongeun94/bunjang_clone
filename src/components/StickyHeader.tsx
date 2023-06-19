@@ -33,6 +33,19 @@ const StickyHeader = () => {
     setMenuHeight();
   });
 
+  type HoverMune = "mainClass" | "subClass" | "subsubClass" | "";
+  const [menuHoverClass, setMenuHoverClass] = useState<HoverMune>("");
+  const timeOutClass = () => {
+    setTimeout(() => {
+      console.log("셋타임아웃");
+      setMenuHoverClass("");
+    }, 500);
+  };
+
+  // 만약 햄버거메뉴를 마우스오버하면 메인메뉴 block
+  // 메인메뉴의 a태그를 마우스오버하면 메인메뉴, 서브메뉴의 block
+  // 서브메뉴의 a태그를 마우스오버함현 메인메뉴, 서브메뉴, 서브서브메뉴의 block
+
   return (
     <header className="bg-white sticky top-0 z-50 pt-[30px]">
       <div className="flex h-[40px] justify-between items-center">
@@ -67,6 +80,9 @@ const StickyHeader = () => {
           width="20px"
           height="16px"
           className=" object-contain mr-[20px]"
+          onMouseEnter={() => setMenuHoverClass("mainClass")}
+          // onMouseLeave={() => setMenuHoverClass("")}
+          // onMouseLeave={timeOutClass}
         />
         <div>
           <b className="text-sm leading-[70px] ml-[10px]">
@@ -75,17 +91,82 @@ const StickyHeader = () => {
         </div>
         <div>
           <div
-            className={`absolute top-[70px] left-0  bg-white border-[1px] border-[#eeeeee] w-[239px] ${menuHeightClass}`}
+            onMouseEnter={() => setMenuHoverClass("mainClass")}
+            // onMouseLeave={() => setMenuHoverClass("")}
+            onMouseLeave={timeOutClass}
+            className={`${
+              menuHoverClass === "mainClass" ||
+              menuHoverClass === "subClass" ||
+              menuHoverClass === "subsubClass"
+                ? "block"
+                : "hidden"
+            } absolute top-[70px] left-0  bg-white border-l-[1px] border-t-[1px] border-[#eeeeee] w-[239px] ${menuHeightClass}`}
           >
-            <div className="w-full h-[40px] font-bold text-sm leading-[40px] pl-[30px] border-b-[1px] border-[#eeeeee]">
+            <div className="w-full h-[40px] font-bold text-sm leading-[40px] pl-[30px] border-r-[1px] border-b-[1px] border-[#eeeeee]">
               전체카테고리
             </div>
-            <div className="pt-[20px] pb-[25px] flex flex-col justify-start ">
-              <a className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px]">
+            <div className="pt-[20px] pb-[25px] border-r-[1px]  flex flex-col justify-start ">
+              <a
+                onMouseEnter={() => setMenuHoverClass("subClass")}
+                onMouseLeave={() => setMenuHoverClass("")}
+                className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
+              >
                 여성의류
               </a>
-              <a className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px]">
-                여성의류
+              <a
+                onMouseEnter={() => setMenuHoverClass("subClass")}
+                onMouseLeave={() => setMenuHoverClass("")}
+                className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
+              >
+                남성의류
+              </a>
+            </div>
+          </div>
+          <div
+            onMouseEnter={() => setMenuHoverClass("subClass")}
+            onMouseLeave={() => setMenuHoverClass("")}
+            className={`${
+              menuHoverClass === "subClass" || menuHoverClass === "subsubClass"
+                ? "block"
+                : "hidden"
+            } absolute top-[70px] left-[238px]  bg-white border-l-[1px] border-t-[1px] border-[#eeeeee] w-[239px] ${menuHeightClass}`}
+          >
+            <div className="w-full h-[40px] font-bold text-sm leading-[40px] pl-[30px] border-b-[1px] border-[#eeeeee]">
+              여성의류
+            </div>
+            <div className="pt-[20px] pb-[25px] flex flex-col justify-start border-r-[1px] ">
+              <a
+                onMouseEnter={() => setMenuHoverClass("subsubClass")}
+                onMouseLeave={() => setMenuHoverClass("")}
+                className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
+              >
+                아우터
+              </a>
+              <a
+                onMouseEnter={() => setMenuHoverClass("subsubClass")}
+                onMouseLeave={() => setMenuHoverClass("")}
+                className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
+              >
+                상의
+              </a>
+            </div>
+          </div>
+          <div
+            onMouseEnter={() => setMenuHoverClass("subsubClass")}
+            onMouseLeave={() => setMenuHoverClass("")}
+            className={`${
+              menuHoverClass === "subsubClass" ? "block" : "hidden"
+            } absolute top-[70px] left-[476px]  bg-white border-l-[1px] border-t-[1px] border-[#eeeeee] w-[239px] ${menuHeightClass}`}
+          >
+            <div className="w-full h-[40px] font-bold text-sm leading-[40px] pl-[30px] border-b-[1px] border-[#eeeeee]">
+              아우터
+            </div>
+            <div className="pt-[20px] pb-[25px] flex flex-col justify-start border-r-[1px] ">
+              <a className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer">
+                패딩
+              </a>
+              <a className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer">
+                점퍼
               </a>
             </div>
           </div>
