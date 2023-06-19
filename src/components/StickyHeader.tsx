@@ -81,7 +81,7 @@ const StickyHeader = () => {
           height="16px"
           className=" object-contain mr-[20px]"
           onMouseEnter={() => setMenuHoverClass("mainClass")}
-          // onMouseLeave={() => setMenuHoverClass("")}
+          onMouseLeave={() => setMenuHoverClass("")}
           // onMouseLeave={timeOutClass}
         />
         <div>
@@ -92,8 +92,8 @@ const StickyHeader = () => {
         <div>
           <div
             onMouseEnter={() => setMenuHoverClass("mainClass")}
-            // onMouseLeave={() => setMenuHoverClass("")}
-            onMouseLeave={timeOutClass}
+            onMouseLeave={() => setMenuHoverClass("")}
+            // onMouseLeave={timeOutClass}
             className={`${
               menuHoverClass === "mainClass" ||
               menuHoverClass === "subClass" ||
