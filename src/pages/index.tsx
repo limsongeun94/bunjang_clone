@@ -1,16 +1,9 @@
+import type { Banner, Category, Product, User } from "@/interface";
 import { Carousel } from "@/components";
 import MainLayout from "@/layouts/MainLayout";
 import axios from "@/libs/axios";
-import type { Banner, Category, Product } from "@/interface";
-
-// src/interface 로 이관
-// interface Product {
-//   product_image: string;
-//   name: string;
-//   price: string;
-//   update_time: number;
-//   pid: number;
-// }
+import { withIronSessionSsr } from "iron-session/next";
+import { ironSessionOptions } from '@/libs/session'
 
 interface IndexProps {
   data: {
@@ -18,15 +11,14 @@ interface IndexProps {
     products: Array<Product>
     categories: Array<Category>
   }
+  user?: User
 }
 
-interface ServerSideProps {
-  props: IndexProps
-}
-
-export default ({ data }: IndexProps) => {
-  console.log(data);
-  axios.get("/product", { params: { page: 2, size: 100 } });
+export default ({ data, user }: IndexProps) => {
+  
+  console.log('로그인 성공하면 출력됨', user)
+  // console.log(data);
+  // axios.get("/product", { params: { page: 2, size: 100 } });
   // .then((res) => console.log(res.data));
 
   const banner_img: Banner[] = data.banners;
@@ -87,7 +79,13 @@ export default ({ data }: IndexProps) => {
   );
 };
 
-export const getServerSideProps = async (): Promise<ServerSideProps> => {
-  const data = (await axios.get("/landing")).data;
-  return { props: { data }}
-};
+export const getServerSideProps = withIronSessionSsr(
+  async ({ req }) => {
+    const data = (await axios.get("/landing")).data;
+
+    const user = req.session.user ?? null
+
+    return { props: { data, user }}
+  },
+  ironSessionOptions
+)

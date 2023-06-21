@@ -1,6 +1,13 @@
 
 export interface Banner { url: string };
 
+export interface User {
+  id: number
+  email: string
+  password?: string
+  name: string
+}
+
 export interface Category {
   id: string
   count: number

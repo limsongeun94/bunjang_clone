@@ -9,7 +9,7 @@ interface LayoutProps {
 
 export default function MainLayout({ children, categories }: LayoutProps) {
 
-  console.log('layout', categories)
+  // console.log('layout', categories)
   return (
     <div className="w-[1024px] mx-auto">
       <TopHeader />
