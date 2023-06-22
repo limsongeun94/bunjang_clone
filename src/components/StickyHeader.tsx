@@ -35,6 +35,12 @@ const StickyHeader = () => {
 
   type HoverMune = "mainClass" | "subClass" | "subsubClass" | "";
   const [menuHoverClass, setMenuHoverClass] = useState<HoverMune>("");
+  const timeOutClass = () => {
+    setTimeout(() => {
+      console.log("셋타임아웃");
+      setMenuHoverClass("");
+    }, 500);
+  };
 
   // 만약 햄버거메뉴를 마우스오버하면 메인메뉴 block
   // 메인메뉴의 a태그를 마우스오버하면 메인메뉴, 서브메뉴의 block
@@ -76,6 +82,7 @@ const StickyHeader = () => {
           className=" object-contain mr-[20px]"
           onMouseEnter={() => setMenuHoverClass("mainClass")}
           onMouseLeave={() => setMenuHoverClass("")}
+          // onMouseLeave={timeOutClass}
         />
         <div>
           <b className="text-sm leading-[70px] ml-[10px]">
@@ -86,6 +93,7 @@ const StickyHeader = () => {
           <div
             onMouseEnter={() => setMenuHoverClass("mainClass")}
             onMouseLeave={() => setMenuHoverClass("")}
+            // onMouseLeave={timeOutClass}
             className={`${
               menuHoverClass === "mainClass" ||
               menuHoverClass === "subClass" ||
