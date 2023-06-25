@@ -3,25 +3,16 @@ import MainLayout from "@/layouts/MainLayout";
 import axios from "@/libs/axios";
 import type { Banner, Category, Product } from "@/interface";
 
-// src/interface 로 이관
-// interface Product {
-//   product_image: string;
-//   name: string;
-//   price: string;
-//   update_time: number;
-//   pid: number;
-// }
-
 interface IndexProps {
   data: {
-    banners: Array<Banner>
-    products: Array<Product>
-    categories: Array<Category>
-  }
+    banners: Array<Banner>;
+    products: Array<Product>;
+    categories: Array<Category>;
+  };
 }
 
 interface ServerSideProps {
-  props: IndexProps
+  props: IndexProps;
 }
 
 export default ({ data }: IndexProps) => {
@@ -89,5 +80,5 @@ export default ({ data }: IndexProps) => {
 
 export const getServerSideProps = async (): Promise<ServerSideProps> => {
   const data = (await axios.get("/landing")).data;
-  return { props: { data }}
+  return { props: { data } };
 };
