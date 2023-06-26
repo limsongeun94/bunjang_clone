@@ -38,8 +38,7 @@ const StickyHeader = ({ categories }: LayoutProps) => {
     setMenuHeight();
   });
 
-  type HoverMune = "mainClass" | "subClass" | "subsubClass" | "";
-  const [menuHoverClass, setMenuHoverClass] = useState<HoverMune>("");
+  const [menuOpenState, setMenuOpenState] = useState<boolean>(false);
 
   const [currentMainMenu, setCurrentMainMenu] = useState<string>("");
   const [currentSubMenu, setCurrentSubMenu] = useState<string>("");
@@ -84,18 +83,23 @@ const StickyHeader = ({ categories }: LayoutProps) => {
           width="20px"
           height="16px"
           className=" object-contain mr-[20px]"
-          onMouseEnter={() => setMenuHoverClass("mainClass")}
-          onMouseLeave={() => setMenuHoverClass("")}
+          onMouseEnter={() => setMenuOpenState(true)}
+          onMouseLeave={() => setMenuOpenState(false)}
         />
         <div>
           <b className="text-sm leading-[70px] ml-[10px]">
             번개장터 판매자센터
           </b>
         </div>
-        <div>
+        <div
+          onMouseEnter={() => setMenuOpenState(true)}
+          onMouseLeave={() => {
+            setMenuOpenState(false);
+            setCurrentMainMenu("");
+          }}
+          className={menuOpenState ? "block" : "hidden"}
+        >
           <div
-            onMouseEnter={() => setMenuHoverClass("mainClass")}
-            onMouseLeave={() => setMenuHoverClass("")}
             className={` absolute top-[70px] left-0  bg-white border-l-[1px] border-t-[1px] border-[#eeeeee] w-[239px] ${menuHeightClass}`}
           >
             <div className="w-full h-[40px] font-bold text-sm leading-[40px] pl-[30px] border-r-[1px] border-b-[1px] border-[#eeeeee]">
@@ -107,7 +111,7 @@ const StickyHeader = ({ categories }: LayoutProps) => {
                   <a
                     key={el.id}
                     onMouseEnter={() => setCurrentMainMenu(el.id)}
-                    onMouseLeave={() => setMenuHoverClass("")}
+                    // onMouseLeave={() => setCurrentMainMenu("")}
                     className="block pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
                   >
                     {el.title}
@@ -117,9 +121,9 @@ const StickyHeader = ({ categories }: LayoutProps) => {
             </div>
           </div>
           <div
-            onMouseEnter={() => setMenuHoverClass("subClass")}
-            onMouseLeave={() => setMenuHoverClass("")}
-            className={` absolute top-[70px] left-[238px]  bg-white border-l-[1px] border-t-[1px] border-[#eeeeee] w-[239px] ${menuHeightClass}`}
+            className={`${
+              menuCategories ? "block" : "hidden"
+            } absolute top-[70px] left-[238px]  bg-white border-l-[1px] border-t-[1px] border-[#eeeeee] w-[239px] ${menuHeightClass}`}
           >
             <div className="w-full h-[40px] font-bold text-sm leading-[40px] pl-[30px] border-b-[1px] border-[#eeeeee]">
               {menuCategories ? menuCategories.title : ""}
@@ -131,7 +135,7 @@ const StickyHeader = ({ categories }: LayoutProps) => {
                       return (
                         <a
                           onMouseEnter={() => setCurrentSubMenu(el.id)}
-                          onMouseLeave={() => setMenuHoverClass("")}
+                          // onMouseLeave={() => setCurrentSubMenu("")}
                           className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
                         >
                           {el.title}
@@ -143,9 +147,9 @@ const StickyHeader = ({ categories }: LayoutProps) => {
             </div>
           </div>
           <div
-            onMouseEnter={() => setMenuHoverClass("subsubClass")}
-            onMouseLeave={() => setMenuHoverClass("")}
-            className={` absolute top-[70px] left-[476px]  bg-white border-l-[1px] border-t-[1px] border-[#eeeeee] w-[239px] ${menuHeightClass}`}
+            className={`${
+              subMenuCategories ? "block" : "hidden"
+            } absolute top-[70px] left-[476px]  bg-white border-l-[1px] border-t-[1px] border-[#eeeeee] w-[239px] ${menuHeightClass}`}
           >
             <div className="w-full h-[40px] font-bold text-sm leading-[40px] pl-[30px] border-b-[1px] border-[#eeeeee]">
               {subMenuCategories ? subMenuCategories.title : ""}
