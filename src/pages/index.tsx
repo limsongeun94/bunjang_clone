@@ -2,6 +2,7 @@ import { Carousel } from "@/components";
 import MainLayout from "@/layouts/MainLayout";
 import axios from "@/libs/axios";
 import type { Banner, Category, Product } from "@/interface";
+import { useInView } from "react-intersection-observer";
 
 interface IndexProps {
   data: {
@@ -21,6 +22,23 @@ export default ({ data }: IndexProps) => {
   // .then((res) => console.log(res.data));
 
   const banner_img: Banner[] = data.banners;
+
+  const { ref, inView, entry } = useInView();
+
+  const showDate = (update_time: number): string => {
+    const myDate = new Date(update_time * 1000);
+    return (
+      myDate.getFullYear() +
+      "." +
+      (myDate.getMonth() + 1 > 9
+        ? (myDate.getMonth() + 1).toString()
+        : "0" + (myDate.getMonth() + 1)) +
+      "." +
+      (myDate.getDate() > 9
+        ? myDate.getDate().toString()
+        : "0" + myDate.getDate().toString())
+    );
+  };
 
   return (
     <MainLayout categories={data.categories}>
@@ -52,7 +70,7 @@ export default ({ data }: IndexProps) => {
                           .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                       </div>
                       <div className="text-xs text-[#888888]">
-                        {product.update_time}
+                        {showDate(product.update_time)}
                       </div>
                     </div>
                   </div>
@@ -60,18 +78,6 @@ export default ({ data }: IndexProps) => {
               );
             })}
           </div>
-          {/* <div className="flex flex-wrap">
-            <div className="flex-item-propduct w-[196px] h-[276px] mr-[11px] mb-[11px] border-[1px] border-[#eeeeee]">
-              <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee]"></div>
-              <div className="w-[194px] h-[80px] py-[15px] px-[10px] flex flex-col justify-between">
-                <div className="text-sm">상품제목</div>
-                <div className="flex justify-between items-center">
-                  <div className="text-base font-semibold after-won">4,000</div>
-                  <div className="text-xs text-[#888888]">3시간 전</div>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </section>
       </div>
     </MainLayout>
