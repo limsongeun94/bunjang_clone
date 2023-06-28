@@ -24,7 +24,7 @@ export default ({ data }: IndexProps) => {
 
   const banner_img: Banner[] = data.banners;
 
-  const { ref, inView, entry } = useInView();
+  const { ref, inView } = useInView();
 
   const showDate = (update_time: number): string => {
     const myDate = new Date(update_time * 1000);
