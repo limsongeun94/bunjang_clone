@@ -19,7 +19,7 @@ interface ServerSideProps {
 
 export default ({ data }: IndexProps) => {
   // console.log(data);
-  axios.get("/product", { params: { page: 2, size: 50 } });
+  // axios.get("/product", { params: { page: 2, size: 50 } });
   // .then((res) => console.log(res.data));
 
   const banner_img: Banner[] = data.banners;
@@ -46,7 +46,7 @@ export default ({ data }: IndexProps) => {
   const showMoreProduct = () => {
     if (inView) {
       axios
-        .get("/product", { params: { page: productPage, size: 52 } })
+        .get("/product", { params: { page: productPage, size: 50 } })
         .then((res) => {
           setProductList([...productList, ...res.data.list]);
           setProductPage(productPage + 1);
