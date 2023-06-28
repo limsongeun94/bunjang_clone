@@ -6,7 +6,7 @@ import { promises as fs } from 'fs'
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   
   const dist = path.join(process.cwd(), 'data')
-  const products: Array<never> = JSON.parse(await fs.readFile(`${dist}/index_products.json`, 'utf8')).slice(0,100)
+  const products: Array<never> = JSON.parse(await fs.readFile(`${dist}/index_products.json`, 'utf8')).slice(0,52)
   const categories = JSON.parse(await fs.readFile(`${dist}/categories.json`, 'utf8'))
   const ret = {
     banners: [

@@ -5,8 +5,8 @@ import { promises as fs } from 'fs'
 // endpoint: /api/product
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 
-  const page = parseInt(req.query.page as string ?? 1)
-  const size = parseInt(req.query.size as string ?? 100)
+  const page = parseInt(req.query.page as string)
+  const size = parseInt(req.query.size as string)
   
   const dist = path.join(process.cwd(), 'data')
   const data: Array<never> = JSON.parse(await fs.readFile(`${dist}/index_products.json`, 'utf8'))

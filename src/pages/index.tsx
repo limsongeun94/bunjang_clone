@@ -3,6 +3,7 @@ import MainLayout from "@/layouts/MainLayout";
 import axios from "@/libs/axios";
 import type { Banner, Category, Product } from "@/interface";
 import { useInView } from "react-intersection-observer";
+import { useEffect, useState } from "react";
 
 interface IndexProps {
   data: {
@@ -17,8 +18,8 @@ interface ServerSideProps {
 }
 
 export default ({ data }: IndexProps) => {
-  console.log(data);
-  axios.get("/product", { params: { page: 2, size: 100 } });
+  // console.log(data);
+  axios.get("/product", { params: { page: 2, size: 50 } });
   // .then((res) => console.log(res.data));
 
   const banner_img: Banner[] = data.banners;
@@ -39,6 +40,27 @@ export default ({ data }: IndexProps) => {
         : "0" + myDate.getDate().toString())
     );
   };
+
+  const [productPage, setProductPage] = useState(2);
+  const [productList, setProductList] = useState<Array<Product>>([]);
+  const showMoreProduct = () => {
+    if (inView) {
+      axios
+        .get("/product", { params: { page: productPage, size: 52 } })
+        .then((res) => {
+          setProductList([...productList, ...res.data.list]);
+          setProductPage(productPage + 1);
+          console.log(productPage, res.data.list);
+        });
+    }
+  };
+
+  useEffect(() => {
+    if (inView) {
+      console.log("무한열차 슝슝");
+    }
+    showMoreProduct();
+  }, [inView]);
 
   return (
     <MainLayout categories={data.categories}>
@@ -77,8 +99,39 @@ export default ({ data }: IndexProps) => {
                 </div>
               );
             })}
+            {productList.map((product: Product) => {
+              return (
+                <div
+                  key={product.pid}
+                  className="flex-item-propduct w-[196px] h-[276px] mr-[11px] mb-[11px] border-[1px] border-[#eeeeee]"
+                >
+                  <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee]">
+                    <img
+                      className="w-[194px] h-[194px] object-cover"
+                      src={product.product_image}
+                    />
+                  </div>
+                  <div className="w-[194px] h-[80px] py-[15px] px-[10px] flex flex-col justify-between">
+                    <div className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">
+                      {product.name}
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <div className="text-base font-semibold after-won">
+                        {product.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      </div>
+                      <div className="text-xs text-[#888888]">
+                        {showDate(product.update_time)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
+        <div ref={ref} />
       </div>
     </MainLayout>
   );
