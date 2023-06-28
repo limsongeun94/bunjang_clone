@@ -50,7 +50,7 @@ const StickyHeader = ({ categories }: LayoutProps) => {
     : "";
 
   return (
-    <header className="bg-white sticky top-0 z-50 pt-[30px]">
+    <header className="bg-white sticky top-0 z-30 pt-[30px]">
       <div className="flex h-[40px] justify-between items-center">
         <img src="/logo.svg" />
         <div className="border-2 border-[#F72F33] px-[15px] w-[460px] h-[40px] flex justify-between items-center">
