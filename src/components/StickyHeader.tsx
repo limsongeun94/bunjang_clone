@@ -1,6 +1,6 @@
-"use client";
+// "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Category } from "@/interface";
 
 interface LayoutProps {
@@ -111,7 +111,6 @@ const StickyHeader = ({ categories }: LayoutProps) => {
                   <a
                     key={el.id}
                     onMouseEnter={() => setCurrentMainMenu(el.id)}
-                    // onMouseLeave={() => setCurrentMainMenu("")}
                     className="block pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
                   >
                     {el.title}
@@ -135,7 +134,6 @@ const StickyHeader = ({ categories }: LayoutProps) => {
                       return (
                         <a
                           onMouseEnter={() => setCurrentSubMenu(el.id)}
-                          // onMouseLeave={() => setCurrentSubMenu("")}
                           className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
                         >
                           {el.title}
@@ -159,11 +157,7 @@ const StickyHeader = ({ categories }: LayoutProps) => {
                 ? subMenuCategories.categories
                   ? subMenuCategories.categories.map((el) => {
                       return (
-                        <a
-                          // onMouseEnter={() => setCurrentSubMenu(el.id)}
-                          // onMouseLeave={() => setMenuHoverClass("")}
-                          className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
-                        >
+                        <a className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer">
                           {el.title}
                         </a>
                       );
