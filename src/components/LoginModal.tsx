@@ -5,7 +5,7 @@ interface LayoutProps {
   setLoginModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Login = ({ loginModal, setLoginModal }: LayoutProps) => {
+const LoginModal = ({ loginModal, setLoginModal }: LayoutProps) => {
   const [hoverKakao, setHoverKakao] = useState<string>("/icons/kakaotalk.png");
   const [hoverFacebook, setHoverFacebook] = useState("/icons/facebook.png");
   const [hoverNaver, setHoverNaver] = useState("/icons/naver.png");
@@ -109,4 +109,4 @@ const Login = ({ loginModal, setLoginModal }: LayoutProps) => {
   );
 };
 
-export default Login;
+export default LoginModal;

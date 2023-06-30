@@ -1,4 +1,4 @@
-import { TopHeader, StickyHeader, Footer, Login } from "@/components";
+import { TopHeader, StickyHeader, Footer, LoginModal } from "@/components";
 import { ReactNode } from "react";
 import { Category } from "@/interface";
 import { useState, useEffect } from "react";
@@ -23,7 +23,7 @@ export default function MainLayout({ children, categories }: LayoutProps) {
     <div className="w-[1024px] mx-auto">
       <TopHeader setLoginModal={setLoginModal} />
       <StickyHeader categories={categories} />
-      <Login loginModal={loginModal} setLoginModal={setLoginModal} />
+      <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />
       <main>{children}</main>
       <Footer />
     </div>
