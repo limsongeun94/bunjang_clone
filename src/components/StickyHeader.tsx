@@ -78,14 +78,18 @@ const StickyHeader = ({ categories }: LayoutProps) => {
         </div>
       </div>
       <div className="h-[70px] flex flex-row align-middle relative">
-        <img
-          src="/icons/icon_hamburger.png"
-          width="20px"
-          height="16px"
-          className=" object-contain mr-[20px]"
+        <div
+          className="flex items-center after:absolute after:w-[60px] after:h-[90px] after:top-0 after:left-[-13px] after:content-['']"
           onMouseEnter={() => setMenuOpenState(true)}
           onMouseLeave={() => setMenuOpenState(false)}
-        />
+        >
+          <img
+            src="/icons/icon_hamburger.png"
+            width="20px"
+            height="16px"
+            className="object-contain mr-[20px]"
+          />
+        </div>
         <div>
           <b className="text-sm leading-[70px] ml-[10px]">
             번개장터 판매자센터
