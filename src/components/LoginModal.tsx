@@ -97,7 +97,10 @@ const LoginModal = ({ loginModal, setLoginModal }: LayoutProps) => {
           </div>
           <div className="text-left px-[32px] pt-[56px] pb-[24px]">
             <p className="text-xs text-[#999999] border-t-[1px] border-[#e5e5e5] pt-[16px]">
-              도움이 필요하면 <a href="mailto:help@bunjang.co.kr">이메일</a>
+              도움이 필요하면{" "}
+              <a href="mailto:help@bunjang.co.kr" className="text-[#999999]">
+                이메일
+              </a>
               또는 고객센터<b>1670-2910</b>로 문의 부탁드립니다.
               <br />
               고객센터 운영시간: 09~18시 (점심시간 12~13시, 주말/공휴일 제외)
