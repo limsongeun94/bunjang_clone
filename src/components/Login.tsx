@@ -1,15 +1,27 @@
 import { useState } from "react";
 
-const Login = () => {
+interface LayoutProps {
+  loginModal: boolean;
+  setLoginModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Login = ({ loginModal, setLoginModal }: LayoutProps) => {
   const [hoverKakao, setHoverKakao] = useState<string>("/icons/kakaotalk.png");
   const [hoverFacebook, setHoverFacebook] = useState("/icons/facebook.png");
   const [hoverNaver, setHoverNaver] = useState("/icons/naver.png");
   const [hoverAuth, setHoverAuth] = useState("/icons/authentication.svg");
 
   return (
-    <div className="z-50 w-full h-full fixed top-0 left-0 bg-black/60 flex justify-center items-center">
+    <div
+      className={`${
+        loginModal ? "block" : "hidden"
+      } z-50 w-full h-full fixed top-0 left-0 bg-black/60 flex justify-center items-center`}
+    >
       <div className="bg-[#f7f7f7] w-[420px] h-[506px] relative">
-        <button className="absolute right-[20px] top-[20px] w-[24px] h-[24px]">
+        <button
+          onClick={() => setLoginModal(false)}
+          className="absolute right-[20px] top-[20px] w-[24px] h-[24px]"
+        >
           <img src="/icons/icon_close.png" width="24px" />
         </button>
         <div className="text-center pt-[40px]">

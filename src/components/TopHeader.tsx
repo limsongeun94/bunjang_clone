@@ -1,4 +1,8 @@
-const TopHeader = () => {
+interface LayoutProps {
+  setLoginModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const TopHeader = ({ setLoginModal }: LayoutProps) => {
   return (
     <header className=" bg-white h-auto">
       <div className="flex justify-between items-center h-[40px] border-b-[1px]">
@@ -13,9 +17,13 @@ const TopHeader = () => {
           </div>
         </div>
         <div className="flex">
-          <div className="text-[13px] px-[15px]">로그아웃</div>
-          <div className="text-[13px] px-[15px]">알림</div>
-          <div className="text-[13px] px-[15px]">내 상점</div>
+          <div
+            onClick={() => setLoginModal(true)}
+            className="text-[13px] px-[15px] cursor-pointer"
+          >
+            로그인/회원가입
+          </div>
+          <div className="text-[13px] px-[15px] cursor-pointer">내 상점</div>
         </div>
       </div>
     </header>
