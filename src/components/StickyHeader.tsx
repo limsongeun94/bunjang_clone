@@ -109,7 +109,7 @@ const StickyHeader = ({ categories }: LayoutProps) => {
             <div className="w-full h-[40px] font-bold text-sm leading-[40px] pl-[30px] border-r-[1px] border-b-[1px] border-[#eeeeee]">
               전체카테고리
             </div>
-            <div className="pt-[20px] pb-[25px] border-r-[1px] overflow-y-scroll h-full after:content-[''] after:block after:h-[25px] after:w-full">
+            <div className="pt-[20px] pb-[25px] border-r-[1px] overflow-y-auto h-full after:content-[''] after:block after:h-[25px] after:w-full">
               {categories.map((el) => {
                 return (
                   <a
