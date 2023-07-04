@@ -14,7 +14,7 @@ import "@/styles/globals.css";
 
 export default ({ Component, pageProps }: any) => {
   return (
-    <div className="font-['Noto-Sans']">
+    <div className="font-['Noto-Sans'] w-full h-full">
       <Component {...pageProps} />
     </div>
   );
