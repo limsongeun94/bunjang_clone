@@ -1,9 +1,12 @@
 import { Carousel } from "@/components";
 import MainLayout from "@/layouts/MainLayout";
 import axios from "@/libs/axios";
-import type { Banner, Category, Product } from "@/interface";
+import type { Banner, Category, Product, User } from "@/interface";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
+import { withIronSessionSsr } from "iron-session/next/dist";
+import { ironSessionOptions } from "@/libs/session";
+
 
 interface IndexProps {
   data: {
@@ -11,13 +14,10 @@ interface IndexProps {
     products: Array<Product>;
     categories: Array<Category>;
   };
+  user?: User
 }
 
-interface ServerSideProps {
-  props: IndexProps;
-}
-
-export default ({ data }: IndexProps) => {
+export default ({ data, user }: IndexProps) => {
   // console.log(data);
   // axios.get("/product", { params: { page: 2, size: 50 } });
   // .then((res) => console.log(res.data));
@@ -137,7 +137,11 @@ export default ({ data }: IndexProps) => {
   );
 };
 
-export const getServerSideProps = async (): Promise<ServerSideProps> => {
-  const data = (await axios.get("/landing")).data;
-  return { props: { data } };
-};
+export const getServerSideProps = withIronSessionSsr(
+  async ({ req }) => {
+    const data = (await axios.get("/landing")).data;
+    const user = req.session.user ?? null
+    return { props: { data, user }}
+  },
+  ironSessionOptions
+)

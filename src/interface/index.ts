@@ -17,6 +17,13 @@ export interface Category {
   categories?: Array<Category>
 }
 
+export interface User {
+  id: number
+  email: string
+  password?: string
+  name: string
+}
+
 export interface Product {
   product_image: string;
   name: string;
