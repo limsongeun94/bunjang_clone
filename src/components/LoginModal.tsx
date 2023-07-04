@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 interface LayoutProps {
   loginModal: boolean;
@@ -6,6 +7,8 @@ interface LayoutProps {
 }
 
 const LoginModal = ({ loginModal, setLoginModal }: LayoutProps) => {
+  const router = useRouter();
+
   const [hoverKakao, setHoverKakao] = useState<string>("/icons/kakaotalk.png");
   const [hoverFacebook, setHoverFacebook] = useState("/icons/facebook.png");
   const [hoverNaver, setHoverNaver] = useState("/icons/naver.png");
@@ -86,7 +89,10 @@ const LoginModal = ({ loginModal, setLoginModal }: LayoutProps) => {
               onMouseLeave={() => setHoverAuth("/icons/authentication.svg")}
               className="hover:text-white hover:font-bold relative text-[#212121] w-[280px] h-[38px]  bg-white text-center leading-[38px] text-sm"
             >
-              <div className="hover:bg-[#9b99a9]">
+              <div
+                onClick={() => router.push("/signup")}
+                className="hover:bg-[#9b99a9]"
+              >
                 <img
                   src={hoverAuth}
                   className="absolute top-[11px] left-[39px]"
