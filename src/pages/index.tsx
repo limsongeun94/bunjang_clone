@@ -56,9 +56,6 @@ export default ({ data }: IndexProps) => {
   };
 
   useEffect(() => {
-    if (inView) {
-      console.log("무한열차 슝슝");
-    }
     showMoreProduct();
   }, [inView]);
 
