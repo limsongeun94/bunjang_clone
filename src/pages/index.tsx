@@ -4,9 +4,8 @@ import axios from "@/libs/axios";
 import type { Banner, Category, Product, User } from "@/interface";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
-import { withIronSessionSsr } from "iron-session/next/dist";
+import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
-
 
 interface IndexProps {
   data: {
@@ -14,7 +13,7 @@ interface IndexProps {
     products: Array<Product>;
     categories: Array<Category>;
   };
-  user?: User
+  user?: User;
 }
 
 export default ({ data, user }: IndexProps) => {
@@ -134,11 +133,8 @@ export default ({ data, user }: IndexProps) => {
   );
 };
 
-export const getServerSideProps = withIronSessionSsr(
-  async ({ req }) => {
-    const data = (await axios.get("/landing")).data;
-    const user = req.session.user ?? null
-    return { props: { data, user }}
-  },
-  ironSessionOptions
-)
+export const getServerSideProps = withIronSessionSsr(async ({ req }) => {
+  const data = (await axios.get("/landing")).data;
+  const user = req.session.user ?? null;
+  return { props: { data, user } };
+}, ironSessionOptions);
