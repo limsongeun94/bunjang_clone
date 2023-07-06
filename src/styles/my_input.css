@@ -22,7 +22,6 @@
   letter-spacing: -0.5px;
 }
 .field_input::placeholder {
-  /* opacity: 1; */
   color: transparent;
 }
 .field label p {
@@ -52,4 +51,8 @@
   top: 50%;
   font-size: 1rem;
   transform: translateY(-50%);
+}
+.floating_label_selectbox {
+  top: 0 !important;
+  font-size: 0.75rem !important;
 }

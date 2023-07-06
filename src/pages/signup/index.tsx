@@ -1,6 +1,17 @@
 import MyInput from "@/components/MyInput";
+import { useState } from "react";
 
 export default () => {
+  const [floatingClass, setFloatingClass] = useState("");
+  const changeFloatingClass = (value: string) => {
+    if (value) {
+      setFloatingClass("floating_label_selectbox");
+      console.log(floatingClass);
+    } else {
+      setFloatingClass("");
+      console.log(floatingClass);
+    }
+  };
   return (
     <div className="bg-[#f9f9f9] py-[100px]">
       <div className="bg-white m-auto w-[450px] h-[927px] p-[60px] rounded-md shadow-[0px_3px_6px_rgba(0,0,0,0.1)] box-content">
@@ -24,7 +35,10 @@ export default () => {
         <MyInput placeholder={"예시: 01012345678"}>휴대폰번호</MyInput>
         <div className="field">
           <label>
-            <select className="field_input">
+            <select
+              onChange={(e) => changeFloatingClass(e.target.value)}
+              className="field_input text-[100%]"
+            >
               <option className="hidden" value="" />
               <option value="skt">SKT</option>
               <option value="kt">KT</option>
@@ -33,10 +47,9 @@ export default () => {
               <option value="kt_alddle">KT 알뜰폰</option>
               <option value="lg_alddle">LG U+ 알뜰폰</option>
             </select>
-            <p>톻신사</p>
+            <p className={`${floatingClass}`}>톻신사</p>
           </label>
         </div>
-        {/* <MyInput>통신사</MyInput> */}
       </div>
     </div>
   );
