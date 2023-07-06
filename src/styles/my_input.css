@@ -22,6 +22,7 @@
   letter-spacing: -0.5px;
 }
 .field_input::placeholder {
+  /* opacity: 1; */
   color: transparent;
 }
 .field label p {
@@ -47,53 +48,8 @@
   top: 0;
   font-size: 0.75rem;
 }
-.field select:focus + p,
-.field select:not([value=""]):valid + p {
-  top: 0;
-  font-size: 0.75rem;
-}
 .field_input:not(:focus) + p {
   top: 50%;
   font-size: 1rem;
   transform: translateY(-50%);
-}
-
-.floating-label {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.floating-select {
-  display: block;
-  width: 100% !important;
-  height: 3.75rem;
-  padding: 0;
-  font-size: 1.3125rem;
-  font-weight: 900;
-  border-bottom: 1px solid rgb(229, 229, 229);
-  outline: none;
-  appearance: none;
-  color: rgb(33, 33, 33);
-  box-sizing: border-box;
-  letter-spacing: -0.5px;
-}
-.floating-select:focus {
-  border-color: rgb(25, 25, 25);
-}
-.floating-label label {
-  top: 50%;
-  font-size: 1rem;
-  transform: translateY(-50%);
-  position: absolute;
-  left: 0;
-  color: rgb(178, 178, 178);
-  font-weight: 700;
-  transition: top 0.2s, font-size 0.2s;
-  user-select: none;
-  pointer-events: none;
-}
-.floating-select:focus ~ label,
-.floating-select:not([value=""]):valid ~ label {
-  top: 0;
-  font-size: 0.75rem;
 }
