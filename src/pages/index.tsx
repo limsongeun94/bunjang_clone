@@ -4,7 +4,7 @@ import axios from "@/libs/axios";
 import type { Banner, Category, Product, User } from "@/interface";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
-import { withIronSessionSsr } from "iron-session/next/dist";
+import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
 
 
