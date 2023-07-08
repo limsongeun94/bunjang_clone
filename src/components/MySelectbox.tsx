@@ -25,9 +25,9 @@ const MySelectbox = ({ selectArr }: LayoutProps) => {
           className="field_input"
         >
           <option className="hidden" value="" />
-          {selectArr.map((el) => {
+          {selectArr.map((el, i) => {
             return (
-              <option className="text-base" value={el.value}>
+              <option key={i} className="text-base" value={el.value}>
                 {el.title}
               </option>
             );

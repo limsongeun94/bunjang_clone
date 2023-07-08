@@ -1,7 +1,7 @@
 import MyInput from "@/components/MyInput";
 import MySelectbox from "@/components/MySelectbox";
-import { useState } from "react";
-import { SelectBox } from "@/interface/index";
+import AgreeList from "@/components/AgreeList";
+import { SelectBox, Agree } from "@/interface/index";
 
 export default () => {
   const selectArr: SelectBox[] = [
@@ -31,6 +31,40 @@ export default () => {
     },
   ];
 
+  const accordionArr: Agree[] = [
+    {
+      title: "번개장터 이용약관 (필수)",
+      contents: "번개장터 이용약관",
+    },
+    {
+      title: "개인정보 수집 이용 동의 (필수)",
+      contents: "개인정보 수집 이용 동의",
+    },
+    {
+      title: "휴대폰 본인확인서비스 (필수)",
+    },
+    {
+      title: "휴대폰 개인정보 분리보관 동의 (필수)",
+      contents: "휴대폰 개인정보 분리보관 동의",
+    },
+    {
+      title: "위치정보 이용약관 동의 (필수)",
+      contents: "위치정보 이용약관 동의",
+    },
+    {
+      title: "개인정보 수집 이용 동의 (선택)",
+      contents: "개인정보 수집 이용 동의",
+    },
+    {
+      title: "마케팅 수신 동의 (선택)",
+      contents: "이메일, SMS, PUSH 수신 동의",
+    },
+    {
+      title: "개인정보 광고 활용 동의 (선택)",
+      contents: "개인정보 광고 활용 동의",
+    },
+  ];
+
   return (
     <div className="bg-[#f9f9f9] py-[100px]">
       <div className="bg-white m-auto w-[450px] h-[927px] p-[60px] rounded-md shadow-[0px_3px_6px_rgba(0,0,0,0.1)] box-content">
@@ -52,24 +86,7 @@ export default () => {
         </div>
         <MyInput placeholder={"예시: 01012345678"}>휴대폰번호</MyInput>
         <MySelectbox selectArr={selectArr} />
-        <div>
-          <div className="flex justify-start items-center border-[1.4px] rounded-[5px] px-[16px] py-[1rem] ">
-            <svg
-              className="mr-[16px] mt-[2px]"
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M10 0c5.523 0 10 4.477 10 10s-4.477 10-10 10S0 15.523 0 10 4.477 0 10 0zm5.056 6.275a.9.9 0 0 0-1.18.099l-5.17 5.332-2.704-2.787-.09-.082a.9.9 0 0 0-1.202 1.335l3.35 3.454.092.084a.9.9 0 0 0 1.2-.084l5.817-6 .079-.093a.9.9 0 0 0-.099-1.18z"
-                fill="#e5e5e5"
-                fill-rule="evenodd"
-              ></path>
-            </svg>
-            <span>전체동의</span>
-          </div>
-        </div>
+        <AgreeList accordionArr={accordionArr} />
       </div>
     </div>
   );

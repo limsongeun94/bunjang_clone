@@ -37,3 +37,8 @@ export interface SelectBox {
   title: string;
   value: string;
 }
+
+export interface Agree {
+  title: string;
+  contents?: string;
+}
