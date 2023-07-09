@@ -90,20 +90,23 @@ export default () => {
 
   const handleAllAgree = () => {
     setAllAgree(!allAgree);
-    if (allAgree) {
+    if (!allAgree) {
       const copy_allAgree = accordionArr.map((el) => {
         el.agree = true;
         return el;
       });
       setAccordionArr(copy_allAgree);
+      console.log("전체동의");
     } else {
       const copy_allAgree = accordionArr.map((el) => {
         el.agree = false;
         return el;
       });
       setAccordionArr(copy_allAgree);
+      console.log("전체비동의");
     }
   };
+  // 이게 과연 맞나???
 
   return (
     <div className="bg-[#f9f9f9] py-[100px]">
@@ -143,7 +146,7 @@ export default () => {
               <path
                 d="M10 0c5.523 0 10 4.477 10 10s-4.477 10-10 10S0 15.523 0 10 4.477 0 10 0zm5.056 6.275a.9.9 0 0 0-1.18.099l-5.17 5.332-2.704-2.787-.09-.082a.9.9 0 0 0-1.202 1.335l3.35 3.454.092.084a.9.9 0 0 0 1.2-.084l5.817-6 .079-.093a.9.9 0 0 0-.099-1.18z"
                 fill={allAgree ? "#d80c18" : "#e5e5e5"}
-                fill-rule="evenodd"
+                fillRule="evenodd"
               ></path>
             </svg>
             <span>전체동의</span>

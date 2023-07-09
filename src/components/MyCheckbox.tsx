@@ -17,7 +17,7 @@ const MyCheckbox = (props: Agree) => {
               id={id}
               type="checkbox"
               className="absolute top-0 left-[36px] opacity-0"
-              checked={agree}
+              defaultChecked={agree}
               // onClick={() => setAgree(!agree)}
             />
             <span>{title}</span>
@@ -31,7 +31,7 @@ const MyCheckbox = (props: Agree) => {
               <path
                 d="M6.326 16.674a.897.897 0 0 0 1.273 0L18.737 5.536a.9.9 0 1 0-1.273-1.272L6.963 14.765l-4.426-4.426a.9.9 0 1 0-1.273 1.273l5.062 5.062z"
                 fill={`${agree ? "#d80c18" : "#e5e5e5"}`}
-                fill-rule="evenodd"
+                fillRule="evenodd"
               ></path>
             </svg>
           </label>
@@ -56,9 +56,9 @@ const MyCheckbox = (props: Agree) => {
             <g
               id="\uD68C\uC6D0\uAC00\uC785-\uAC00\uC774\uB4DC"
               stroke="none"
-              stroke-width="1"
+              strokeWidth="1"
               fill="none"
-              fill-rule="evenodd"
+              fillRule="evenodd"
             >
               <g
                 id="\uD68C\uC6D0\uAC00\uC785-\uC57D\uAD00\uB3D9\uC758"
