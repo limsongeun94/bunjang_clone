@@ -39,6 +39,7 @@ export interface SelectBox {
 }
 
 export interface Agree {
+  id: string;
   title: string;
   contents?: string;
 }

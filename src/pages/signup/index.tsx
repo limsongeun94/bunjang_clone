@@ -33,33 +33,41 @@ export default () => {
 
   const accordionArr: Agree[] = [
     {
+      id: "isTermsAgreed",
       title: "번개장터 이용약관 (필수)",
       contents: "번개장터 이용약관",
     },
     {
+      id: "isCollectionPrivacyPolicyAgreed",
       title: "개인정보 수집 이용 동의 (필수)",
       contents: "개인정보 수집 이용 동의",
     },
     {
+      id: "isPhoneIdentificationAgreed",
       title: "휴대폰 본인확인서비스 (필수)",
     },
     {
+      id: "isPrivacyArchivingAgreed",
       title: "휴대폰 개인정보 분리보관 동의 (필수)",
       contents: "휴대폰 개인정보 분리보관 동의",
     },
     {
+      id: "isLocationInfoAgreed",
       title: "위치정보 이용약관 동의 (필수)",
       contents: "위치정보 이용약관 동의",
     },
     {
+      id: "isTermsAgreed",
       title: "개인정보 수집 이용 동의 (선택)",
       contents: "개인정보 수집 이용 동의",
     },
     {
+      id: "isPrivacyAgreed",
       title: "마케팅 수신 동의 (선택)",
       contents: "이메일, SMS, PUSH 수신 동의",
     },
     {
+      id: "isAdUtilizationAgreed",
       title: "개인정보 광고 활용 동의 (선택)",
       contents: "개인정보 광고 활용 동의",
     },
