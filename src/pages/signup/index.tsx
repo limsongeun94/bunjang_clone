@@ -1,6 +1,7 @@
+import { useState } from "react";
 import MyInput from "@/components/MyInput";
 import MySelectbox from "@/components/MySelectbox";
-import AgreeList from "@/components/AgreeList";
+import MyCheckbox from "@/components/MyCheckbox";
 import { SelectBox, Agree } from "@/interface/index";
 
 export default () => {
@@ -31,47 +32,78 @@ export default () => {
     },
   ];
 
-  const accordionArr: Agree[] = [
+  const [accordionArr, setAccordionArr] = useState<Agree[]>([
     {
       id: "isTermsAgreed",
       title: "번개장터 이용약관 (필수)",
       contents: "번개장터 이용약관",
+      agree: false,
     },
     {
       id: "isCollectionPrivacyPolicyAgreed",
       title: "개인정보 수집 이용 동의 (필수)",
       contents: "개인정보 수집 이용 동의",
+      agree: false,
     },
     {
       id: "isPhoneIdentificationAgreed",
       title: "휴대폰 본인확인서비스 (필수)",
+      agree: false,
     },
     {
       id: "isPrivacyArchivingAgreed",
       title: "휴대폰 개인정보 분리보관 동의 (필수)",
       contents: "휴대폰 개인정보 분리보관 동의",
+      agree: false,
     },
     {
       id: "isLocationInfoAgreed",
       title: "위치정보 이용약관 동의 (필수)",
       contents: "위치정보 이용약관 동의",
+      agree: false,
     },
     {
       id: "isTermsAgreed",
       title: "개인정보 수집 이용 동의 (선택)",
       contents: "개인정보 수집 이용 동의",
+      agree: false,
     },
     {
       id: "isPrivacyAgreed",
       title: "마케팅 수신 동의 (선택)",
       contents: "이메일, SMS, PUSH 수신 동의",
+      agree: false,
     },
     {
       id: "isAdUtilizationAgreed",
       title: "개인정보 광고 활용 동의 (선택)",
       contents: "개인정보 광고 활용 동의",
+      agree: false,
     },
-  ];
+  ]);
+
+  const [allAgree, setAllAgree] = useState(false);
+
+  const [agree, setAgree] = useState(false);
+
+  const [accordion, setAccordion] = useState(false);
+
+  const handleAllAgree = () => {
+    setAllAgree(!allAgree);
+    if (allAgree) {
+      const copy_allAgree = accordionArr.map((el) => {
+        el.agree = true;
+        return el;
+      });
+      setAccordionArr(copy_allAgree);
+    } else {
+      const copy_allAgree = accordionArr.map((el) => {
+        el.agree = false;
+        return el;
+      });
+      setAccordionArr(copy_allAgree);
+    }
+  };
 
   return (
     <div className="bg-[#f9f9f9] py-[100px]">
@@ -94,7 +126,77 @@ export default () => {
         </div>
         <MyInput placeholder={"예시: 01012345678"}>휴대폰번호</MyInput>
         <MySelectbox selectArr={selectArr} />
-        <AgreeList accordionArr={accordionArr} />
+        <div>
+          <button
+            onClick={handleAllAgree}
+            className={`flex justify-start items-center ${
+              allAgree ? "border-[#d80c18]" : "#e5e5e5"
+            } border-[1.4px] rounded-[5px] w-full px-[16px] py-[1rem] text-sm font-bold`}
+          >
+            <svg
+              className="mr-[16px] mt-[2px]"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 0c5.523 0 10 4.477 10 10s-4.477 10-10 10S0 15.523 0 10 4.477 0 10 0zm5.056 6.275a.9.9 0 0 0-1.18.099l-5.17 5.332-2.704-2.787-.09-.082a.9.9 0 0 0-1.202 1.335l3.35 3.454.092.084a.9.9 0 0 0 1.2-.084l5.817-6 .079-.093a.9.9 0 0 0-.099-1.18z"
+                fill={allAgree ? "#d80c18" : "#e5e5e5"}
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+            <span>전체동의</span>
+          </button>
+          <MyCheckbox
+            title={accordionArr[0].title}
+            contents={accordionArr[0].contents}
+            id={accordionArr[0].id}
+            agree={accordionArr[0].agree}
+          />
+          <MyCheckbox
+            title={accordionArr[1].title}
+            contents={accordionArr[1].contents}
+            id={accordionArr[1].id}
+            agree={accordionArr[1].agree}
+          />
+          <MyCheckbox
+            title={accordionArr[2].title}
+            contents={accordionArr[2].contents}
+            id={accordionArr[2].id}
+            agree={accordionArr[2].agree}
+          />
+          <MyCheckbox
+            title={accordionArr[3].title}
+            contents={accordionArr[3].contents}
+            id={accordionArr[3].id}
+            agree={accordionArr[3].agree}
+          />
+          <MyCheckbox
+            title={accordionArr[4].title}
+            contents={accordionArr[4].contents}
+            id={accordionArr[4].id}
+            agree={accordionArr[4].agree}
+          />
+          <MyCheckbox
+            title={accordionArr[5].title}
+            contents={accordionArr[5].contents}
+            id={accordionArr[5].id}
+            agree={accordionArr[5].agree}
+          />
+          <MyCheckbox
+            title={accordionArr[6].title}
+            contents={accordionArr[6].contents}
+            id={accordionArr[6].id}
+            agree={accordionArr[6].agree}
+          />
+          <MyCheckbox
+            title={accordionArr[7].title}
+            contents={accordionArr[7].contents}
+            id={accordionArr[7].id}
+            agree={accordionArr[7].agree}
+          />
+        </div>
       </div>
     </div>
   );

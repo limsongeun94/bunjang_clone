@@ -1,13 +1,9 @@
+import { Agree } from "@/interface/index";
 import { useState } from "react";
 
-interface LayoutProps {
-  title: string;
-  contents?: string;
-  id: string;
-}
-
-const MyCheckbox = ({ title, contents, id }: LayoutProps) => {
-  const [agree, setAgree] = useState(false);
+const MyCheckbox = (props: Agree) => {
+  const { title, contents, id, agree } = props;
+  // const [agree, setAgree] = useState(false);
   const [accordion, setAccordion] = useState(false);
   return (
     <div className=" my-[20px] pl-[16px] pr-[11px] text-sm text-[#7f7f7f] font-medium">
@@ -22,7 +18,7 @@ const MyCheckbox = ({ title, contents, id }: LayoutProps) => {
               type="checkbox"
               className="absolute top-0 left-[36px] opacity-0"
               checked={agree}
-              onClick={() => setAgree(!agree)}
+              // onClick={() => setAgree(!agree)}
             />
             <span>{title}</span>
             <svg

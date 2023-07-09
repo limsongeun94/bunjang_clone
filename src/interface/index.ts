@@ -42,4 +42,5 @@ export interface Agree {
   id: string;
   title: string;
   contents?: string;
+  agree: boolean;
 }
