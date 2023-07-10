@@ -97,25 +97,32 @@ export default () => {
         return el;
       });
       setAccordionArr(copy_allAgree);
-      console.log("전체동의");
     } else {
       const copy_allAgree = accordionArr.map((el) => {
         el.agree = false;
         return el;
       });
       setAccordionArr(copy_allAgree);
-      console.log("전체비동의");
     }
   };
-  // 이게 과연 맞나???
 
   const handleAgreeCheck = (value: string): void => {
+    // 각각 체크박스 제어
     const i = accordionArr.findIndex((el) => el.id == value);
-    const copy_accordionArr = [
-      ...accordionArr,
-      (accordionArr[i].agree = !accordionArr[i].agree),
-    ] as Agree[];
-    setAccordionArr(copy_accordionArr);
+    accordionArr[i].agree = !accordionArr[i].agree;
+    setAccordionArr([...accordionArr]);
+  };
+
+  // accordionArr의 agree가 false가 있는지 체크
+  // => true이면(false가 있으면) setAllAgree false
+  // => false이면(false가 없으면 == true만 있으면) setAllAgree true
+  const 아이름못짓겠다 = (): void => {
+    const condition = accordionArr.some((el) => el.agree === false);
+    if (condition) {
+      setAllAgree(false);
+    } else {
+      setAllAgree(true);
+    }
   };
 
   return (
@@ -163,50 +170,50 @@ export default () => {
           </button>
           <MyCheckbox
             accordionArr={accordionArr}
-            setAccordionArr={setAccordionArr}
             handleAgreeCheck={handleAgreeCheck}
+            아이름못짓겠다={아이름못짓겠다}
             index={0}
           />
           <MyCheckbox
             accordionArr={accordionArr}
-            setAccordionArr={setAccordionArr}
             handleAgreeCheck={handleAgreeCheck}
+            아이름못짓겠다={아이름못짓겠다}
             index={1}
           />
           <MyCheckbox
             accordionArr={accordionArr}
-            setAccordionArr={setAccordionArr}
             handleAgreeCheck={handleAgreeCheck}
+            아이름못짓겠다={아이름못짓겠다}
             index={2}
           />
           <MyCheckbox
             accordionArr={accordionArr}
-            setAccordionArr={setAccordionArr}
             handleAgreeCheck={handleAgreeCheck}
+            아이름못짓겠다={아이름못짓겠다}
             index={3}
           />
           <MyCheckbox
             accordionArr={accordionArr}
-            setAccordionArr={setAccordionArr}
             handleAgreeCheck={handleAgreeCheck}
+            아이름못짓겠다={아이름못짓겠다}
             index={4}
           />
           <MyCheckbox
             accordionArr={accordionArr}
-            setAccordionArr={setAccordionArr}
             handleAgreeCheck={handleAgreeCheck}
+            아이름못짓겠다={아이름못짓겠다}
             index={5}
           />
           <MyCheckbox
             accordionArr={accordionArr}
-            setAccordionArr={setAccordionArr}
             handleAgreeCheck={handleAgreeCheck}
+            아이름못짓겠다={아이름못짓겠다}
             index={6}
           />
           <MyCheckbox
             accordionArr={accordionArr}
-            setAccordionArr={setAccordionArr}
             handleAgreeCheck={handleAgreeCheck}
+            아이름못짓겠다={아이름못짓겠다}
             index={7}
           />
         </div>

@@ -3,13 +3,14 @@ import { useState } from "react";
 
 interface LayoutProps {
   accordionArr: Agree[];
-  setAccordionArr: React.Dispatch<React.SetStateAction<Agree[]>>;
+  // setAccordionArr: React.Dispatch<React.SetStateAction<Agree[]>>;
   index: number;
   handleAgreeCheck: (value: string) => void;
+  아이름못짓겠다: () => void;
 }
 
 const MyCheckbox = (props: LayoutProps) => {
-  const { accordionArr, setAccordionArr, handleAgreeCheck, index } = props;
+  const { accordionArr, index, handleAgreeCheck, 아이름못짓겠다 } = props;
 
   const [accordion, setAccordion] = useState(false);
   return (
@@ -25,7 +26,10 @@ const MyCheckbox = (props: LayoutProps) => {
               type="checkbox"
               className="absolute top-0 left-[36px] opacity-0"
               defaultChecked={accordionArr[index].agree}
-              onChange={() => handleAgreeCheck(accordionArr[index].id)}
+              onChange={() => {
+                handleAgreeCheck(accordionArr[index].id);
+                아이름못짓겠다();
+              }}
             />
             <span>{accordionArr[index].title}</span>
             <svg
