@@ -63,13 +63,13 @@ export default () => {
       agree: false,
     },
     {
-      id: "isTermsAgreed",
+      id: "isPrivacyAgreed",
       title: "개인정보 수집 이용 동의 (선택)",
       contents: "개인정보 수집 이용 동의",
       agree: false,
     },
     {
-      id: "isPrivacyAgreed",
+      id: "isEventAgreed",
       title: "마케팅 수신 동의 (선택)",
       contents: "이메일, SMS, PUSH 수신 동의",
       agree: false,
@@ -108,6 +108,15 @@ export default () => {
     }
   };
   // 이게 과연 맞나???
+
+  const handleAgreeCheck = (value: string): void => {
+    const i = accordionArr.findIndex((el) => el.id == value);
+    const copy_accordionArr = [
+      ...accordionArr,
+      (accordionArr[i].agree = !accordionArr[i].agree),
+    ] as Agree[];
+    setAccordionArr(copy_accordionArr);
+  };
 
   return (
     <div className="bg-[#f9f9f9] py-[100px]">
@@ -155,41 +164,49 @@ export default () => {
           <MyCheckbox
             accordionArr={accordionArr}
             setAccordionArr={setAccordionArr}
+            handleAgreeCheck={handleAgreeCheck}
             index={0}
           />
           <MyCheckbox
             accordionArr={accordionArr}
             setAccordionArr={setAccordionArr}
+            handleAgreeCheck={handleAgreeCheck}
             index={1}
           />
           <MyCheckbox
             accordionArr={accordionArr}
             setAccordionArr={setAccordionArr}
+            handleAgreeCheck={handleAgreeCheck}
             index={2}
           />
           <MyCheckbox
             accordionArr={accordionArr}
             setAccordionArr={setAccordionArr}
+            handleAgreeCheck={handleAgreeCheck}
             index={3}
           />
           <MyCheckbox
             accordionArr={accordionArr}
             setAccordionArr={setAccordionArr}
+            handleAgreeCheck={handleAgreeCheck}
             index={4}
           />
           <MyCheckbox
             accordionArr={accordionArr}
             setAccordionArr={setAccordionArr}
+            handleAgreeCheck={handleAgreeCheck}
             index={5}
           />
           <MyCheckbox
             accordionArr={accordionArr}
             setAccordionArr={setAccordionArr}
+            handleAgreeCheck={handleAgreeCheck}
             index={6}
           />
           <MyCheckbox
             accordionArr={accordionArr}
             setAccordionArr={setAccordionArr}
+            handleAgreeCheck={handleAgreeCheck}
             index={7}
           />
         </div>

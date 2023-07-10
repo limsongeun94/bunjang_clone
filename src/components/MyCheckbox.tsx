@@ -5,19 +5,11 @@ interface LayoutProps {
   accordionArr: Agree[];
   setAccordionArr: React.Dispatch<React.SetStateAction<Agree[]>>;
   index: number;
+  handleAgreeCheck: (value: string) => void;
 }
 
 const MyCheckbox = (props: LayoutProps) => {
-  const { accordionArr, setAccordionArr, index } = props;
-  // const [agree, setAgree] = useState(false);
-
-  const handleAgreeCheck = (): void => {
-    const copy_accordionArr: Agree[] = [
-      ...accordionArr,
-      (accordionArr[index].agree = !accordionArr[index].agree),
-    ];
-    setAccordionArr(copy_accordionArr);
-  };
+  const { accordionArr, setAccordionArr, handleAgreeCheck, index } = props;
 
   const [accordion, setAccordion] = useState(false);
   return (
@@ -33,8 +25,7 @@ const MyCheckbox = (props: LayoutProps) => {
               type="checkbox"
               className="absolute top-0 left-[36px] opacity-0"
               defaultChecked={accordionArr[index].agree}
-              onChange={handleAgreeCheck}
-              // onClick={() => setAgree(!agree)}
+              onChange={() => handleAgreeCheck(accordionArr[index].id)}
             />
             <span>{accordionArr[index].title}</span>
             <svg
