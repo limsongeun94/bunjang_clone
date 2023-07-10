@@ -152,7 +152,61 @@ export default () => {
             </svg>
             <span>전체동의</span>
           </button>
-          <MyCheckbox
+          <MyCheckbox 
+            title={accordionArr[0].title} 
+            contents={accordionArr[0].contents as string} 
+            value={accordionArr[0].agree} 
+            onChange={(value: boolean) => {
+              accordionArr[0].agree = value
+              setAccordionArr([...accordionArr])
+            }}
+          />
+          <MyCheckbox 
+            title={accordionArr[1].title} 
+            contents={accordionArr[1].contents as string} 
+            value={accordionArr[1].agree} 
+            onChange={(value: boolean) => {
+              accordionArr[1].agree = value
+              setAccordionArr([...accordionArr])
+            }}
+          />
+          <MyCheckbox 
+            title={accordionArr[2].title} 
+            contents={accordionArr[2].contents as string} 
+            value={accordionArr[2].agree} 
+            onChange={(value: boolean) => {
+              accordionArr[2].agree = value
+              setAccordionArr([...accordionArr])
+            }}
+          />
+          <MyCheckbox 
+            title={accordionArr[3].title} 
+            contents={accordionArr[3].contents as string} 
+            value={accordionArr[3].agree} 
+            onChange={(value: boolean) => {
+              accordionArr[3].agree = value
+              setAccordionArr([...accordionArr])
+            }}
+          />
+          <MyCheckbox 
+            title={accordionArr[4].title} 
+            contents={accordionArr[4].contents as string} 
+            value={accordionArr[4].agree} 
+            onChange={(value: boolean) => {
+              accordionArr[4].agree = value
+              setAccordionArr([...accordionArr])
+            }}
+          />
+          <MyCheckbox 
+            title={accordionArr[5].title} 
+            contents={accordionArr[5].contents as string} 
+            value={accordionArr[5].agree} 
+            onChange={(value: boolean) => {
+              accordionArr[5].agree = value
+              setAccordionArr([...accordionArr])
+            }}
+          />
+          {/* <MyCheckbox
             accordionArr={accordionArr}
             setAccordionArr={setAccordionArr}
             index={0}
@@ -191,7 +245,7 @@ export default () => {
             accordionArr={accordionArr}
             setAccordionArr={setAccordionArr}
             index={7}
-          />
+          /> */}
         </div>
       </div>
     </div>
