@@ -1,26 +1,42 @@
 import { Agree } from "@/interface/index";
 import { useState } from "react";
 
-const MyCheckbox = (props: Agree) => {
-  const { title, contents, id, agree } = props;
+interface LayoutProps {
+  accordionArr: Agree[];
+  setAccordionArr: React.Dispatch<React.SetStateAction<Agree[]>>;
+  index: number;
+}
+
+const MyCheckbox = (props: LayoutProps) => {
+  const { accordionArr, setAccordionArr, index } = props;
   // const [agree, setAgree] = useState(false);
+
+  const handleAgreeCheck = (): void => {
+    const copy_accordionArr: Agree[] = [
+      ...accordionArr,
+      (accordionArr[index].agree = !accordionArr[index].agree),
+    ];
+    setAccordionArr(copy_accordionArr);
+  };
+
   const [accordion, setAccordion] = useState(false);
   return (
     <div className=" my-[20px] pl-[16px] pr-[11px] text-sm text-[#7f7f7f] font-medium">
       <div className="flex justify-between items-center">
         <div className="w-full">
           <label
-            htmlFor={id}
+            htmlFor={accordionArr[index].id}
             className="flex justify-start items-center relative pl-[36px] w-full"
           >
             <input
-              id={id}
+              id={accordionArr[index].id}
               type="checkbox"
               className="absolute top-0 left-[36px] opacity-0"
-              defaultChecked={agree}
+              defaultChecked={accordionArr[index].agree}
+              onChange={handleAgreeCheck}
               // onClick={() => setAgree(!agree)}
             />
-            <span>{title}</span>
+            <span>{accordionArr[index].title}</span>
             <svg
               className="absolute top-0 left-0"
               width="20"
@@ -30,7 +46,7 @@ const MyCheckbox = (props: Agree) => {
             >
               <path
                 d="M6.326 16.674a.897.897 0 0 0 1.273 0L18.737 5.536a.9.9 0 1 0-1.273-1.272L6.963 14.765l-4.426-4.426a.9.9 0 1 0-1.273 1.273l5.062 5.062z"
-                fill={`${agree ? "#d80c18" : "#e5e5e5"}`}
+                fill={`${accordionArr[index].agree ? "#d80c18" : "#e5e5e5"}`}
                 fillRule="evenodd"
               ></path>
             </svg>
@@ -98,7 +114,7 @@ const MyCheckbox = (props: Agree) => {
             : "max-h-0 overflow-hidden"
         } transition-[all] duration-700  delay-0 pl-[36px] `}
       >
-        {contents}
+        {accordionArr[index].contents}
       </div>
     </div>
   );

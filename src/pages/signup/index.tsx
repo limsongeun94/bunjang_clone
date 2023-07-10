@@ -89,6 +89,7 @@ export default () => {
   const [accordion, setAccordion] = useState(false);
 
   const handleAllAgree = () => {
+    // 전체동의 버튼 제어
     setAllAgree(!allAgree);
     if (!allAgree) {
       const copy_allAgree = accordionArr.map((el) => {
@@ -152,52 +153,44 @@ export default () => {
             <span>전체동의</span>
           </button>
           <MyCheckbox
-            title={accordionArr[0].title}
-            contents={accordionArr[0].contents}
-            id={accordionArr[0].id}
-            agree={accordionArr[0].agree}
+            accordionArr={accordionArr}
+            setAccordionArr={setAccordionArr}
+            index={0}
           />
           <MyCheckbox
-            title={accordionArr[1].title}
-            contents={accordionArr[1].contents}
-            id={accordionArr[1].id}
-            agree={accordionArr[1].agree}
+            accordionArr={accordionArr}
+            setAccordionArr={setAccordionArr}
+            index={1}
           />
           <MyCheckbox
-            title={accordionArr[2].title}
-            contents={accordionArr[2].contents}
-            id={accordionArr[2].id}
-            agree={accordionArr[2].agree}
+            accordionArr={accordionArr}
+            setAccordionArr={setAccordionArr}
+            index={2}
           />
           <MyCheckbox
-            title={accordionArr[3].title}
-            contents={accordionArr[3].contents}
-            id={accordionArr[3].id}
-            agree={accordionArr[3].agree}
+            accordionArr={accordionArr}
+            setAccordionArr={setAccordionArr}
+            index={3}
           />
           <MyCheckbox
-            title={accordionArr[4].title}
-            contents={accordionArr[4].contents}
-            id={accordionArr[4].id}
-            agree={accordionArr[4].agree}
+            accordionArr={accordionArr}
+            setAccordionArr={setAccordionArr}
+            index={4}
           />
           <MyCheckbox
-            title={accordionArr[5].title}
-            contents={accordionArr[5].contents}
-            id={accordionArr[5].id}
-            agree={accordionArr[5].agree}
+            accordionArr={accordionArr}
+            setAccordionArr={setAccordionArr}
+            index={5}
           />
           <MyCheckbox
-            title={accordionArr[6].title}
-            contents={accordionArr[6].contents}
-            id={accordionArr[6].id}
-            agree={accordionArr[6].agree}
+            accordionArr={accordionArr}
+            setAccordionArr={setAccordionArr}
+            index={6}
           />
           <MyCheckbox
-            title={accordionArr[7].title}
-            contents={accordionArr[7].contents}
-            id={accordionArr[7].id}
-            agree={accordionArr[7].agree}
+            accordionArr={accordionArr}
+            setAccordionArr={setAccordionArr}
+            index={7}
           />
         </div>
       </div>
