@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import MyInput from "@/components/MyInput";
 import MySelectbox from "@/components/MySelectbox";
 import MyCheckbox from "@/components/MyCheckbox";
 import { SelectBox, Agree } from "@/interface/index";
 
 export default () => {
+  const [joinObject, setJoinObject] = useState({
+    name: "",
+    // 그 외 필요한것들
+  });
+
   const selectArr: SelectBox[] = [
     {
       title: "SKT",
@@ -84,10 +89,6 @@ export default () => {
 
   const [allAgree, setAllAgree] = useState(false);
 
-  const [agree, setAgree] = useState(false);
-
-  const [accordion, setAccordion] = useState(false);
-
   const handleAllAgree = () => {
     // 전체동의 버튼 제어
     setAllAgree(!allAgree);
@@ -113,6 +114,7 @@ export default () => {
     setAccordionArr([...accordionArr]);
   };
 
+  // 각각 체크박스가 모두 체크되어있지 않으면 전체동의 해제, 각각 체크박스가 모두 체크되어있으면 전체동의 설정
   // accordionArr의 agree가 false가 있는지 체크
   // => true이면(false가 있으면) setAllAgree false
   // => false이면(false가 없으면 == true만 있으면) setAllAgree true
@@ -125,28 +127,44 @@ export default () => {
     }
   };
 
+  const inputRef = useRef<HTMLInputElement>(null);
+  // const onClickNext = () => {
+  //   console.log(inputRef.current.value);
+  // };
+
   return (
     <div className="bg-[#f9f9f9] py-[100px]">
-      <div className="bg-white m-auto w-[450px] h-[927px] p-[60px] rounded-md shadow-[0px_3px_6px_rgba(0,0,0,0.1)] box-content">
+      <div className="bg-white m-auto w-[450px] p-[60px] rounded-md shadow-[0px_3px_6px_rgba(0,0,0,0.1)] box-content">
         <h1 className="font-black text-3xl text-[#3f3f3f] mb-[45px]">
           본인 정보를 입력해주세요
         </h1>
-        <MyInput placeholder={"예시: 홍길동"}>이름</MyInput>
-        <div className="flex w-full items-baseline">
-          <div className="w-[212px]">
-            <MyInput placeholder={"예시: 900101"}>생년월일</MyInput>
-          </div>
-          —
-          <div className="w-[212px] flex items-baseline">
-            <div className="w-[34px]">
-              <MyInput textcenter={"text-center"}></MyInput>
-            </div>
-            <div className="text-[#666666] tracking-[1px] text-lg">●●●●●●</div>
-          </div>
-        </div>
-        <MyInput placeholder={"예시: 01012345678"}>휴대폰번호</MyInput>
-        <MySelectbox selectArr={selectArr} />
         <div>
+          <MyInput
+            placeholder={"예시: 홍길동"}
+            onChange={(val) => {
+              setJoinObject({ ...joinObject, name: val });
+            }}
+          >
+            이름
+          </MyInput>
+          <div className="flex w-full items-baseline">
+            <div className="w-[212px]">
+              <MyInput placeholder={"예시: 900101"}>생년월일</MyInput>
+            </div>
+            —
+            <div className="w-[212px] flex items-baseline">
+              <div className="w-[34px]">
+                <MyInput textcenter={"text-center"}></MyInput>
+              </div>
+              <div className="text-[#666666] tracking-[1px] text-lg">
+                ●●●●●●
+              </div>
+            </div>
+          </div>
+          <MyInput placeholder={"예시: 01012345678"}>휴대폰번호</MyInput>
+          <MySelectbox selectArr={selectArr}>통신사</MySelectbox>
+        </div>
+        <div className="mt-[40px] mb-[50px]">
           <button
             onClick={handleAllAgree}
             className={`flex justify-start items-center ${
@@ -168,6 +186,8 @@ export default () => {
             </svg>
             <span>전체동의</span>
           </button>
+          {/* 어제 내가 체크박스에 value 넣었던거 기억하지? 응. 그런 식으로 해야돼. */}
+          {/* 회원가입과 관련된 상태 이 페이지가 갖고있고, 인풋,체크박스는 입력을 받아서 회원가입 상태를 업데이트 하도록... */}
           <MyCheckbox
             accordionArr={accordionArr}
             handleAgreeCheck={handleAgreeCheck}
@@ -217,6 +237,9 @@ export default () => {
             index={7}
           />
         </div>
+        <button className="opacity-30 cursor-not-allowed bg-[#d80c18] w-full h-[72px] rounded-[6px] text-lg text-white text-center">
+          다음
+        </button>
       </div>
     </div>
   );

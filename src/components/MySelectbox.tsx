@@ -1,11 +1,13 @@
+import { ReactNode } from "react";
 import { SelectBox } from "@/interface/index";
 import { useState } from "react";
 
 interface LayoutProps {
+  children?: ReactNode;
   selectArr: SelectBox[];
 }
 
-const MySelectbox = ({ selectArr }: LayoutProps) => {
+const MySelectbox = ({ children, selectArr }: LayoutProps) => {
   const [floatingClass, setFloatingClass] = useState("");
   const changeFloatingClass = (value: string) => {
     if (value) {
@@ -33,7 +35,7 @@ const MySelectbox = ({ selectArr }: LayoutProps) => {
             );
           })}
         </select>
-        <p className={`${floatingClass}`}>톻신사</p>
+        <p className={`${floatingClass}`}>{children}</p>
       </label>
     </div>
   );

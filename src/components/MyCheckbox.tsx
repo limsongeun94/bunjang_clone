@@ -108,7 +108,9 @@ const MyCheckbox = (props: LayoutProps) => {
           accordion
             ? "max-h-[2.25rem] overflow-hidden pt-[18px]"
             : "max-h-0 overflow-hidden"
-        } transition-[all] duration-700  delay-0 pl-[36px] `}
+        } transition-[all] duration-700  delay-0 pl-[36px] ${
+          accordionArr[index].contents ? "" : "hidden"
+        }`}
       >
         {accordionArr[index].contents}
       </div>
