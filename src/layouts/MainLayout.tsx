@@ -17,6 +17,9 @@ export default function MainLayout({ children, categories }: LayoutProps) {
     } else {
       document.body.style.cssText = `overflow: auto`;
     }
+    return () => {
+      document.body.style.cssText = `overflow: auto`;
+    };
   }, [loginModal]);
 
   return (
