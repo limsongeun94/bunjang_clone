@@ -5,11 +5,6 @@ import MyCheckbox from "@/components/MyCheckbox";
 import { SelectBox, Agree } from "@/interface/index";
 
 export default () => {
-  const [joinObject, setJoinObject] = useState({
-    name: "",
-    // 그 외 필요한것들
-  });
-
   const selectArr: SelectBox[] = [
     {
       title: "SKT",
@@ -127,10 +122,13 @@ export default () => {
     }
   };
 
-  const inputRef = useRef<HTMLInputElement>(null);
-  // const onClickNext = () => {
-  //   console.log(inputRef.current.value);
-  // };
+  const [joinObject, setJoinObject] = useState({
+    name: "",
+    birth: "",
+    gender: "",
+    phone: "",
+    carrier: "",
+  });
 
   return (
     <div className="bg-[#f9f9f9] py-[100px]">
