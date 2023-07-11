@@ -116,7 +116,7 @@ export default () => {
   // accordionArr의 agree가 false가 있는지 체크
   // => true이면(false가 있으면) setAllAgree false
   // => false이면(false가 없으면 == true만 있으면) setAllAgree true
-  const 아이름못짓겠다 = (): void => {
+  const handleCheckIfAllAgreed = (): void => {
     const condition = accordionArr.some((el) => el.agree === false);
     if (condition) {
       setAllAgree(false);
@@ -171,49 +171,49 @@ export default () => {
           <MyCheckbox
             accordionArr={accordionArr}
             handleAgreeCheck={handleAgreeCheck}
-            아이름못짓겠다={아이름못짓겠다}
+            handleCheckIfAllAgreed={handleCheckIfAllAgreed}
             index={0}
           />
           <MyCheckbox
             accordionArr={accordionArr}
             handleAgreeCheck={handleAgreeCheck}
-            아이름못짓겠다={아이름못짓겠다}
+            handleCheckIfAllAgreed={handleCheckIfAllAgreed}
             index={1}
           />
           <MyCheckbox
             accordionArr={accordionArr}
             handleAgreeCheck={handleAgreeCheck}
-            아이름못짓겠다={아이름못짓겠다}
+            handleCheckIfAllAgreed={handleCheckIfAllAgreed}
             index={2}
           />
           <MyCheckbox
             accordionArr={accordionArr}
             handleAgreeCheck={handleAgreeCheck}
-            아이름못짓겠다={아이름못짓겠다}
+            handleCheckIfAllAgreed={handleCheckIfAllAgreed}
             index={3}
           />
           <MyCheckbox
             accordionArr={accordionArr}
             handleAgreeCheck={handleAgreeCheck}
-            아이름못짓겠다={아이름못짓겠다}
+            handleCheckIfAllAgreed={handleCheckIfAllAgreed}
             index={4}
           />
           <MyCheckbox
             accordionArr={accordionArr}
             handleAgreeCheck={handleAgreeCheck}
-            아이름못짓겠다={아이름못짓겠다}
+            handleCheckIfAllAgreed={handleCheckIfAllAgreed}
             index={5}
           />
           <MyCheckbox
             accordionArr={accordionArr}
             handleAgreeCheck={handleAgreeCheck}
-            아이름못짓겠다={아이름못짓겠다}
+            handleCheckIfAllAgreed={handleCheckIfAllAgreed}
             index={6}
           />
           <MyCheckbox
             accordionArr={accordionArr}
             handleAgreeCheck={handleAgreeCheck}
-            아이름못짓겠다={아이름못짓겠다}
+            handleCheckIfAllAgreed={handleCheckIfAllAgreed}
             index={7}
           />
         </div>

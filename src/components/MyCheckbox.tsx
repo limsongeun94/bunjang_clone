@@ -6,11 +6,12 @@ interface LayoutProps {
   // setAccordionArr: React.Dispatch<React.SetStateAction<Agree[]>>;
   index: number;
   handleAgreeCheck: (value: string) => void;
-  아이름못짓겠다: () => void;
+  handleCheckIfAllAgreed: () => void;
 }
 
 const MyCheckbox = (props: LayoutProps) => {
-  const { accordionArr, index, handleAgreeCheck, 아이름못짓겠다 } = props;
+  const { accordionArr, index, handleAgreeCheck, handleCheckIfAllAgreed } =
+    props;
 
   const [accordion, setAccordion] = useState(false);
   return (
@@ -28,7 +29,7 @@ const MyCheckbox = (props: LayoutProps) => {
               defaultChecked={accordionArr[index].agree}
               onChange={() => {
                 handleAgreeCheck(accordionArr[index].id);
-                아이름못짓겠다();
+                handleCheckIfAllAgreed();
               }}
             />
             <span>{accordionArr[index].title}</span>
