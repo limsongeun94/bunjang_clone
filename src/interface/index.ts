@@ -43,4 +43,5 @@ export interface Agree {
   title: string;
   contents?: string;
   agree: boolean;
+  selectState: string;
 }

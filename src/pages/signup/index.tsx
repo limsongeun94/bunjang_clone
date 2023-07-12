@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import MyInput from "@/components/MyInput";
 import MySelectbox from "@/components/MySelectbox";
 import MyCheckbox from "@/components/MyCheckbox";
@@ -38,47 +38,55 @@ export default () => {
       title: "번개장터 이용약관 (필수)",
       contents: "번개장터 이용약관",
       agree: false,
+      selectState: "mandatory",
     },
     {
       id: "isCollectionPrivacyPolicyAgreed",
       title: "개인정보 수집 이용 동의 (필수)",
       contents: "개인정보 수집 이용 동의",
       agree: false,
+      selectState: "mandatory",
     },
     {
       id: "isPhoneIdentificationAgreed",
       title: "휴대폰 본인확인서비스 (필수)",
       agree: false,
+      selectState: "mandatory",
     },
     {
       id: "isPrivacyArchivingAgreed",
       title: "휴대폰 개인정보 분리보관 동의 (필수)",
       contents: "휴대폰 개인정보 분리보관 동의",
       agree: false,
+      selectState: "mandatory",
     },
     {
       id: "isLocationInfoAgreed",
       title: "위치정보 이용약관 동의 (필수)",
       contents: "위치정보 이용약관 동의",
       agree: false,
+      selectState: "mandatory",
     },
     {
       id: "isPrivacyAgreed",
       title: "개인정보 수집 이용 동의 (선택)",
       contents: "개인정보 수집 이용 동의",
       agree: false,
+      selectState: "optional",
     },
     {
       id: "isEventAgreed",
       title: "마케팅 수신 동의 (선택)",
       contents: "이메일, SMS, PUSH 수신 동의",
       agree: false,
+      selectState: "optional",
     },
     {
       id: "isAdUtilizationAgreed",
       title: "개인정보 광고 활용 동의 (선택)",
       contents: "개인정보 광고 활용 동의",
       agree: false,
+      selectState: "optional",
     },
   ]);
 
@@ -130,6 +138,31 @@ export default () => {
     carrier: "",
   });
 
+  const onClickNext = () => {
+    console.log(joinObject.name);
+    console.log(joinObject.birth);
+    console.log(joinObject.gender);
+    console.log(joinObject.phone);
+    console.log(joinObject.carrier);
+  };
+
+  const [activeBtnClass, setActiveBtnClass] = useState(false);
+
+  const activateNextBtn = () => {
+    const valueArr = Object.values(joinObject);
+    console.log("valueArr : ", valueArr);
+    const newArr = valueArr.findIndex((el) => el === "");
+    console.log("newArr : ", newArr);
+    if (newArr === -1) {
+      setActiveBtnClass(true);
+    }
+  };
+
+  useEffect(() => {
+    activateNextBtn;
+    console.log(activeBtnClass);
+  });
+
   return (
     <div className="bg-[#f9f9f9] py-[100px]">
       <div className="bg-white m-auto w-[450px] p-[60px] rounded-md shadow-[0px_3px_6px_rgba(0,0,0,0.1)] box-content">
@@ -138,29 +171,55 @@ export default () => {
         </h1>
         <div>
           <MyInput
-            placeholder={"예시: 홍길동"}
-            onChange={(val) => {
-              setJoinObject({ ...joinObject, name: val });
+            onChange={(value: string): void => {
+              setJoinObject({ ...joinObject, name: value });
             }}
+            placeholder={"예시: 홍길동"}
           >
             이름
           </MyInput>
           <div className="flex w-full items-baseline">
             <div className="w-[212px]">
-              <MyInput placeholder={"예시: 900101"}>생년월일</MyInput>
+              <MyInput
+                onChange={(value: string): void => {
+                  setJoinObject({ ...joinObject, birth: value });
+                }}
+                placeholder={"예시: 900101"}
+              >
+                생년월일
+              </MyInput>
             </div>
             —
             <div className="w-[212px] flex items-baseline">
               <div className="w-[34px]">
-                <MyInput textcenter={"text-center"}></MyInput>
+                <MyInput
+                  onChange={(value: string): void => {
+                    setJoinObject({ ...joinObject, gender: value });
+                  }}
+                  textcenter={"text-center"}
+                ></MyInput>
               </div>
               <div className="text-[#666666] tracking-[1px] text-lg">
                 ●●●●●●
               </div>
             </div>
           </div>
-          <MyInput placeholder={"예시: 01012345678"}>휴대폰번호</MyInput>
-          <MySelectbox selectArr={selectArr}>통신사</MySelectbox>
+          <MyInput
+            onChange={(value: string): void => {
+              setJoinObject({ ...joinObject, phone: value });
+            }}
+            placeholder={"예시: 01012345678"}
+          >
+            휴대폰번호
+          </MyInput>
+          <MySelectbox
+            onChange={(value: string): void => {
+              setJoinObject({ ...joinObject, carrier: value });
+            }}
+            selectArr={selectArr}
+          >
+            통신사
+          </MySelectbox>
         </div>
         <div className="mt-[40px] mb-[50px]">
           <button
@@ -235,7 +294,12 @@ export default () => {
             index={7}
           />
         </div>
-        <button className="opacity-30 cursor-not-allowed bg-[#d80c18] w-full h-[72px] rounded-[6px] text-lg text-white text-center">
+        <button
+          onClick={onClickNext}
+          className={`${
+            activeBtnClass ? "" : "opacity-30 cursor-not-allowed"
+          } bg-[#d80c18] w-full h-[72px] rounded-[6px] text-lg text-white text-center`}
+        >
           다음
         </button>
       </div>
