@@ -3,8 +3,11 @@ import MyInput from "@/components/MyInput";
 import MySelectbox from "@/components/MySelectbox";
 import MyCheckbox from "@/components/MyCheckbox";
 import { SelectBox, Agree } from "@/interface/index";
+import { useRouter } from "next/router";
 
 export default () => {
+  const router = useRouter();
+
   const selectArr: SelectBox[] = [
     {
       title: "SKT",
@@ -144,23 +147,32 @@ export default () => {
     console.log(joinObject.gender);
     console.log(joinObject.phone);
     console.log(joinObject.carrier);
+    const agreeTrueArr = accordionArr.filter((el) => el.agree === true);
+    agreeTrueArr.forEach((el) => console.log(el.id));
   };
 
   const [activeBtnClass, setActiveBtnClass] = useState(false);
 
   const activateNextBtn = () => {
-    const valueArr = Object.values(joinObject);
-    console.log("valueArr : ", valueArr);
-    const newArr = valueArr.findIndex((el) => el === "");
-    console.log("newArr : ", newArr);
-    if (newArr === -1) {
+    const valueInputSelectArr = Object.values(joinObject);
+    const new_valueInputSelectArr = valueInputSelectArr.findIndex(
+      (el) => el === ""
+    );
+
+    const valueCheckArr = accordionArr.filter(
+      (el) => el.selectState === "mandatory"
+    );
+    const agreeCondition = valueCheckArr.some((el) => el.agree === false);
+
+    if (new_valueInputSelectArr === -1 && !agreeCondition) {
       setActiveBtnClass(true);
+    } else {
+      setActiveBtnClass(false);
     }
   };
 
   useEffect(() => {
-    activateNextBtn;
-    console.log(activeBtnClass);
+    activateNextBtn();
   });
 
   return (
@@ -185,6 +197,7 @@ export default () => {
                   setJoinObject({ ...joinObject, birth: value });
                 }}
                 placeholder={"예시: 900101"}
+                maxlenght={6}
               >
                 생년월일
               </MyInput>
@@ -197,6 +210,7 @@ export default () => {
                     setJoinObject({ ...joinObject, gender: value });
                   }}
                   textcenter={"text-center"}
+                  maxlenght={1}
                 ></MyInput>
               </div>
               <div className="text-[#666666] tracking-[1px] text-lg">

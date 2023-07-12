@@ -13,10 +13,8 @@ const MySelectbox = ({ children, selectArr, onChange }: LayoutProps) => {
   const changeFloatingClass = (value: string) => {
     if (value) {
       setFloatingClass("floating_label_selectbox");
-      console.log(floatingClass);
     } else {
       setFloatingClass("");
-      console.log(floatingClass);
     }
     onChange(value);
   };
