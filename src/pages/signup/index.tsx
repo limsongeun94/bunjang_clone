@@ -142,13 +142,16 @@ export default () => {
   });
 
   const onClickNext = () => {
-    console.log(joinObject.name);
-    console.log(joinObject.birth);
-    console.log(joinObject.gender);
-    console.log(joinObject.phone);
-    console.log(joinObject.carrier);
-    const agreeTrueArr = accordionArr.filter((el) => el.agree === true);
-    agreeTrueArr.forEach((el) => console.log(el.id));
+    if (activeBtnClass) {
+      console.log(joinObject.name);
+      console.log(joinObject.birth);
+      console.log(joinObject.gender);
+      console.log(joinObject.phone);
+      console.log(joinObject.carrier);
+      const agreeTrueArr = accordionArr.filter((el) => el.agree === true);
+      agreeTrueArr.forEach((el) => console.log(el.id));
+      router.push("/");
+    }
   };
 
   const [activeBtnClass, setActiveBtnClass] = useState(false);
