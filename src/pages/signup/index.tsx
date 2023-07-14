@@ -190,9 +190,6 @@ export default () => {
               setJoinObject({ ...joinObject, name: value });
             }}
             placeholder={"예시: 홍길동"}
-            onChange={(val) => {
-              setJoinObject({ ...joinObject, name: val });
-            }}
             inputType={"text"}
           >
             이름
@@ -232,6 +229,7 @@ export default () => {
               setJoinObject({ ...joinObject, phone: value });
             }}
             placeholder={"예시: 01012345678"}
+            maxlenght={11}
             inputType={"number"}
           >
             휴대폰번호

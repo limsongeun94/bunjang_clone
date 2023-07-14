@@ -6,28 +6,26 @@ interface MyInputProps {
   children?: ReactNode;
   placeholder?: string;
   textcenter?: string;
-<<<<<<< HEAD
+  maxlenght?: number;
   inputType: string;
   onChange?: (val: string) => void;
-  // ref: Ref<HTMLInputElement>; Typescript는 이렇게 하면 되긴 하는데 이렇게 하지말고
-=======
-  onChange: (value: string) => void;
-  maxlenght?: number;
->>>>>>> e0a7431a4fa19e20fb501d8b537f1a7012d91823
 }
 
-// 지금 내가 어떤거 한지 알겠어? 음... 알겠어.
-// 그럼 이제 MyInput에 index에? onChange를 달면 거기서 입력값을 인자로 받을 수 있겠지?
 const MyInput = (props: MyInputProps) => {
-  const { children, placeholder, textcenter, maxlenght, onChange } = props;
+  const { children, placeholder, textcenter, maxlenght, inputType, onChange } =
+    props;
   const onchangehandler = (value: string): void => {
-    onChange(value);
+    if (onChange) {
+      onChange(value);
+    }
   };
-<<<<<<< HEAD
 
-  const { children, placeholder, textcenter, inputType } = props;
-=======
->>>>>>> e0a7431a4fa19e20fb501d8b537f1a7012d91823
+  const setMaxLength = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > e.target.maxLength) {
+      e.target.value = e.target.value.slice(0, e.target.maxLength);
+    }
+  };
+
   return (
     <div className="field">
       <label>
@@ -37,6 +35,7 @@ const MyInput = (props: MyInputProps) => {
           placeholder={placeholder}
           maxLength={maxlenght}
           onChange={(e) => onchangehandler(e.target.value)}
+          onInput={(e: ChangeEvent<HTMLInputElement>) => setMaxLength(e)}
         />
         <p>{children}</p>
       </label>
