@@ -1,4 +1,10 @@
-import { TopHeader, StickyHeader, Footer, LoginModal } from "@/components";
+import {
+  TopHeader,
+  StickyHeader,
+  Footer,
+  LoginModal,
+  FloatingMenu,
+} from "@/components";
 import { ReactNode } from "react";
 import { Category } from "@/interface";
 import { useState, useEffect } from "react";
@@ -24,6 +30,7 @@ export default function MainLayout({ children, categories }: LayoutProps) {
 
   return (
     <div className="w-[1024px] mx-auto">
+      <FloatingMenu />
       <TopHeader setLoginModal={setLoginModal} />
       <StickyHeader categories={categories} />
       <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />
