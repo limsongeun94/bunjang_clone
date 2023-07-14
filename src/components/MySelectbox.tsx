@@ -5,18 +5,18 @@ import { useState } from "react";
 interface LayoutProps {
   children?: ReactNode;
   selectArr: SelectBox[];
+  onChange: (value: string) => void;
 }
 
-const MySelectbox = ({ children, selectArr }: LayoutProps) => {
+const MySelectbox = ({ children, selectArr, onChange }: LayoutProps) => {
   const [floatingClass, setFloatingClass] = useState("");
   const changeFloatingClass = (value: string) => {
     if (value) {
       setFloatingClass("floating_label_selectbox");
-      console.log(floatingClass);
     } else {
       setFloatingClass("");
-      console.log(floatingClass);
     }
+    onChange(value);
   };
 
   return (

@@ -1,10 +1,13 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import MyInput from "@/components/MyInput";
 import MySelectbox from "@/components/MySelectbox";
 import MyCheckbox from "@/components/MyCheckbox";
 import { SelectBox, Agree } from "@/interface/index";
+import { useRouter } from "next/router";
 
 export default () => {
+  const router = useRouter();
+
   const selectArr: SelectBox[] = [
     {
       title: "SKT",
@@ -38,47 +41,55 @@ export default () => {
       title: "번개장터 이용약관 (필수)",
       contents: "번개장터 이용약관",
       agree: false,
+      selectState: "mandatory",
     },
     {
       id: "isCollectionPrivacyPolicyAgreed",
       title: "개인정보 수집 이용 동의 (필수)",
       contents: "개인정보 수집 이용 동의",
       agree: false,
+      selectState: "mandatory",
     },
     {
       id: "isPhoneIdentificationAgreed",
       title: "휴대폰 본인확인서비스 (필수)",
       agree: false,
+      selectState: "mandatory",
     },
     {
       id: "isPrivacyArchivingAgreed",
       title: "휴대폰 개인정보 분리보관 동의 (필수)",
       contents: "휴대폰 개인정보 분리보관 동의",
       agree: false,
+      selectState: "mandatory",
     },
     {
       id: "isLocationInfoAgreed",
       title: "위치정보 이용약관 동의 (필수)",
       contents: "위치정보 이용약관 동의",
       agree: false,
+      selectState: "mandatory",
     },
     {
       id: "isPrivacyAgreed",
       title: "개인정보 수집 이용 동의 (선택)",
       contents: "개인정보 수집 이용 동의",
       agree: false,
+      selectState: "optional",
     },
     {
       id: "isEventAgreed",
       title: "마케팅 수신 동의 (선택)",
       contents: "이메일, SMS, PUSH 수신 동의",
       agree: false,
+      selectState: "optional",
     },
     {
       id: "isAdUtilizationAgreed",
       title: "개인정보 광고 활용 동의 (선택)",
       contents: "개인정보 광고 활용 동의",
       agree: false,
+      selectState: "optional",
     },
   ]);
 
@@ -130,6 +141,43 @@ export default () => {
     carrier: "",
   });
 
+  const onClickNext = () => {
+    if (activeBtnClass) {
+      console.log(joinObject.name);
+      console.log(joinObject.birth);
+      console.log(joinObject.gender);
+      console.log(joinObject.phone);
+      console.log(joinObject.carrier);
+      const agreeTrueArr = accordionArr.filter((el) => el.agree === true);
+      agreeTrueArr.forEach((el) => console.log(el.id));
+      router.push("/");
+    }
+  };
+
+  const [activeBtnClass, setActiveBtnClass] = useState(false);
+
+  const activateNextBtn = () => {
+    const valueInputSelectArr = Object.values(joinObject);
+    const new_valueInputSelectArr = valueInputSelectArr.findIndex(
+      (el) => el === ""
+    );
+
+    const valueCheckArr = accordionArr.filter(
+      (el) => el.selectState === "mandatory"
+    );
+    const agreeCondition = valueCheckArr.some((el) => el.agree === false);
+
+    if (new_valueInputSelectArr === -1 && !agreeCondition) {
+      setActiveBtnClass(true);
+    } else {
+      setActiveBtnClass(false);
+    }
+  };
+
+  useEffect(() => {
+    activateNextBtn();
+  });
+
   return (
     <div className="bg-[#f9f9f9] py-[100px]">
       <div className="bg-white m-auto w-[450px] p-[60px] rounded-md shadow-[0px_3px_6px_rgba(0,0,0,0.1)] box-content">
@@ -138,6 +186,9 @@ export default () => {
         </h1>
         <div>
           <MyInput
+            onChange={(value: string): void => {
+              setJoinObject({ ...joinObject, name: value });
+            }}
             placeholder={"예시: 홍길동"}
             onChange={(val) => {
               setJoinObject({ ...joinObject, name: val });
@@ -148,7 +199,14 @@ export default () => {
           </MyInput>
           <div className="flex w-full items-baseline">
             <div className="w-[212px]">
-              <MyInput placeholder={"예시: 900101"} inputType={"number"}>
+              <MyInput
+                onChange={(value: string): void => {
+                  setJoinObject({ ...joinObject, birth: value });
+                }}
+                placeholder={"예시: 900101"}
+                inputType={"number"}
+                maxlenght={6}
+              >
                 생년월일
               </MyInput>
             </div>
@@ -156,7 +214,11 @@ export default () => {
             <div className="w-[212px] flex items-baseline">
               <div className="w-[34px]">
                 <MyInput
+                  onChange={(value: string): void => {
+                    setJoinObject({ ...joinObject, gender: value });
+                  }}
                   textcenter={"text-center"}
+                  maxlenght={1}
                   inputType={"number"}
                 ></MyInput>
               </div>
@@ -165,10 +227,23 @@ export default () => {
               </div>
             </div>
           </div>
-          <MyInput placeholder={"예시: 01012345678"} inputType={"number"}>
+          <MyInput
+            onChange={(value: string): void => {
+              setJoinObject({ ...joinObject, phone: value });
+            }}
+            placeholder={"예시: 01012345678"}
+            inputType={"number"}
+          >
             휴대폰번호
           </MyInput>
-          <MySelectbox selectArr={selectArr}>통신사</MySelectbox>
+          <MySelectbox
+            onChange={(value: string): void => {
+              setJoinObject({ ...joinObject, carrier: value });
+            }}
+            selectArr={selectArr}
+          >
+            통신사
+          </MySelectbox>
         </div>
         <div className="mt-[40px] mb-[50px]">
           <button
@@ -243,7 +318,12 @@ export default () => {
             index={7}
           />
         </div>
-        <button className="opacity-30 cursor-not-allowed bg-[#d80c18] w-full h-[72px] rounded-[6px] text-lg text-white text-center">
+        <button
+          onClick={onClickNext}
+          className={`${
+            activeBtnClass ? "" : "opacity-30 cursor-not-allowed"
+          } bg-[#d80c18] w-full h-[72px] rounded-[6px] text-lg text-white text-center`}
+        >
           다음
         </button>
       </div>
