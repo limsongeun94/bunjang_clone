@@ -142,24 +142,32 @@ export default () => {
             onChange={(val) => {
               setJoinObject({ ...joinObject, name: val });
             }}
+            inputType={"text"}
           >
             이름
           </MyInput>
           <div className="flex w-full items-baseline">
             <div className="w-[212px]">
-              <MyInput placeholder={"예시: 900101"}>생년월일</MyInput>
+              <MyInput placeholder={"예시: 900101"} inputType={"number"}>
+                생년월일
+              </MyInput>
             </div>
             —
             <div className="w-[212px] flex items-baseline">
               <div className="w-[34px]">
-                <MyInput textcenter={"text-center"}></MyInput>
+                <MyInput
+                  textcenter={"text-center"}
+                  inputType={"number"}
+                ></MyInput>
               </div>
               <div className="text-[#666666] tracking-[1px] text-lg">
                 ●●●●●●
               </div>
             </div>
           </div>
-          <MyInput placeholder={"예시: 01012345678"}>휴대폰번호</MyInput>
+          <MyInput placeholder={"예시: 01012345678"} inputType={"number"}>
+            휴대폰번호
+          </MyInput>
           <MySelectbox selectArr={selectArr}>통신사</MySelectbox>
         </div>
         <div className="mt-[40px] mb-[50px]">

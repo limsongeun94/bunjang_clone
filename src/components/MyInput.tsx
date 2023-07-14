@@ -6,6 +6,7 @@ interface MyInputProps {
   children?: ReactNode;
   placeholder?: string;
   textcenter?: string;
+  inputType: string;
   onChange?: (val: string) => void;
   // ref: Ref<HTMLInputElement>; Typescript는 이렇게 하면 되긴 하는데 이렇게 하지말고
 }
@@ -17,14 +18,14 @@ const MyInput = (props: MyInputProps) => {
     if (props.onChange) props.onChange(evt.target.value);
   };
 
-  const { children, placeholder, textcenter } = props;
+  const { children, placeholder, textcenter, inputType } = props;
   return (
     <div className="field">
       <label>
         <input
           onChange={onChangeInputHandler}
           className={`${textcenter} field_input`}
-          type="text"
+          type={inputType}
           placeholder={placeholder}
         />
         <p>{children}</p>
