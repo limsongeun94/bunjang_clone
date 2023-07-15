@@ -14,7 +14,7 @@ const FlotingMenu = () => {
 
   return (
     <div
-      className={`w-[90px] box-border leading-none fixed top-[102px] ${
+      className={`z-[-10] w-[90px] box-border leading-none fixed top-[102px] ${
         innerWidth > 1280
           ? "right-[calc(50%-617px)]"
           : "right-[calc(640px-617px)]"

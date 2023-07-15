@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import MyInput from "@/components/MyInput";
 import MySelectbox from "@/components/MySelectbox";
 import MyCheckbox from "@/components/MyCheckbox";
