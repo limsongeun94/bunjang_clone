@@ -18,8 +18,8 @@ function ControlledCarousel() {
       interval={null}
       controls={isHover ? true : false}
       className="product_carousel w-[428px] h-[428px]"
-      onMouseOver={() => setIsHover(true)}
-      onMouseOut={() => setIsHover(false)}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
     >
       <Carousel.Item>
         <img src="/무제1.jpg" width="428px" height="428px" />
