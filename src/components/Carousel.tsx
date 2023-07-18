@@ -18,6 +18,7 @@ function ControlledCarousel({ banner_img }: CarouselProps) {
 
   return (
     <Carousel
+      className="index_carousel"
       activeIndex={index}
       onSelect={handleSelect}
       indicators={false}

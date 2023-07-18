@@ -1,18 +1,17 @@
-import {
-  TopHeader,
-  StickyHeader,
-  Footer,
-  LoginModal,
-  FloatingMenu,
-} from "@/components";
+import { TopHeader, StickyHeader, Footer, LoginModal } from "@/components";
 import { ReactNode } from "react";
 import { Category } from "@/interface";
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 
 interface LayoutProps {
   children?: ReactNode;
   categories: Array<Category>;
 }
+
+const FloatingMenu = dynamic(() => import("@/components/FloatingMenu"), {
+  ssr: false,
+});
 
 export default function MainLayout({ children, categories }: LayoutProps) {
   const [loginModal, setLoginModal] = useState(false);
