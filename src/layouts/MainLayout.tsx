@@ -28,8 +28,8 @@ export default function MainLayout({ children, categories }: LayoutProps) {
   }, [loginModal]);
 
   return (
-    <div className="w-[1024px] mx-auto">
-      <FloatingMenu />
+    // 이 div를 렐러티브로, floa
+    <div className="w-[1024px] mx-auto relative">
       <TopHeader setLoginModal={setLoginModal} />
       <StickyHeader categories={categories} />
       <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />

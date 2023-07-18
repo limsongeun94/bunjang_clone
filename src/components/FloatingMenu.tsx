@@ -13,13 +13,7 @@ const FlotingMenu = () => {
   console.log(innerWidth);
 
   return (
-    <div
-      className={`z-[-10] w-[90px] box-border leading-none fixed top-[102px] ${
-        innerWidth > 1280
-          ? "right-[calc(50%-617px)]"
-          : "right-[calc(640px-617px)]"
-      } `}
-    >
+    <div className="z-[-10] w-[90px] box-border leading-none absolute top-[102px] right-[-106px]">
       <div className="border-[#666666] border-[1px]  p-[10px] mb-[6px]">
         <div className="text-xs font-semibold text-[#666666] text-center mb-[8px]  leading-none">
           찜한상품
