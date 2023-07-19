@@ -7,14 +7,13 @@ import { useEffect, useState } from "react";
 import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
 
-
 interface IndexProps {
   data: {
     banners: Array<Banner>;
     products: Array<Product>;
     categories: Array<Category>;
   };
-  user?: User
+  user?: User;
 }
 
 export default ({ data, user }: IndexProps) => {
@@ -63,6 +62,10 @@ export default ({ data, user }: IndexProps) => {
     <MainLayout categories={data.categories}>
       <div className="w-[1024px] mx-auto">
         <Carousel banner_img={banner_img} />
+        <img
+          src="/banners/app_install_banner.png"
+          className="align-bottom w-full h-full mt-[16px]"
+        />
         <section className="pt-[56px]">
           <h2 className="text-2xl mb-6">오늘의 상품 추천</h2>
           <div className="flex flex-wrap">
@@ -134,11 +137,8 @@ export default ({ data, user }: IndexProps) => {
   );
 };
 
-export const getServerSideProps = withIronSessionSsr(
-  async ({ req }) => {
-    const data = (await axios.get("/landing")).data;
-    const user = req.session.user ?? null
-    return { props: { data, user }}
-  },
-  ironSessionOptions
-)
+export const getServerSideProps = withIronSessionSsr(async ({ req }) => {
+  const data = (await axios.get("/landing")).data;
+  const user = req.session.user ?? null;
+  return { props: { data, user } };
+}, ironSessionOptions);
