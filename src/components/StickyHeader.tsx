@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { Category } from "@/interface";
-import FlotingMenu from "./FloatingMenu";
+import dynamic from "next/dynamic";
 
 interface LayoutProps {
   categories: Array<Category>;
 }
+
+const FloatingMenu = dynamic(() => import("@/components/FloatingMenu"), {
+  ssr: false,
+});
 
 const StickyHeader = ({ categories }: LayoutProps) => {
   // position: sticky는 부모 내에서만 작동한다.
@@ -50,7 +54,7 @@ const StickyHeader = ({ categories }: LayoutProps) => {
 
   return (
     <header className="bg-white sticky top-0 z-30 pt-[30px]">
-      <FlotingMenu />
+      <FloatingMenu />
       <div className="flex h-[40px] justify-between items-center">
         <img src="/logo.svg" />
         <div className="border-2 border-[#F72F33] px-[15px] w-[460px] h-[40px] flex justify-between items-center">
