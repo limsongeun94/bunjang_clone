@@ -188,6 +188,96 @@ export default ({ data, user }: IndexProps) => {
             </div>
           </div>
         </div>
+        <div className="h-[50px] border-b border-[#212121]  flex justify-end items-center">
+          <button className="w-[28px] h-[28px] bg-[#00cb2f] flex justify-center items-center mr-[10px]">
+            <img src="/icons/naver_blog.png" width="22px" height="18px" />
+          </button>
+          <button className="w-[28px] h-[28px] bg-[#3b5998] flex justify-center items-center mr-[10px]">
+            <img src="/icons/facebook_f.png" width="8px" height="15px" />
+          </button>
+          <button className="w-[28px] h-[28px] bg-[#55acee] flex justify-center items-center mr-[10px]">
+            <img src="/icons/twitter.png" width="16px" height="13px" />
+          </button>
+          <button className="w-[28px] h-[28px] bg-[#7e6e6c] flex justify-center items-center">
+            <img src="icons/url.png" width="25px" height="25px" />
+          </button>
+        </div>
+        <div className="flex">
+          <div className="w-[663px] pr-[30px] border-r border-[#eeeeee]">
+            <div className="pt-[48px] pb-[16px] border-b border-[#eeeeee] text-lg">
+              상품정보
+            </div>
+            <div className="my-[40px] text-sm leading-[1.5]">
+              비상계엄이 선포된 때에는 법률이 정하는 바에 의하여 영장제도,
+              언론·출판·집회·결사의 자유, 정부나 법원의 권한에 관하여 특별한
+              조치를 할 수 있다. 행정각부의 설치·조직과 직무범위는 법률로
+              정한다. 대한민국의 국민이 되는 요건은 법률로 정한다. 헌법개정안은
+              국회가 의결한 후 30일 이내에 국민투표에 붙여 국회의원선거권자
+              과반수의 투표와 투표자 과반수의 찬성을 얻어야 한다.
+            </div>
+            <div className="border-y border-[#eeeeee] py-[20px]">
+              <div className="w-[221px]"></div>
+              <div className="w-[221px]"></div>
+              <div className="w-[221px]"></div>
+            </div>
+          </div>
+          <div className="px-[32px] pb-[118px]  border-r border-[#eeeeee]">
+            <div className="pt-[48px] pb-[16px] border-b border-[#eeeeee] text-lg">
+              상점정보
+            </div>
+            <div className="px-[10px]">
+              <div className="flex mt-[20px] mb-[16px]">
+                <div className="mr-[16px]">
+                  <img src="/icons/shop.svg" width="48px" height="48px" />
+                </div>
+                <div>
+                  <div className="mt-[4px] mb-[11px] text-[#212121] text-sm font-normal">
+                    상점이름
+                  </div>
+                  <div className="flex text-[#999999] text-[13px]">
+                    <div className="mr-[17px]">
+                      상품<span>19</span>
+                    </div>
+                    <div>
+                      팔로워<span>12</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button className="flex justify-center items-center w-full h-[32px] border-[1px] border-[#eeeeee] rounded-sm text-[#888888] text-[13px]">
+              <img src="/icons/follow.png" width="20px" height="14px" />
+              &nbsp;팔로우
+            </button>
+            <div className="pt-[30px] pb-[16px] border-b border-[#eeeeee] text-sm">
+              상점후기<span className="ml-[5px] text-[#f72f33]">1</span>
+            </div>
+            <div className="flex pt-[16px] border-b border-[#eeeeee]">
+              <div className="mr-[12px]">
+                <img src="/icons/shop.svg" width="32px" height="32px" />
+              </div>
+              <div className="w-fit pb-[16px]">
+                <div className="flex justify-between text-[#b2b2b2] text-[13px] mb-[5px]">
+                  <div>닉네임</div>
+                  <div>7년전</div>
+                </div>
+                <div className="flex mb-[10px]">
+                  <img src="icons/star.png" width="15px" height="14px" />
+                  <img src="icons/star.png" width="15px" height="14px" />
+                  <img src="icons/star.png" width="15px" height="14px" />
+                  <img src="icons/star.png" width="15px" height="14px" />
+                  <img src="icons/star.png" width="15px" height="14px" />
+                </div>
+                <div className="text-[#888888] text-[13px] leading-[1.4]">
+                  너무 좋은 거래 했습니다.
+                </div>
+              </div>
+            </div>
+            <div className="text-[13px] text-[#666666] h-[40px] flex justify-center items-center border-b border-[#eeeeee]">
+              상점후기 더보기
+            </div>
+          </div>
+        </div>
       </div>
     </MainLayout>
   );
