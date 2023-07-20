@@ -202,12 +202,12 @@ export default ({ data, user }: IndexProps) => {
             <img src="icons/url.png" width="25px" height="25px" />
           </button>
         </div>
-        <div className="flex">
-          <div className="w-[663px] pr-[30px] border-r border-[#eeeeee]">
+        <div className="flex justify-between">
+          <div className="pr-[30px] border-r border-[#eeeeee]">
             <div className="pt-[48px] pb-[16px] border-b border-[#eeeeee] text-lg">
               상품정보
             </div>
-            <div className="my-[40px] text-sm leading-[1.5]">
+            <div className="my-[40px] w-[663px]  text-sm leading-[1.5]">
               비상계엄이 선포된 때에는 법률이 정하는 바에 의하여 영장제도,
               언론·출판·집회·결사의 자유, 정부나 법원의 권한에 관하여 특별한
               조치를 할 수 있다. 행정각부의 설치·조직과 직무범위는 법률로
@@ -215,13 +215,52 @@ export default ({ data, user }: IndexProps) => {
               국회가 의결한 후 30일 이내에 국민투표에 붙여 국회의원선거권자
               과반수의 투표와 투표자 과반수의 찬성을 얻어야 한다.
             </div>
-            <div className="border-y border-[#eeeeee] py-[20px]">
-              <div className="w-[221px]"></div>
-              <div className="w-[221px]"></div>
-              <div className="w-[221px]"></div>
+            <div className="flex border-y border-[#eeeeee] py-[20px]">
+              <div className="w-[221px] border-r border-[#eeeeee]">
+                <div className="mb-[15px] flex justify-center items-center text-[13px] text-[#b2b2b2]">
+                  <img
+                    src="/icons/region.png"
+                    width="16px"
+                    height="18px"
+                    className="mr-[7px]"
+                  />
+                  거래지역
+                </div>
+                <div className="px-[15px] text-center text-[13px] text-[#666666] leading-normal">
+                  서울시 도봉구 방학3동
+                </div>
+              </div>
+              <div className="w-[221px] border-r border-[#eeeeee]">
+                <div className="mb-[15px] flex justify-center items-center text-[13px] text-[#b2b2b2]">
+                  <img
+                    src="/icons/category.png"
+                    width="16px"
+                    height="18px"
+                    className="mr-[7px]"
+                  />
+                  카테고리
+                </div>
+                <div className="px-[15px] text-center text-[13px] text-[#666666] leading-normal">
+                  피규어
+                </div>
+              </div>
+              <div className="w-[221px] border-r border-[#eeeeee]">
+                <div className="mb-[15px] flex justify-center items-center text-[13px] text-[#b2b2b2]">
+                  <img
+                    src="/icons/product_tag.png"
+                    width="15px"
+                    height="18px"
+                    className="mr-[7px]"
+                  />
+                  상품태그
+                </div>
+                <div className="px-[15px] text-center text-[13px] text-[#666666] leading-normal">
+                  #산리오 #마이멜로디
+                </div>
+              </div>
             </div>
           </div>
-          <div className="px-[32px] pb-[118px]  border-r border-[#eeeeee]">
+          <div className="px-[32px] pb-[118px] w-[330px] border-r border-[#eeeeee]">
             <div className="pt-[48px] pb-[16px] border-b border-[#eeeeee] text-lg">
               상점정보
             </div>
