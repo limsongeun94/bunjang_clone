@@ -17,7 +17,7 @@ interface IndexProps {
 export default ({ data, user }: IndexProps) => {
   return (
     <MainLayout categories={data.categories}>
-      <div>
+      <div className="w-[1024px] mx-auto ">
         <div className="text-xs flex items-center justify-start pt-[30px] pb-[20px] border-b border-[#3f3f3f]">
           <div className="flex items-center">
             <img

@@ -4,7 +4,7 @@ interface LayoutProps {
 
 const TopHeader = ({ setLoginModal }: LayoutProps) => {
   return (
-    <header className=" bg-white h-auto">
+    <header className=" w-[1024px] mx-auto  bg-white h-auto">
       <div className="flex justify-between items-center h-[40px] border-b-[1px]">
         <div className="flex">
           <div className="flex  px-[15px]">

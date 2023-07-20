@@ -14,7 +14,7 @@ const FlotingMenu = () => {
 
   return (
     <div className="z-[-10] w-[90px] box-border leading-none absolute top-[102px] right-[-106px]">
-      <div className="border-[#666666] border-[1px]  p-[10px] mb-[6px]">
+      <div className="bg-white border-[#666666] border-[1px]  p-[10px] mb-[6px]">
         <div className="text-xs font-semibold text-[#666666] text-center mb-[8px]  leading-none">
           찜한상품
         </div>
@@ -30,7 +30,7 @@ const FlotingMenu = () => {
           </span>
         </div>
       </div>
-      <div className="border-[#cccccc] border-[1px] p-[10px] mb-[6px]">
+      <div className="bg-white border-[#cccccc] border-[1px] p-[10px] mb-[6px]">
         <div className="text-xs font-semibold text-[#666666] text-center">
           최근본상품
         </div>
@@ -38,7 +38,7 @@ const FlotingMenu = () => {
           ………
         </div>
       </div>
-      <div className="border-[#e5e5e5] border-[1px] p-[10px] mb-[6px] text-[13px] font-semibold text-[#666666] text-center">
+      <div className="bg-white border-[#e5e5e5] border-[1px] p-[10px] mb-[6px] text-[13px] font-semibold text-[#666666] text-center">
         TOP
       </div>
     </div>

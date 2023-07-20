@@ -53,9 +53,9 @@ const StickyHeader = ({ categories }: LayoutProps) => {
     : "";
 
   return (
-    <header className="bg-white sticky top-0 z-30 pt-[30px]">
+    <header className=" bg-white sticky top-0 z-30 pt-[30px]">
       <FloatingMenu />
-      <div className="flex h-[40px] justify-between items-center">
+      <div className="w-[1024px] mx-auto flex h-[40px] justify-between items-center">
         <img src="/logo.svg" />
         <div className="border-2 border-[#F72F33] px-[15px] w-[460px] h-[40px] flex justify-between items-center">
           <input
@@ -81,7 +81,7 @@ const StickyHeader = ({ categories }: LayoutProps) => {
           </div>
         </div>
       </div>
-      <div className="h-[70px] flex flex-row align-middle relative">
+      <div className="w-[1024px] mx-auto h-[70px] flex flex-row align-middle relative">
         <div
           className="flex items-center after:absolute after:w-[60px] after:h-[90px] after:top-0 after:left-[-13px] after:content-['']"
           onMouseEnter={() => setMenuOpenState(true)}
