@@ -4,7 +4,7 @@ interface LayoutProps {
 
 const TopHeader = ({ setLoginModal }: LayoutProps) => {
   return (
-    <header className=" w-[1024px] mx-auto  bg-white h-auto">
+    <div className=" w-[1024px] mx-auto  bg-white h-auto">
       <div className="flex justify-between items-center h-[40px] border-b-[1px]">
         <div className="flex">
           <div className="flex  px-[15px]">
@@ -26,7 +26,7 @@ const TopHeader = ({ setLoginModal }: LayoutProps) => {
           <div className="text-[13px] px-[15px] cursor-pointer">내 상점</div>
         </div>
       </div>
-    </header>
+    </div>
   );
 };
 export default TopHeader;

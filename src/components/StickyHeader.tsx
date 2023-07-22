@@ -53,8 +53,10 @@ const StickyHeader = ({ categories }: LayoutProps) => {
     : "";
 
   return (
-    <header className=" bg-white sticky top-0 z-30 pt-[30px]">
-      <FloatingMenu />
+    <div className="bg-white sticky top-0 z-30 pt-[30px]">
+      <div className="relative w-[1024px] mx-auto">
+        <FloatingMenu />
+      </div>
       <div className="w-[1024px] mx-auto flex h-[40px] justify-between items-center">
         <img src="/logo.svg" />
         <div className="border-2 border-[#F72F33] px-[15px] w-[460px] h-[40px] flex justify-between items-center">
@@ -176,7 +178,7 @@ const StickyHeader = ({ categories }: LayoutProps) => {
           </div>
         </div>
       </div>
-    </header>
+    </div>
   );
 };
 
