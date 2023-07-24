@@ -83,7 +83,7 @@ const StickyHeader = ({ categories }: LayoutProps) => {
           </div>
         </div>
       </div>
-      <div className="w-[1024px] mx-auto h-[70px] flex flex-row align-middle relative">
+      <div className="w-[1024px] mx-auto h-[70px] border-b border-[#eeeeee] flex flex-row align-middle relative">
         <div
           className="flex items-center after:absolute after:w-[60px] after:h-[90px] after:top-0 after:left-[-13px] after:content-['']"
           onMouseEnter={() => setMenuOpenState(true)}
