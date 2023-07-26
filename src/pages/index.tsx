@@ -49,7 +49,6 @@ export default ({ data, user }: IndexProps) => {
         .then((res) => {
           setProductList([...productList, ...res.data.list]);
           setProductPage(productPage + 1);
-          console.log(productPage, res.data.list);
         });
     }
   };

@@ -113,3 +113,55 @@ input[type="number"] {
   content: "";
   display: inline-block;
 }
+
+.checkRadio::before {
+  content: "";
+  background-image: url("/icons/checkRadio.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.noneCheckRadio::before {
+  content: "";
+  background-image: url("/icons/noneCheckRadio.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.checkCheckBox::before {
+  content: "";
+  background-image: url("/icons/noneCheckCheckBox.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.noneCheckCheckBox::before {
+  content: "";
+  background-image: url("/icons/checkCheckBox.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: inline-block;
+}

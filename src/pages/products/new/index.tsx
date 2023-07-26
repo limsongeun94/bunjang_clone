@@ -33,10 +33,12 @@ export default ({ data, user }: IndexProps) => {
       ? subMenuCategories.categories.find((el) => el.id === currentThirdMenu)
       : ""
     : "";
-  console.log(mainMenuCategories);
 
-  const [usedCheck, setUsedCheck] = useState(true);
-  const [newCheck, setNewCheck] = useState(false);
+  const [usedNewCheck, setUsedNewCheck] = useState("used");
+
+  const [exchangeState, setExchangeState] = useState("notExchange");
+
+  const [shippingFee, setShippingFee] = useState(false);
 
   return (
     <MainLayout categories={data.categories}>
@@ -113,7 +115,7 @@ export default ({ data, user }: IndexProps) => {
             </div>
           </div>
           <div className="py-[2rem] border-b border-[#dcdbe4] flex">
-            <div className="w-[10.5rem] text-lg">
+            <div className="w-[10.5rem] text-lg ">
               카테고리 <span className="text-[#ff5058]">*</span>
             </div>
             <div>
@@ -233,41 +235,137 @@ export default ({ data, user }: IndexProps) => {
           </div>
           <div className="py-[2rem] border-b border-[#dcdbe4] flex">
             <div className="w-[10.5rem] text-lg">
+              거래지역 <span className="text-[#ff5058]">*</span>
+            </div>
+            <div className="w-[856px]">
+              <div className="flex">
+                <div className="hover:bg-[#f4f4fa] active:bg-[#eae9f1] cursor-pointer h-[3rem] w-[6.5rem] leading-[3rem] text-center border-[1px] border-[#c3c2cc] rounded-[2px] mr-[1rem]">
+                  내 위치
+                </div>
+                <div className="hover:bg-[#f4f4fa] active:bg-[#eae9f1] cursor-pointer h-[3rem] w-[6.5rem] leading-[3rem] text-center border-[1px] border-[#c3c2cc] rounded-[2px] mr-[1rem]">
+                  최근 지역
+                </div>
+                <div className="hover:bg-[#f4f4fa] active:bg-[#eae9f1] cursor-pointer h-[3rem] w-[6.5rem] leading-[3rem] text-center border-[1px] border-[#c3c2cc] rounded-[2px] mr-[1rem]">
+                  주소 검색
+                </div>
+                <div className="hover:bg-[#f4f4fa] active:bg-[#eae9f1] cursor-pointer h-[3rem] w-[6.5rem] leading-[3rem] text-center border-[1px] border-[#c3c2cc] rounded-[2px]">
+                  지역설정안함
+                </div>
+              </div>
+              <div className="bg-[#f4f4fa] h-[3rem] w-full mt-[1rem] px-[1rem] border-[1px] border-[#c3c2cc]"></div>
+            </div>
+          </div>
+          <div className="py-[2rem] border-b border-[#dcdbe4] flex">
+            <div className="w-[10.5rem] text-lg">
               상태 <span className="text-[#ff5058]">*</span>
             </div>
-            <div>
+            <div className="flex">
               <label
                 htmlFor="중고상품"
                 className={`${
-                  usedCheck ? "checkRadio" : "noneCheckRadio"
-                } mr-[32px] text-[1rem] relative`}
+                  usedNewCheck === "used" ? "checkRadio" : "noneCheckRadio"
+                } mr-[32px] text-[1rem] relative flex items-center`}
               >
                 <input
                   className="hidden"
-                  onChange={() => setUsedCheck(!usedCheck)}
+                  onClick={() => setUsedNewCheck("used")}
                   id="중고상품"
                   type="radio"
                   value="0"
-                  checked={usedCheck}
+                  defaultChecked={usedNewCheck === "used" ? true : false}
                 />
                 중고상품
               </label>
               <label
                 htmlFor="새상품"
                 className={`${
-                  newCheck ? "checkRadio" : "noneCheckRadio"
-                } text-[1rem] relative`}
+                  usedNewCheck === "new" ? "checkRadio" : "noneCheckRadio"
+                }                
+                text-[1rem] relative flex items-center`}
               >
                 <input
                   className="hidden"
-                  onChange={() => setNewCheck(!newCheck)}
+                  onClick={() => setUsedNewCheck("new")}
                   id="새상품"
                   type="radio"
                   value="0"
-                  checked={newCheck}
+                  defaultChecked={usedNewCheck === "new" ? true : false}
                 />
                 새상품
               </label>
+            </div>
+          </div>
+          <div className="py-[2rem] border-b border-[#dcdbe4] flex">
+            <div className="w-[10.5rem] text-lg ">
+              교환 <span className="text-[#ff5058]">*</span>
+            </div>
+            <div className="flex">
+              <label
+                htmlFor="교환불가"
+                className={`${
+                  exchangeState === "notExchange"
+                    ? "checkRadio"
+                    : "noneCheckRadio"
+                } mr-[32px] text-[1rem] relative flex items-center`}
+              >
+                <input
+                  className="hidden"
+                  id="교환불가"
+                  type="radio"
+                  value="0"
+                  onClick={() => setExchangeState("notExchange")}
+                  defaultChecked={
+                    exchangeState === "notExchange" ? true : false
+                  }
+                />
+                교환불가
+              </label>
+              <label
+                htmlFor="교환가능"
+                className={`${
+                  exchangeState === "exchange" ? "checkRadio" : "noneCheckRadio"
+                } text-[1rem] relative flex items-center`}
+              >
+                <input
+                  className="hidden"
+                  id="교환가능"
+                  type="radio"
+                  value="0"
+                  onClick={() => setExchangeState("exchange")}
+                  defaultChecked={exchangeState === "exchange" ? true : false}
+                />
+                교환가능
+              </label>
+            </div>
+          </div>
+          <div className="py-[2rem] border-b border-[#dcdbe4] flex">
+            <div className="w-[10.5rem] text-lg pt-[14px]">
+              가격 <span className="text-[#ff5058]">*</span>
+            </div>
+            <div>
+              <div>
+                <div>
+                  <input
+                    className="border-[1px] text-[#c3c2cc] h-[3rem] px-[1rem] mr-[1rem]"
+                    type="number"
+                    placeholder="숫자만 입력해주세요."
+                  />
+                  원
+                </div>
+                <label
+                  className={`${
+                    shippingFee ? "checkCheckBox" : "noneCheckCheckBox"
+                  } mt-[1rem] bm-[1.5rem] flex items-center`}
+                >
+                  배송비 포함
+                  <input
+                    type="checkbox"
+                    className="hidden"
+                    onClick={() => setShippingFee(!shippingFee)}
+                    defaultChecked={shippingFee}
+                  />
+                </label>
+              </div>
             </div>
           </div>
         </div>
