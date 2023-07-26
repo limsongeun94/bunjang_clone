@@ -94,3 +94,22 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+.category_select {
+  color: #f57e00;
+  font-size: 14px;
+  margin-top: 0.5rem;
+  line-height: 1;
+}
+
+.category_select::before {
+  margin-right: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  background-image: url("/icons/nope_category.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  content: "";
+  display: inline-block;
+}

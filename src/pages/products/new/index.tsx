@@ -35,6 +35,9 @@ export default ({ data, user }: IndexProps) => {
     : "";
   console.log(mainMenuCategories);
 
+  const [usedCheck, setUsedCheck] = useState(true);
+  const [newCheck, setNewCheck] = useState(false);
+
   return (
     <MainLayout categories={data.categories}>
       <div className="w-[1024px] mx-auto">
@@ -207,9 +210,9 @@ export default ({ data, user }: IndexProps) => {
                   )}
                 </div>
               </div>
-              <div className="before:content-[''] before:bg-center before:bg-no-repeat before:bg-cover before:bg-[url('/icons/nope_category.svg')] before:w-[1rem] before:h-[1rem] text-[#f57e00] text-sm mt-[0.5rem]">
-                상세 카테고리를 선택해주세요.
-              </div>
+              {/* <div className="category_select">
+                 상세 카테고리를 선택해주세요.
+              </div> */}
               <div className="mt-[24px]">
                 <h2 className="text-[#ff5058] text-base">
                   선택한 카테고리 :&nbsp;
@@ -226,6 +229,45 @@ export default ({ data, user }: IndexProps) => {
                   </b>
                 </h2>
               </div>
+            </div>
+          </div>
+          <div className="py-[2rem] border-b border-[#dcdbe4] flex">
+            <div className="w-[10.5rem] text-lg">
+              상태 <span className="text-[#ff5058]">*</span>
+            </div>
+            <div>
+              <label
+                htmlFor="중고상품"
+                className={`${
+                  usedCheck ? "checkRadio" : "noneCheckRadio"
+                } mr-[32px] text-[1rem] relative`}
+              >
+                <input
+                  className="hidden"
+                  onChange={() => setUsedCheck(!usedCheck)}
+                  id="중고상품"
+                  type="radio"
+                  value="0"
+                  checked={usedCheck}
+                />
+                중고상품
+              </label>
+              <label
+                htmlFor="새상품"
+                className={`${
+                  newCheck ? "checkRadio" : "noneCheckRadio"
+                } text-[1rem] relative`}
+              >
+                <input
+                  className="hidden"
+                  onChange={() => setNewCheck(!newCheck)}
+                  id="새상품"
+                  type="radio"
+                  value="0"
+                  checked={newCheck}
+                />
+                새상품
+              </label>
             </div>
           </div>
         </div>
