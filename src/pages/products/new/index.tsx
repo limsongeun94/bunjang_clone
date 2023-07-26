@@ -19,6 +19,7 @@ export default ({ data, user }: IndexProps) => {
 
   const [currentMainMenu, setCurrentMainMenu] = useState<string>("");
   const [currentSubMenu, setCurrentSubMenu] = useState<string>("");
+  const [currentThirdMenu, setCurrentThirdMenu] = useState<string>("");
   const mainMenuCategories = data.categories.find(
     (el) => el.id === currentMainMenu
   );
@@ -27,8 +28,12 @@ export default ({ data, user }: IndexProps) => {
       ? mainMenuCategories.categories.find((el) => el.id === currentSubMenu)
       : ""
     : "";
-
-  console.log(subMenuCategories);
+  const thirdMenuCategories = subMenuCategories
+    ? subMenuCategories.categories
+      ? subMenuCategories.categories.find((el) => el.id === currentThirdMenu)
+      : ""
+    : "";
+  console.log(mainMenuCategories);
 
   return (
     <MainLayout categories={data.categories}>
@@ -108,33 +113,36 @@ export default ({ data, user }: IndexProps) => {
             <div className="w-[10.5rem] text-lg">
               카테고리 <span className="text-[#ff5058]">*</span>
             </div>
-            <div className="border-[1px] border-[#dcdbe4] h-[19rem] flex">
-              <div className="w-[284px] h-full">
-                <ul className="py-[0.5rem] w-full h-full pl-0 overflow-y-auto">
-                  {data.categories.map((el) => {
-                    return (
-                      <li
-                        key={el.id}
-                        className="w-full h-[40px] leading-[40px]"
-                      >
-                        <button
-                          onClick={() => {
-                            setCurrentMainMenu(el.id);
-                          }}
-                          className="hover:bg-[#f4f4fa] w-full h-full px-[1.5rem] text-left"
+            <div>
+              <div className="border-[1px] border-[#dcdbe4] h-[19rem] flex">
+                <div className="w-[284px] h-full">
+                  <ul className="py-[0.5rem] w-full h-full pl-0 overflow-y-auto">
+                    {data.categories.map((el) => {
+                      return (
+                        <li
+                          key={el.id}
+                          className="w-full h-[40px] leading-[40px]"
                         >
-                          {el.title}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-              <div className="w-[284px] h-full">
-                <ul className="py-[0.5rem] w-full h-full pl-0 overflow-y-auto">
-                  {mainMenuCategories
-                    ? mainMenuCategories.categories
-                      ? mainMenuCategories.categories.map((el) => {
+                          <button
+                            onClick={() => {
+                              setCurrentMainMenu(el.id);
+                            }}
+                            className={`${
+                              el.id === currentMainMenu ? "text-[#ff5058]" : ""
+                            } hover:bg-[#f4f4fa] w-full h-full px-[1.5rem] text-left`}
+                          >
+                            {el.title}
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                <div className="w-[284px] h-full border-r border-[#dcdbe4] flex justify-center items-center ">
+                  {mainMenuCategories ? (
+                    mainMenuCategories.categories ? (
+                      <ul className="py-[0.5rem] w-full h-full pl-0 overflow-y-auto">
+                        {mainMenuCategories.categories.map((el) => {
                           return (
                             <li
                               key={el.id}
@@ -144,36 +152,79 @@ export default ({ data, user }: IndexProps) => {
                                 onClick={() => {
                                   setCurrentSubMenu(el.id);
                                 }}
-                                className="hover:bg-[#f4f4fa] w-full h-full px-[1.5rem] text-left"
+                                className={`${
+                                  currentSubMenu === el.id
+                                    ? "text-[#ff5058]"
+                                    : ""
+                                } hover:bg-[#f4f4fa] w-full h-full px-[1.5rem] text-left`}
                               >
                                 {el.title}
                               </button>
                             </li>
                           );
-                        })
-                      : ""
-                    : ""}
-                </ul>
-              </div>
-              <div className="w-[284px] h-full">
-                <ul className="py-[0.5rem] w-full h-full pl-0 overflow-y-auto">
-                  {subMenuCategories
-                    ? subMenuCategories.categories
-                      ? subMenuCategories.categories.map((el) => {
+                        })}
+                      </ul>
+                    ) : (
+                      ""
+                    )
+                  ) : (
+                    <div className="text-[#c3c2cc] text-[16px]">
+                      중분류 선택
+                    </div>
+                  )}
+                </div>
+                <div className="w-[284px] h-full flex justify-center items-center ">
+                  {subMenuCategories ? (
+                    subMenuCategories.categories ? (
+                      <ul className="py-[0.5rem] w-full h-full pl-0 overflow-y-auto">
+                        {subMenuCategories.categories.map((el) => {
                           return (
                             <li
                               key={el.id}
                               className="w-full h-[40px] leading-[40px]"
                             >
-                              <button className="hover:bg-[#f4f4fa] w-full h-full px-[1.5rem] text-left">
+                              <button
+                                onClick={() => setCurrentThirdMenu(el.id)}
+                                className={`${
+                                  currentThirdMenu === el.id
+                                    ? "text-[#ff5058]"
+                                    : ""
+                                } hover:bg-[#f4f4fa] w-full h-full px-[1.5rem] text-left`}
+                              >
                                 {el.title}
                               </button>
                             </li>
                           );
-                        })
-                      : ""
-                    : ""}
-                </ul>
+                        })}
+                      </ul>
+                    ) : (
+                      ""
+                    )
+                  ) : (
+                    <div className="text-[#c3c2cc] text-[16px]">
+                      소분류 선택
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="before:content-[''] before:bg-center before:bg-no-repeat before:bg-cover before:bg-[url('/icons/nope_category.svg')] before:w-[1rem] before:h-[1rem] text-[#f57e00] text-sm mt-[0.5rem]">
+                상세 카테고리를 선택해주세요.
+              </div>
+              <div className="mt-[24px]">
+                <h2 className="text-[#ff5058] text-base">
+                  선택한 카테고리 :&nbsp;
+                  <b>{mainMenuCategories ? mainMenuCategories.title : ""}</b>
+                  &nbsp;
+                  <b>
+                    {subMenuCategories ? "> " + subMenuCategories.title : ""}
+                  </b>
+                  &nbsp;
+                  <b>
+                    {thirdMenuCategories
+                      ? "> " + thirdMenuCategories.title
+                      : ""}
+                  </b>
+                </h2>
               </div>
             </div>
           </div>
