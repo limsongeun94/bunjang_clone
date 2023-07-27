@@ -165,3 +165,13 @@ input[type="number"] {
   border-radius: 50%;
   display: inline-block;
 }
+
+.upload_image {
+  margin-right: 16px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.upload_image:nth-child(4n) {
+  margin-right: 0;
+}

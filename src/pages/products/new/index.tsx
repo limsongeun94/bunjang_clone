@@ -17,6 +17,26 @@ interface IndexProps {
 export default ({ data, user }: IndexProps) => {
   console.log(data.categories);
 
+  const [images, setImages] = useState<string[]>([]);
+  const onChangePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files!;
+    if (!files[0]) return;
+    if (images.length + files.length > 12) {
+      return alert("최대 10개 사진만 첨부할 수 있습니다.");
+    }
+    const readAndPreview = (file: any) => {
+      if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+        const reader = new FileReader();
+        reader.onload = () =>
+          setImages((prev) => [reader.result as string, ...prev]);
+        reader.readAsDataURL(file);
+      }
+    };
+    if (files) {
+      [].forEach.call(files, readAndPreview);
+    }
+  };
+
   const [currentMainMenu, setCurrentMainMenu] = useState<string>("");
   const [currentSubMenu, setCurrentSubMenu] = useState<string>("");
   const [currentThirdMenu, setCurrentThirdMenu] = useState<string>("");
@@ -62,21 +82,34 @@ export default ({ data, user }: IndexProps) => {
         </h2>
         <div>
           <div className="py-[2rem] border-b border-[#dcdbe4] flex">
-            <div className="w-[10.5rem] text-lg">
+            <div className="w-[10.5rem] text-lg w-[168px]">
               상품이미지 <span className="text-[#ff5058]">*</span>
               <small className="text-[#9b99a9] ml-[0.25rem] text-[80%]">
                 (0/12)
               </small>
             </div>
             <div>
-              <div className="before:bg-center before:bg-no-repeat before:bg-cover before:w-[2rem] before:h-[2rem] before:bg-[url('/icons/camera.svg')] before:mb-[1rem] w-[202px] h-[202px] border-[1px] border-[#e6e5ef] bg-[#fafafd] text-[#9b99a9] flex flex-col justify-center items-center relative">
-                이미지 등록
-                <input
-                  type="file"
-                  accept="image/jpg, image/jpeg, image/png"
-                  multiple={true}
-                  className="w-full h-full border-[1px] border-[#c3c2cc] absolute top-0 left-0 cursor-pointer text-[0px] opacity-0"
-                />
+              <div className="w-[856px] flex flex-wrap">
+                <div className="upload_image before:bg-center before:bg-no-repeat before:bg-cover before:w-[2rem] before:h-[2rem] before:bg-[url('/icons/camera.svg')] before:mb-[1rem] w-[202px] h-[202px] border-[1px] border-[#e6e5ef] bg-[#fafafd] text-[#9b99a9] flex flex-col justify-center items-center relative">
+                  이미지 등록
+                  <input
+                    type="file"
+                    accept="image/jpg, image/jpeg, image/png"
+                    multiple={true}
+                    onChange={(e) => onChangePhoto(e)}
+                    className="w-full h-full border-[1px] border-[#c3c2cc] absolute top-0 left-0 cursor-pointer text-[0px] opacity-0"
+                  />
+                </div>
+                {images.map((el) => {
+                  return (
+                    <div className="w-[202px] h-[202px] border-[1px] border-[#e6e5ef] cursor-pointer upload_image relative">
+                      <img src={el} />
+                      <button className="absolute top-[0.5rem] right-[0.5rem] rounded-[50%] bg-[#1e1d29] bg-opacity-25 w-[1.5rem] h-[1.5rem] text-white">
+                        X
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
               <div className="mt-[1.5rem] text-[#4aa4ff] text-sm">
                 <b>* 상품 이미지는 640x640에 최적화 되어 있습니다.</b>
