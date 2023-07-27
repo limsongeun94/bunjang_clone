@@ -3,7 +3,7 @@ import type { Banner, Category, Product, User } from "@/interface";
 import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
 import axios from "@/libs/axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface IndexProps {
   data: {
@@ -18,6 +18,7 @@ export default ({ data, user }: IndexProps) => {
   console.log(data.categories);
 
   const [images, setImages] = useState<string[]>([]);
+
   const onChangePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files!;
     if (!files[0]) return;
@@ -35,6 +36,12 @@ export default ({ data, user }: IndexProps) => {
     if (files) {
       [].forEach.call(files, readAndPreview);
     }
+  };
+
+  const photoInput = useRef();
+
+  const onDelectPhoto = (index: number) => {
+    const files = photoInput.files;
   };
 
   const [currentMainMenu, setCurrentMainMenu] = useState<string>("");
@@ -97,16 +104,21 @@ export default ({ data, user }: IndexProps) => {
                     accept="image/jpg, image/jpeg, image/png"
                     multiple={true}
                     onChange={(e) => onChangePhoto(e)}
+                    ref={photoInput}
                     className="w-full h-full border-[1px] border-[#c3c2cc] absolute top-0 left-0 cursor-pointer text-[0px] opacity-0"
                   />
                 </div>
-                {images.map((el) => {
+                {images.map((el, i) => {
                   return (
-                    <div className="w-[202px] h-[202px] border-[1px] border-[#e6e5ef] cursor-pointer upload_image relative">
+                    <div
+                      key={i}
+                      className="w-[202px] h-[202px] border-[1px] border-[#e6e5ef] cursor-pointer upload_image relative"
+                    >
                       <img src={el} />
-                      <button className="absolute top-[0.5rem] right-[0.5rem] rounded-[50%] bg-[#1e1d29] bg-opacity-25 w-[1.5rem] h-[1.5rem] text-white">
-                        X
-                      </button>
+                      <button
+                        onClick={() => onDelectPhoto(i)}
+                        className="bg-[url('/icons/upload_image_x.svg')] bg-center bg-no-repeat bg-[length:12px_12px] absolute top-[0.5rem] right-[0.5rem] rounded-[50%] bg-[#1e1d29] bg-opacity-25 w-[1.5rem] h-[1.5rem] text-white"
+                      ></button>
                     </div>
                   );
                 })}
