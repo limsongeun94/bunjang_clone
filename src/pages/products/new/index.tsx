@@ -4,7 +4,7 @@ import type { Banner, Category, Product, User } from "@/interface";
 import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
 import axios from "@/libs/axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface IndexProps {
   data: {
@@ -138,6 +138,16 @@ export default ({ data, user }: IndexProps) => {
     setMoney(str);
   };
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const [description, setDescription] = useState("");
+
+  const onChangeDescriptionInput = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setDescription(e.target.value);
+  };
+
   return (
     <MainLayout categories={data.categories}>
       <div className="w-[1024px] mx-auto">
@@ -163,7 +173,7 @@ export default ({ data, user }: IndexProps) => {
             <div className="w-[10.5rem] text-lg w-[168px]">
               상품이미지 <span className="text-[#ff5058]">*</span>
               <small className="text-[#9b99a9] ml-[0.25rem] text-[80%]">
-                (0/12)
+                ({images.length}/12)
               </small>
             </div>
             <div>
@@ -327,8 +337,8 @@ export default ({ data, user }: IndexProps) => {
                   )}
                 </div>
               </div>
-              {/* <div className="category_select">
-                 상세 카테고리를 선택해주세요.
+              {/* <div className="warning_orange">
+                상세 카테고리를 선택해주세요.
               </div> */}
               <div className="mt-[24px]">
                 <h2 className="text-[#ff5058] text-base">
@@ -477,7 +487,7 @@ export default ({ data, user }: IndexProps) => {
               <div>
                 <div>
                   <input
-                    className="border-[1px] h-[3rem] px-[1rem] mr-[1rem] focus-visible:outline-0 focus:border-[#1e1d29]"
+                    className="border-[1px] border-[#c3c2cc] h-[3rem] px-[1rem] mr-[1rem] focus-visible:outline-0 focus:border-[#1e1d29]"
                     type="text"
                     placeholder="숫자만 입력해주세요."
                     onChange={(e) => onChangePoints(e)}
@@ -498,6 +508,56 @@ export default ({ data, user }: IndexProps) => {
                     defaultChecked={shippingFee}
                   />
                 </label>
+              </div>
+            </div>
+          </div>
+          <div className="py-[2rem] border-b border-[#dcdbe4] flex">
+            <div className="w-[10.5rem] text-lg pt-[14px]">
+              설명 <span className="text-[#ff5058]">*</span>
+            </div>
+            <div className="w-[856px] relative">
+              <textarea
+                rows={6}
+                className={`${
+                  description.length > 0 && description.length < 10
+                    ? "border_orange"
+                    : ""
+                } p-[1rem] resize-none leading-[1.35] w-full border-[1px] border-[#c3c2cc] focus-visible:outline-0 focus:border-[#1e1d29]`}
+                value={description}
+                onChange={onChangeDescriptionInput}
+                ref={textareaRef}
+              />
+              <div
+                onClick={() => {
+                  textareaRef.current && textareaRef.current.focus();
+                }}
+                className={`${
+                  description.length > 0 ? "hidden" : ""
+                } absolute top-0 p-[1rem] leading-[16px] text-[#9b99a9]`}
+              >
+                여러 장의 상품 사진과 구입 연도, 브랜드, 사용감, 하자 유무 등
+                구매자에게 필요한 정보를 꼭 포함해 주세요. (10자 이상)
+                <br />
+                <span className="inline-block mt-[8px] text-xs">
+                  안전하고 건전한 거래 환경을 위해 과학기술정보통신부,
+                  한국인터넷진흥원과 번개장터(주)가 함께 합니다.
+                </span>
+              </div>
+              <div
+                className={`${
+                  description.length > 0 && description.length < 10
+                    ? ""
+                    : "hidden"
+                } warning_orange`}
+              >
+                상품 설명을 10글자 이상 입력해주세요
+              </div>
+              <div className="flex items-center justify-between mt-[0.5rem]">
+                <div className="text-[1rem] text-[#9b99a9]">
+                  혹시 <span className="underline">카카오톡 ID</span>를
+                  적으셨나요?
+                </div>
+                <div>{description.length}/2000</div>
               </div>
             </div>
           </div>

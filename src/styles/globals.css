@@ -95,14 +95,14 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.category_select {
+.warning_orange {
   color: #f57e00;
   font-size: 14px;
   margin-top: 0.5rem;
   line-height: 1;
 }
 
-.category_select::before {
+.warning_orange::before {
   margin-right: 0.5rem;
   width: 1rem;
   height: 1rem;
@@ -174,4 +174,8 @@ input[type="number"] {
 
 .upload_image:nth-child(4n) {
   margin-right: 0;
+}
+
+.border_orange {
+  border-color: rgb(245, 126, 0) !important;
 }
