@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { Category } from "@/interface";
 import dynamic from "next/dynamic";
 
@@ -14,6 +15,8 @@ const StickyHeader = ({ categories }: LayoutProps) => {
   // position: sticky는 부모 내에서만 작동한다.
   // 따라서 부모가 body여야지 sticky가 어디에서든 작동을 한다.
   // TopHeader와 StickyHeader 컴포넌트를 분리한 이유이다.
+
+  const router = useRouter();
 
   const [position, setPosition] = useState(0);
   const [menuHeightClass, setMenuHeightClass] = useState("");
@@ -58,7 +61,11 @@ const StickyHeader = ({ categories }: LayoutProps) => {
         <FloatingMenu />
       </div>
       <div className="w-[1024px] mx-auto flex h-[40px] justify-between items-center">
-        <img src="/logo.svg" />
+        <img
+          src="/logo.svg"
+          onClick={() => router.push("/")}
+          className="cursor-pointer"
+        />
         <div className="border-2 border-[#F72F33] px-[15px] w-[460px] h-[40px] flex justify-between items-center">
           <input
             className="outline-none h-[16px] w-full"
