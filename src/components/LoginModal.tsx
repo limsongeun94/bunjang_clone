@@ -19,8 +19,12 @@ const LoginModal = ({ loginModal, setLoginModal }: LayoutProps) => {
       className={`${
         loginModal ? "block" : "hidden"
       } z-50 w-full h-full fixed top-0 left-0 bg-black/60 flex justify-center items-center`}
+      onClick={() => setLoginModal(false)}
     >
-      <div className="bg-[#f7f7f7] w-[420px] h-[506px] relative">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="bg-[#f7f7f7] w-[420px] h-[506px] relative"
+      >
         <button
           onClick={() => setLoginModal(false)}
           className="absolute right-[20px] top-[20px] w-[24px] h-[24px]"

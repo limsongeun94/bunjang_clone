@@ -142,7 +142,7 @@ input[type="number"] {
 
 .checkCheckBox::before {
   content: "";
-  background-image: url("/icons/noneCheckCheckBox.svg");
+  background-image: url("/icons/checkCheckBox.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 20px 20px;
@@ -155,7 +155,7 @@ input[type="number"] {
 
 .noneCheckCheckBox::before {
   content: "";
-  background-image: url("/icons/checkCheckBox.svg");
+  background-image: url("/icons/noneCheckCheckBox.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 20px 20px;

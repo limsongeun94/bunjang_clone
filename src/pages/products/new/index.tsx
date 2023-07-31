@@ -1,9 +1,10 @@
 import MainLayout from "@/layouts/MainLayout";
+import AddressSearchModal from "@/components/AddressSearchModal";
 import type { Banner, Category, Product, User } from "@/interface";
 import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
 import axios from "@/libs/axios";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 interface IndexProps {
   data: {
@@ -38,10 +39,11 @@ export default ({ data, user }: IndexProps) => {
     }
   };
 
-  const photoInput = useRef();
-
-  const onDelectPhoto = (index: number) => {
-    const files = photoInput.files;
+  const onDelectPhoto = (idx: number) => {
+    setImages([
+      ...images.slice(0, idx),
+      ...images.slice(idx + 1, images.length),
+    ]);
   };
 
   const [currentMainMenu, setCurrentMainMenu] = useState<string>("");
@@ -61,11 +63,80 @@ export default ({ data, user }: IndexProps) => {
       : ""
     : "";
 
+  const [tradeLocation, setTradeLocation] = useState("");
+
+  const [longitude, setLongitude] = useState("");
+  const [latitude, setLatitude] = useState("");
+
+  const getMyLatLon = () => {
+    const success = (event: any) => {
+      setLongitude(event.coords.longitude); // 경도
+      setLatitude(event.coords.latitude); // 위도
+    };
+    if (window.navigator.geolocation) {
+      // geolocation 지원할 경우 현재 위치 get
+      window.navigator.geolocation.getCurrentPosition(success);
+    }
+  };
+
+  const getMyAddress = async () => {
+    try {
+      let response = await axios
+        .get(
+          `https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?&x=${longitude}&y=${latitude}`,
+          {
+            headers: {
+              Authorization: "KakaoAK 8c968b954fec27d48c45cde969ac5cfc",
+            },
+          }
+        )
+        .then((response) => {
+          const region = response.data.documents.find(
+            (el: any) => el.region_type === "H"
+          );
+          setTradeLocation(region.address_name);
+          // console.log(region.address_name);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getMyAddress();
+  }, [longitude && latitude]);
+
+  const [addressModal, setAddressModal] = useState(false);
+
+  useEffect(() => {
+    if (addressModal) {
+      document.body.style.cssText = `overflow: hidden`;
+    } else {
+      document.body.style.cssText = `overflow: auto`;
+    }
+    return () => {
+      document.body.style.cssText = `overflow: auto`;
+    };
+  }, [addressModal]);
+
   const [usedNewCheck, setUsedNewCheck] = useState("used");
 
   const [exchangeState, setExchangeState] = useState("notExchange");
 
   const [shippingFee, setShippingFee] = useState(false);
+
+  const [money, setMoney] = useState("");
+
+  const addComma = (price: string) => {
+    let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return returnString;
+  };
+
+  const onChangePoints = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target as HTMLInputElement;
+    let str = value.replaceAll(",", "");
+    setMoney(str);
+  };
 
   return (
     <MainLayout categories={data.categories}>
@@ -104,7 +175,6 @@ export default ({ data, user }: IndexProps) => {
                     accept="image/jpg, image/jpeg, image/png"
                     multiple={true}
                     onChange={(e) => onChangePhoto(e)}
-                    ref={photoInput}
                     className="w-full h-full border-[1px] border-[#c3c2cc] absolute top-0 left-0 cursor-pointer text-[0px] opacity-0"
                   />
                 </div>
@@ -112,9 +182,9 @@ export default ({ data, user }: IndexProps) => {
                   return (
                     <div
                       key={i}
-                      className="w-[202px] h-[202px] border-[1px] border-[#e6e5ef] cursor-pointer upload_image relative"
+                      className="w-[202px] h-[202px] border-[1px] border-[#e6e5ef] cursor-pointer upload_image relative overflow-hidden"
                     >
-                      <img src={el} />
+                      <img src={el} className="w-full h-full object-cover" />
                       <button
                         onClick={() => onDelectPhoto(i)}
                         className="bg-[url('/icons/upload_image_x.svg')] bg-center bg-no-repeat bg-[length:12px_12px] absolute top-[0.5rem] right-[0.5rem] rounded-[50%] bg-[#1e1d29] bg-opacity-25 w-[1.5rem] h-[1.5rem] text-white"
@@ -149,7 +219,7 @@ export default ({ data, user }: IndexProps) => {
             </div>
             <div className="flex flex-1 items-center">
               <input
-                className="h-[3rem] w-full px-[1rem] border-[1px] border-[#c3c2cc]"
+                className="h-[3rem] w-full px-[1rem] border-[1px] border-[#c3c2cc] focus-visible:outline-0 focus:border-[#1e1d29]"
                 type="text"
                 maxLength={40}
                 placeholder="상품 제목을 입력해주세요."
@@ -284,22 +354,38 @@ export default ({ data, user }: IndexProps) => {
             </div>
             <div className="w-[856px]">
               <div className="flex">
-                <div className="hover:bg-[#f4f4fa] active:bg-[#eae9f1] cursor-pointer h-[3rem] w-[6.5rem] leading-[3rem] text-center border-[1px] border-[#c3c2cc] rounded-[2px] mr-[1rem]">
+                <div
+                  onClick={getMyLatLon}
+                  className="hover:bg-[#f4f4fa] active:bg-[#eae9f1] cursor-pointer h-[3rem] w-[6.5rem] leading-[3rem] text-center border-[1px] border-[#c3c2cc] rounded-[2px] mr-[1rem]"
+                >
                   내 위치
                 </div>
                 <div className="hover:bg-[#f4f4fa] active:bg-[#eae9f1] cursor-pointer h-[3rem] w-[6.5rem] leading-[3rem] text-center border-[1px] border-[#c3c2cc] rounded-[2px] mr-[1rem]">
                   최근 지역
                 </div>
-                <div className="hover:bg-[#f4f4fa] active:bg-[#eae9f1] cursor-pointer h-[3rem] w-[6.5rem] leading-[3rem] text-center border-[1px] border-[#c3c2cc] rounded-[2px] mr-[1rem]">
+                <div
+                  onClick={() => setAddressModal(true)}
+                  className="hover:bg-[#f4f4fa] active:bg-[#eae9f1] cursor-pointer h-[3rem] w-[6.5rem] leading-[3rem] text-center border-[1px] border-[#c3c2cc] rounded-[2px] mr-[1rem]"
+                >
                   주소 검색
                 </div>
-                <div className="hover:bg-[#f4f4fa] active:bg-[#eae9f1] cursor-pointer h-[3rem] w-[6.5rem] leading-[3rem] text-center border-[1px] border-[#c3c2cc] rounded-[2px]">
+                <div
+                  onClick={() => setTradeLocation("지역설정안함")}
+                  className="hover:bg-[#f4f4fa] active:bg-[#eae9f1] cursor-pointer h-[3rem] w-[6.5rem] leading-[3rem] text-center border-[1px] border-[#c3c2cc] rounded-[2px]"
+                >
                   지역설정안함
                 </div>
               </div>
-              <div className="bg-[#f4f4fa] h-[3rem] w-full mt-[1rem] px-[1rem] border-[1px] border-[#c3c2cc]"></div>
+              <div className="bg-[#f4f4fa] h-[3rem] leading-[3rem] text-[100%] w-full mt-[1rem] px-[1rem] border-[1px] border-[#c3c2cc]">
+                {tradeLocation}
+              </div>
             </div>
           </div>
+          <AddressSearchModal
+            addressModal={addressModal}
+            setAddressModal={setAddressModal}
+            setTradeLocation={setTradeLocation}
+          />
           <div className="py-[2rem] border-b border-[#dcdbe4] flex">
             <div className="w-[10.5rem] text-lg">
               상태 <span className="text-[#ff5058]">*</span>
@@ -391,16 +477,18 @@ export default ({ data, user }: IndexProps) => {
               <div>
                 <div>
                   <input
-                    className="border-[1px] text-[#c3c2cc] h-[3rem] px-[1rem] mr-[1rem]"
-                    type="number"
+                    className="border-[1px] h-[3rem] px-[1rem] mr-[1rem] focus-visible:outline-0 focus:border-[#1e1d29]"
+                    type="text"
                     placeholder="숫자만 입력해주세요."
+                    onChange={(e) => onChangePoints(e)}
+                    value={addComma(money) || ""}
                   />
                   원
                 </div>
                 <label
                   className={`${
                     shippingFee ? "checkCheckBox" : "noneCheckCheckBox"
-                  } mt-[1rem] bm-[1.5rem] flex items-center`}
+                  } mt-[1rem] bm-[1.5rem] flex items-center `}
                 >
                   배송비 포함
                   <input

@@ -10,8 +10,6 @@ const FlotingMenu = () => {
     window.addEventListener("resize", resizeListener);
   });
 
-  console.log(innerWidth);
-
   return (
     <div className="z-[-10] w-[90px] box-border leading-none absolute top-[62px] right-[-106px]">
       <div className="bg-white border-[#666666] border-[1px]  p-[10px] mb-[6px]">
