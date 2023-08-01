@@ -5,6 +5,7 @@ import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
 import axios from "@/libs/axios";
 import { useState, useEffect, useRef } from "react";
+import { KeyboardEvent } from "react";
 
 interface IndexProps {
   data: {
@@ -148,6 +149,29 @@ export default ({ data, user }: IndexProps) => {
     setDescription(e.target.value);
   };
 
+  const [tagContainerClass, setTagContainerClass] = useState("");
+
+  const [tagList, setTagList] = useState<string[]>([]);
+
+  const madeTagList = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === "Space" || e.key === "Enter") {
+      if (tagList.some((el) => el === (e.target as HTMLInputElement).value)) {
+        (e.target as HTMLInputElement).value = "";
+      } else {
+        console.log((e.target as HTMLInputElement).value);
+        setTagList([...tagList, (e.target as HTMLInputElement).value]);
+        (e.target as HTMLInputElement).value = "";
+      }
+    }
+  };
+
+  const deleteTagListItem = (idx: number) => {
+    setTagList([
+      ...tagList.slice(0, idx),
+      ...tagList.slice(idx + 1, tagList.length),
+    ]);
+  };
+
   return (
     <MainLayout categories={data.categories}>
       <div className="w-[1024px] mx-auto">
@@ -170,7 +194,7 @@ export default ({ data, user }: IndexProps) => {
         </h2>
         <div>
           <div className="py-[2rem] border-b border-[#dcdbe4] flex">
-            <div className="w-[10.5rem] text-lg w-[168px]">
+            <div className="w-[10.5rem] text-lg ">
               상품이미지 <span className="text-[#ff5058]">*</span>
               <small className="text-[#9b99a9] ml-[0.25rem] text-[80%]">
                 ({images.length}/12)
@@ -229,7 +253,7 @@ export default ({ data, user }: IndexProps) => {
             </div>
             <div className="flex flex-1 items-center">
               <input
-                className="h-[3rem] w-full px-[1rem] border-[1px] border-[#c3c2cc] focus-visible:outline-0 focus:border-[#1e1d29]"
+                className="h-[3rem] w-full px-[1rem] border-[1px] border-[#c3c2cc] focus-visible:outline-0 hover:border-[#1e1d29] focus:border-[#1e1d29]"
                 type="text"
                 maxLength={40}
                 placeholder="상품 제목을 입력해주세요."
@@ -487,7 +511,7 @@ export default ({ data, user }: IndexProps) => {
               <div>
                 <div>
                   <input
-                    className="border-[1px] border-[#c3c2cc] h-[3rem] px-[1rem] mr-[1rem] focus-visible:outline-0 focus:border-[#1e1d29]"
+                    className="border-[1px] border-[#c3c2cc] h-[3rem] px-[1rem] mr-[1rem] focus-visible:outline-0 hover:border-[#1e1d29] focus:border-[#1e1d29]"
                     type="text"
                     placeholder="숫자만 입력해주세요."
                     onChange={(e) => onChangePoints(e)}
@@ -522,7 +546,7 @@ export default ({ data, user }: IndexProps) => {
                   description.length > 0 && description.length < 10
                     ? "border_orange"
                     : ""
-                } p-[1rem] resize-none leading-[1.35] w-full border-[1px] border-[#c3c2cc] focus-visible:outline-0 focus:border-[#1e1d29]`}
+                } p-[1rem] resize-none leading-[1.35] w-full border-[1px] border-[#c3c2cc] focus-visible:outline-0 hover:border-[#1e1d29] focus:border-[#1e1d29]`}
                 value={description}
                 onChange={onChangeDescriptionInput}
                 ref={textareaRef}
@@ -558,6 +582,58 @@ export default ({ data, user }: IndexProps) => {
                   적으셨나요?
                 </div>
                 <div>{description.length}/2000</div>
+              </div>
+            </div>
+          </div>
+          <div className="py-[2rem] border-b border-[#dcdbe4] flex">
+            <div className="w-[10.5rem] text-lg pt-[14px]">연관태그</div>
+            <div className="w-[856px]">
+              <div
+                className={`${tagContainerClass} hover:border-[#1e1d29] w-full h-[3rem] border-[1px]  flex justify-between items-center`}
+              >
+                <div className="w-fit h-full flex items-center justify-between">
+                  {tagList.map((el, i) => {
+                    return (
+                      <div
+                        key={i}
+                        className="flex justify-between items-center rounded-[1rem] bg-[#f4f4fa] h-[2rem] w-max px-[0.5rem] ml-[0.5rem] "
+                      >
+                        <div className="flex-shrink-0 text-[100%]">
+                          #<span>{el}</span>
+                        </div>
+                        <div
+                          onClick={() => deleteTagListItem(i)}
+                          className="bg-center bg-no-repeat bg-cover bg-[url('/icons/tag_x.svg')] w-[20px] h-[20px] ml-[0.5rem] cursor-pointer"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+                <input
+                  onFocus={() => setTagContainerClass("border-[#1e1d29]")}
+                  onBlur={() => setTagContainerClass("border-[#c3c2cc]")}
+                  onKeyPress={(e) => madeTagList(e)}
+                  placeholder="연관태그를 입력해주세요. (최대 5개)"
+                  className={`${
+                    tagList.length >= 5 ? "hidden" : ""
+                  } w-full h-full px-[1rem] border-[0px] focus-visible:outline-0`}
+                />
+              </div>
+              <div className="pt-[0.5rem]">
+                <div className="before:content-['-'] before:inline-block before:w-[1rem] before:h-[1rem] text-[#888888] mb-[0.25rem]">
+                  태그는 띄어쓰기로 구분되며 최대 9자까지 입력할 수 있습니다.
+                </div>
+                <div className="before:content-['-'] before:inline-block before:w-[1rem] before:h-[1rem] text-[#888888] mb-[0.25rem]">
+                  태그는 검색의 부가정보로 사용 되지만, 검색 결과 노출을
+                  보장하지는 않습니다.
+                </div>
+                <div className="before:content-['-'] before:inline-block before:w-[1rem] before:h-[1rem] text-[#888888] mb-[0.25rem]">
+                  검색 광고는 태그정보를 기준으로 노출됩니다.
+                </div>
+                <div className="before:content-['-'] before:inline-block before:w-[1rem] before:h-[1rem] text-[#888888] mb-[0.25rem]">
+                  상품과 직접 관련이 없는 다른 상품명, 브랜드, 스팸성 키워드
+                  등을 입력하면 노출이 중단되거나 상품이 삭제될 수 있습니다.
+                </div>
               </div>
             </div>
           </div>
