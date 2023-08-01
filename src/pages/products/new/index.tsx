@@ -652,7 +652,7 @@ export default ({ data, user }: IndexProps) => {
                 <input
                   type="number"
                   placeholder="숫자만 입력해주세요"
-                  className="border-[1px] border-[#c3c2cc] h-[3rem] px-[1rem] w-[24ppx] mr-[1rem]"
+                  className="border-[1px] border-[#c3c2cc] h-[3rem] px-[1rem] w-[24ppx] mr-[1rem] focus-visible:outline-0 hover:border-[#1e1d29] focus:border-[#1e1d29]"
                 />
                 원
               </div>
