@@ -154,13 +154,29 @@ export default ({ data, user }: IndexProps) => {
   const [tagList, setTagList] = useState<string[]>([]);
 
   const madeTagList = (e: KeyboardEvent<HTMLInputElement>) => {
+    // 이 함수를 onKeyPress에 물려놓았던데 deprecated(더이상 사용되지 않음)되었더라구. 대신 onKeyDown이나 onKeyUp을 사용하면 돼.
+    // .value = ""해도 공백이 남아있던 이유:
+    // onKeyPress와 onKeyDown은 키를 누르는 순간 이벤트가 발생하는데 이때 .value = ""로 설정하고 키를 뗴는 짧은 순간에(아직 스페이스바를 누르고 있기때문에) 다시 스페이스바가 입력되어서 그래.
+    // 그 증거로 1754줄 주석치고 177~179줄 주석 푼 뒤 스페이스바 눌러서 태그를 만들어보면 공백이 남아있지 않는걸 확인 할 수 있어.
+    // 이를 해결하려면 177~179줄과같은 코드를 사용하거나 키를 떼는 순간에 이벤트가 발생하는 onKeyUp을 사용하면 돼.
+
+    // 참고: https://velog.io/@euji42/solved-%ED%95%9C%EA%B8%80-%EC%9E%85%EB%A0%A5%EC%8B%9C-2%EB%B2%88-%EC%9E%85%EB%A0%A5%EC%9D%B4-%EB%90%98%EB%8A%94-%EA%B2%BD%EC%9A%B0
+    if (e.nativeEvent.isComposing) return;
+
+    // String.trim() : 문자열의 시작과 끝에 공백을 제거해줌. "   공백   " ---> "공백"
+    const newTag = (e.target as HTMLInputElement).value.trim();
+
     if (e.code === "Space" || e.key === "Enter") {
-      if (tagList.some((el) => el === (e.target as HTMLInputElement).value)) {
+      // 스페이스바만 눌렀을때 빈태그가 생성됨. ---> 아래 if문의 조건에 newTag == "" 조건 추가로 해결.
+      if (tagList.some((el) => el === newTag)) {
         (e.target as HTMLInputElement).value = "";
       } else {
-        console.log((e.target as HTMLInputElement).value);
-        setTagList([...tagList, (e.target as HTMLInputElement).value]);
+        setTagList([...tagList, newTag]);
         (e.target as HTMLInputElement).value = "";
+
+        // setTimeout(() => {
+        //   (e.target as HTMLInputElement).value = "";
+        // }, 10);
       }
     }
   };
