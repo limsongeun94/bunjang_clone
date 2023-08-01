@@ -149,7 +149,7 @@ export default ({ data, user }: IndexProps) => {
     setDescription(e.target.value);
   };
 
-  const [tagContainerClass, setTagContainerClass] = useState("");
+  const [tagToggleClass, settagToggleClass] = useState(false);
 
   const [tagList, setTagList] = useState<string[]>([]);
 
@@ -162,6 +162,8 @@ export default ({ data, user }: IndexProps) => {
     if (e.code === "Space" || e.key === "Enter") {
       if (tagList.some((el) => el === newTag)) {
         (e.target as HTMLInputElement).value = "";
+      } else if (newTag === "") {
+        return;
       } else {
         setTagList([...tagList, newTag]);
         (e.target as HTMLInputElement).value = "";
@@ -593,7 +595,9 @@ export default ({ data, user }: IndexProps) => {
             <div className="w-[10.5rem] text-lg pt-[14px]">연관태그</div>
             <div className="w-[856px]">
               <div
-                className={`${tagContainerClass} hover:border-[#1e1d29] w-full h-[3rem] border-[1px]  flex justify-between items-center`}
+                className={`${
+                  tagToggleClass ? "tagContainerBorder" : ""
+                } hover:border-[#1e1d29] w-full h-[3rem] border-[1px] border-[#c3c2cc] flex justify-between items-center`}
               >
                 <div className="w-fit h-full flex items-center justify-between">
                   {tagList.map((el, i) => {
@@ -614,13 +618,13 @@ export default ({ data, user }: IndexProps) => {
                   })}
                 </div>
                 <input
-                  onFocus={() => setTagContainerClass("border-[#1e1d29]")}
-                  onBlur={() => setTagContainerClass("border-[#c3c2cc]")}
-                  onKeyDown={(e) => madeTagList(e)}
+                  onFocus={() => settagToggleClass(true)}
+                  onBlur={() => settagToggleClass(false)}
+                  onKeyUp={(e) => madeTagList(e)}
                   placeholder="연관태그를 입력해주세요. (최대 5개)"
                   className={`${
                     tagList.length >= 5 ? "hidden" : ""
-                  } w-full h-full px-[1rem] border-[0px] focus-visible:outline-0`}
+                  } w-full h-full px-[1rem] border-[0px] border-[#c3c2cc] focus-visible:outline-0`}
                 />
               </div>
               <div className="pt-[0.5rem]">

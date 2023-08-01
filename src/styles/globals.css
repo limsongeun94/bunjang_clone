@@ -179,3 +179,7 @@ input[type="number"] {
 .border_orange {
   border-color: rgb(245, 126, 0) !important;
 }
+
+.tagContainerBorder {
+  border-color: #1e1d29 !important;
+}
