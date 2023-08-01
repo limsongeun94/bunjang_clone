@@ -265,8 +265,6 @@ export default () => {
             </svg>
             <span>전체동의</span>
           </button>
-          {/* 어제 내가 체크박스에 value 넣었던거 기억하지? 응. 그런 식으로 해야돼. */}
-          {/* 회원가입과 관련된 상태 이 페이지가 갖고있고, 인풋,체크박스는 입력을 받아서 회원가입 상태를 업데이트 하도록... */}
           <MyCheckbox
             accordionArr={accordionArr}
             handleAgreeCheck={handleAgreeCheck}
