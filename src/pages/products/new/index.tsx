@@ -192,7 +192,7 @@ export default ({ data, user }: IndexProps) => {
             *필수항목
           </span>
         </h2>
-        <div>
+        <div className="mb-[48px]">
           <div className="py-[2rem] border-b border-[#dcdbe4] flex">
             <div className="w-[10.5rem] text-lg ">
               상품이미지 <span className="text-[#ff5058]">*</span>
@@ -637,8 +637,30 @@ export default ({ data, user }: IndexProps) => {
               </div>
             </div>
           </div>
+          <div className="py-[2rem] flex items-center">
+            <div className="w-[10.5rem] text-lg">수량</div>
+            <div>
+              <div className="flex justify-start items-center">
+                <input
+                  type="number"
+                  placeholder="숫자만 입력해주세요"
+                  className="border-[1px] border-[#c3c2cc] h-[3rem] px-[1rem] w-[24ppx] mr-[1rem]"
+                />
+                원
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="h-[300px]"></div>
+        <h2 className="h-[100px] text-[26px] leading-[100px] border-b-[2px] border-[#1e1d29] ">
+          빠른 판매{" "}
+          <span className="text-[1rem] ml-[16px] text-[#1e1d29] text-base">
+            내 상품에 안전결제 배지가 표시돼요{" "}
+            <span className="underline">자세히</span>
+          </span>
+        </h2>
+        <div className="py-[2rem] flex items-center">
+          <div className="w-[10.5rem] text-lg">옵션</div>
+        </div>
       </div>
     </MainLayout>
   );
