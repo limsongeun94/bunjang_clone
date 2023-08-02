@@ -835,6 +835,7 @@ export default ({ data, user }: IndexProps) => {
             </div>
           </div>
         </div>
+        <div id="scrollAnchor">ㅋㅋ</div>
       </div>
       <div
         className={`${submitBtnClass} h-[5.5rem] w-full bg-[#fafafd] shadow-[0_-1px_0_-0_rgba(234,233,241,1)]`}
@@ -845,8 +846,6 @@ export default ({ data, user }: IndexProps) => {
           </button>
         </div>
       </div>
-
-      <div id="scrollAnchor" />
     </MainLayout>
   );
 };
