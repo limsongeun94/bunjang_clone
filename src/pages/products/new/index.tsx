@@ -180,6 +180,48 @@ export default ({ data, user }: IndexProps) => {
 
   const [bunPay, setBunPay] = useState(true);
 
+  const [submitBtnClass, setScrollAnchor] = useState("");
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  function onScroll() {
+    setScrollPosition(window.scrollY);
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  let scrollAnchor;
+
+  if (typeof document !== "undefined") {
+    scrollAnchor = document.getElementById("scrollAnchor");
+  }
+
+  let scrollAnchorPosition: number;
+
+  if (typeof document !== "undefined") {
+    scrollAnchorPosition = Math.floor(
+      window.pageYOffset + scrollAnchor!.getBoundingClientRect().top
+    );
+  }
+
+  const setsubmitBtnPosition = () => {
+    if (scrollPosition >= scrollAnchorPosition) {
+      setScrollAnchor("");
+    } else {
+      setScrollAnchor("fixed left-0 bottom-0");
+    }
+  };
+
+  useEffect(() => {
+    setsubmitBtnPosition();
+    console.log(scrollPosition, scrollAnchorPosition);
+  });
+
   return (
     <MainLayout categories={data.categories}>
       <div className="w-[1024px] mx-auto">
@@ -668,7 +710,7 @@ export default ({ data, user }: IndexProps) => {
             <span className="underline">자세히</span>
           </span>
         </h2>
-        <div className="py-[2rem] flex items-center">
+        <div className="py-[2rem] flex">
           <div className="w-[10.5rem] text-lg">옵션</div>
           <div>
             <div>
@@ -705,18 +747,106 @@ export default ({ data, user }: IndexProps) => {
               </label>
             </div>
             <div className="border-[1px] border-[#e6e5ef] rounded-[2px] bg-[#fafafd] p-[36px] mt-[22px] w-[856px]">
-              <div>
-                안전결제(번개페이) 요청을 거절하지 않는 대신 혜택을 받을 수
-                있어요.
+              <div className="flex items-end box-border">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 20 20"
+                  role="img"
+                  fill={`${bunPay ? "#ff5058" : "#c3c2cc"}`}
+                  className="mr-[8px]"
+                >
+                  <g fill="current" fill-rule="evenodd">
+                    <g fill="current">
+                      <g>
+                        <path
+                          d="M7.5 16.667c-.221 0-.433-.088-.59-.244l-5-5c-.21-.21-.292-.518-.215-.805.077-.288.302-.512.59-.59.287-.076.594.006.804.216l4.363 4.364 9.415-10.984c.3-.349.825-.39 1.175-.09.349.299.39.824.09 1.174l-10 11.666c-.15.177-.368.283-.6.292H7.5"
+                          transform="translate(-308 -798) translate(308 798)"
+                        ></path>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+                <div className="text-[15px] text-[#1e1d29]">
+                  안전결제(번개페이) 요청을 거절하지 않는 대신 혜택을 받을 수
+                  있어요.
+                  <small className="absolute block text-[13px] text-[#f57e00]">
+                    거절 시, <span className="underline">이용 제재</span>가 있을
+                    수 있으니 주의해 주세요.
+                  </small>
+                </div>
               </div>
-              <div>
-                내 상품을 먼저 보여주는 전용 필터로 더 빠르게 판매할 수 있어요.
+              <div className="flex items-end box-border mt-[43px]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 20 20"
+                  role="img"
+                  fill={`${bunPay ? "#ff5058" : "#c3c2cc"}`}
+                  className="mr-[8px]"
+                >
+                  <g fill="current" fill-rule="evenodd">
+                    <g fill="current">
+                      <g>
+                        <path
+                          d="M7.5 16.667c-.221 0-.433-.088-.59-.244l-5-5c-.21-.21-.292-.518-.215-.805.077-.288.302-.512.59-.59.287-.076.594.006.804.216l4.363 4.364 9.415-10.984c.3-.349.825-.39 1.175-.09.349.299.39.824.09 1.174l-10 11.666c-.15.177-.368.283-.6.292H7.5"
+                          transform="translate(-308 -798) translate(308 798)"
+                        ></path>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+                <div className="text-[15px] text-[#1e1d29]">
+                  내 상품을 먼저 보여주는 전용 필터로 더 빠르게 판매할 수
+                  있어요.
+                </div>
               </div>
-              <div>번개페이 배지로 더 많은 관심을 받을 수 있어요.</div>
+              <div className="flex items-end box-border mt-[43px]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 20 20"
+                  role="img"
+                  fill={`${bunPay ? "#ff5058" : "#c3c2cc"}`}
+                  className="mr-[8px]"
+                >
+                  <g fill="current" fill-rule="evenodd">
+                    <g fill="current">
+                      <g>
+                        <path
+                          d="M7.5 16.667c-.221 0-.433-.088-.59-.244l-5-5c-.21-.21-.292-.518-.215-.805.077-.288.302-.512.59-.59.287-.076.594.006.804.216l4.363 4.364 9.415-10.984c.3-.349.825-.39 1.175-.09.349.299.39.824.09 1.174l-10 11.666c-.15.177-.368.283-.6.292H7.5"
+                          transform="translate(-308 -798) translate(308 798)"
+                        ></path>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+                <div className="text-[15px] text-[#1e1d29]">
+                  번개페이 배지로 더 많은 관심을 받을 수 있어요.
+                </div>
+              </div>
+            </div>
+            <div className="text-sm	text-[#72707f] mt-[20px] mb-[154px] ml-[32px]">
+              * 번개페이 배지와 전용 필터 기능은 앱 또는 모바일 웹에서만 볼 수
+              있어요.
             </div>
           </div>
         </div>
       </div>
+      <div
+        className={`${submitBtnClass} h-[5.5rem] w-full bg-[#fafafd] shadow-[0_-1px_0_-0_rgba(234,233,241,1)]`}
+      >
+        <div className="w-[1024px] h-full m-auto flex items-center justify-end">
+          <button className="h-[3.5rem] w-[10rem] text-white text-xl font-bold bg-[#ff5058]">
+            등록하기
+          </button>
+        </div>
+      </div>
+
+      <div id="scrollAnchor" />
     </MainLayout>
   );
 };
