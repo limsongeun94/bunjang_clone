@@ -13,6 +13,7 @@ const LoginModal = ({ loginModal, setLoginModal }: LayoutProps) => {
   const [hoverFacebook, setHoverFacebook] = useState("/icons/facebook.png");
   const [hoverNaver, setHoverNaver] = useState("/icons/naver.png");
   const [hoverAuth, setHoverAuth] = useState("/icons/authentication.svg");
+  const [hoverEmail, setHoverEmail] = useState("/icons/authentication.svg");
 
   return (
     <div
@@ -91,7 +92,7 @@ const LoginModal = ({ loginModal, setLoginModal }: LayoutProps) => {
                 setHoverAuth("/icons/authentication_white.svg")
               }
               onMouseLeave={() => setHoverAuth("/icons/authentication.svg")}
-              className="hover:text-white hover:font-bold relative text-[#212121] w-[280px] h-[38px]  bg-white text-center leading-[38px] text-sm"
+              className="hover:text-white hover:font-bold relative text-[#212121] w-[280px] h-[38px] mb-[15px] bg-white text-center leading-[38px] text-sm"
             >
               <div
                 onClick={() => router.push("/signup")}
@@ -102,6 +103,24 @@ const LoginModal = ({ loginModal, setLoginModal }: LayoutProps) => {
                   className="absolute top-[11px] left-[39px]"
                 />
                 본인인증으로 이용하기
+              </div>
+            </button>
+            <button
+              onMouseEnter={() =>
+                setHoverEmail("/icons/authentication_white.svg")
+              }
+              onMouseLeave={() => setHoverEmail("/icons/authentication.svg")}
+              className="hover:text-white hover:font-bold relative text-[#212121] w-[280px] h-[38px]  bg-white text-center leading-[38px] text-sm"
+            >
+              <div
+                onClick={() => router.push("/signin")}
+                className="hover:bg-[#9b99a9]"
+              >
+                <img
+                  src={hoverEmail}
+                  className="absolute top-[11px] left-[39px]"
+                />
+                이메일로 이용하기
               </div>
             </button>
           </div>
