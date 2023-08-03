@@ -31,7 +31,11 @@ export default function MainLayout({
     // 이 div를 렐러티브로, floa
     <div className="relative">
       <TopHeader setLoginModal={setLoginModal} user={user} />
-      <StickyHeader categories={categories} />
+      <StickyHeader
+        categories={categories}
+        user={user}
+        setLoginModal={setLoginModal}
+      />
       <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />
       <main>{children}</main>
       <Footer />
