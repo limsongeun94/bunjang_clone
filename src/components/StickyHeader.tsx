@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Category } from "@/interface";
+import { Category, User } from "@/interface";
 import dynamic from "next/dynamic";
 
 interface LayoutProps {
+  setLoginModal: React.Dispatch<React.SetStateAction<boolean>>;
   categories: Array<Category>;
+  user: User;
 }
 
 const FloatingMenu = dynamic(() => import("@/components/FloatingMenu"), {
   ssr: false,
 });
 
-const StickyHeader = ({ categories }: LayoutProps) => {
+const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
   // position: sticky는 부모 내에서만 작동한다.
   // 따라서 부모가 body여야지 sticky가 어디에서든 작동을 한다.
   // TopHeader와 StickyHeader 컴포넌트를 분리한 이유이다.
@@ -44,6 +46,16 @@ const StickyHeader = ({ categories }: LayoutProps) => {
     setMenuHeight();
   });
 
+  const [loginState, setLoginState] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setLoginState(true);
+    } else {
+      setLoginState(false);
+    }
+  }, [user]);
+
   const [menuOpenState, setMenuOpenState] = useState<boolean>(false);
 
   const [currentMainMenu, setCurrentMainMenu] = useState<string>("");
@@ -74,16 +86,23 @@ const StickyHeader = ({ categories }: LayoutProps) => {
           <img src="/icons/icon_search.png" />
         </div>
         <div className="flex h-[26px]">
-          <div className="flex ml-[30px]">
+          <div
+            onClick={
+              loginState
+                ? () => router.push("/products/new")
+                : () => setLoginModal(true)
+            }
+            className="flex ml-[30px] cursor-pointer"
+          >
             <img className="mr-[5px] " src="/icons/icon_resell.png" />
             <div>판매하기</div>
           </div>
-          <div className="flex ml-[30px] relative">
+          <div className="flex ml-[30px] relative cursor-pointer">
             <div className="after-bar-header" />
             <img className="mr-[5px]" src="/icons/icon_my_shop.png" />
             <div>내상점</div>
           </div>
-          <div className="flex ml-[30px] relative">
+          <div className="flex ml-[30px] relative cursor-pointer">
             <div className="after-bar-header" />
             <img className="mr-[5px]" src="/icons/icon_talk.png" />
             <div>번개톡</div>
