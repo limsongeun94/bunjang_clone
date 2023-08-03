@@ -10,7 +10,7 @@ interface IndexProps {
     products: Array<Product>;
     categories: Array<Category>;
   };
-  user?: User;
+  user: User;
 }
 
 export default ({ data, user }: IndexProps) => {
@@ -30,7 +30,7 @@ export default ({ data, user }: IndexProps) => {
   };
 
   return (
-    <MainLayout categories={data.categories}>
+    <MainLayout categories={data.categories} user={user}>
       <div className="pt-[30px] bg-[#f9f9f9] ">
         <div className="w-[1024px] mx-auto  flex flex-wrap">
           {/* 100개 출력함*/}

@@ -13,11 +13,11 @@ interface IndexProps {
     products: Array<Product>;
     categories: Array<Category>;
   };
-  user?: User;
+  user: User;
 }
 
 export default ({ data, user }: IndexProps) => {
-  // console.log(data);
+  console.log(user);
   // axios.get("/product", { params: { page: 2, size: 50 } });
   // .then((res) => console.log(res.data));
 
@@ -58,7 +58,7 @@ export default ({ data, user }: IndexProps) => {
   }, [inView]);
 
   return (
-    <MainLayout categories={data.categories}>
+    <MainLayout categories={data.categories} user={user}>
       <div className="w-[1024px] mx-auto">
         <Carousel banner_img={banner_img} />
         <img

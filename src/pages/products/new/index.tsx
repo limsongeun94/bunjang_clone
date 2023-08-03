@@ -13,7 +13,7 @@ interface IndexProps {
     products: Array<Product>;
     categories: Array<Category>;
   };
-  user?: User;
+  user: User;
 }
 
 export default ({ data, user }: IndexProps) => {
@@ -223,7 +223,7 @@ export default ({ data, user }: IndexProps) => {
   });
 
   return (
-    <MainLayout categories={data.categories}>
+    <MainLayout categories={data.categories} user={user}>
       <div className="w-[1024px] mx-auto">
         <div className="h-[4rem] border-b border-[#f4f4fa] flex items-center text-[13px]">
           <div className="text-[#ff5058] cursor-pointer ml-[-0.5rem] mr-[2rem] after:content-[''] after:w-[1px] after:h-[14px] after:border-r after:ml-[2rem]">
