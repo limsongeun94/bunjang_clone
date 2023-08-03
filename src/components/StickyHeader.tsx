@@ -56,7 +56,7 @@ const StickyHeader = ({ categories }: LayoutProps) => {
     : "";
 
   return (
-    <div className="bg-white sticky top-0 z-30 pt-[30px]">
+    <header className="bg-white sticky top-0 z-30 pt-[30px]">
       <div className="relative w-[1024px] mx-auto">
         <FloatingMenu />
       </div>
@@ -185,7 +185,7 @@ const StickyHeader = ({ categories }: LayoutProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

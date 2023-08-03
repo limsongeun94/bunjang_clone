@@ -1,14 +1,19 @@
 import { TopHeader, StickyHeader, Footer, LoginModal } from "@/components";
 import { ReactNode } from "react";
-import { Category } from "@/interface";
+import type { Category, User } from "@/interface";
 import { useState, useEffect } from "react";
 
 interface LayoutProps {
   children?: ReactNode;
   categories: Array<Category>;
+  user: User;
 }
 
-export default function MainLayout({ children, categories }: LayoutProps) {
+export default function MainLayout({
+  children,
+  categories,
+  user,
+}: LayoutProps) {
   const [loginModal, setLoginModal] = useState(false);
 
   useEffect(() => {
@@ -25,7 +30,7 @@ export default function MainLayout({ children, categories }: LayoutProps) {
   return (
     // 이 div를 렐러티브로, floa
     <div className="relative">
-      <TopHeader setLoginModal={setLoginModal} />
+      <TopHeader setLoginModal={setLoginModal} user={user} />
       <StickyHeader categories={categories} />
       <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />
       <main>{children}</main>
