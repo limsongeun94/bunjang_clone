@@ -64,6 +64,40 @@ export default ({ data, user }: IndexProps) => {
       : ""
     : "";
 
+  const [categoiySelectWarning, setCategoiySelectWarning] = useState(false);
+  const warnSelectCategory = () => {
+    // 메인메뉴 선택 X ==> 경고없음
+    // 메인메뉴 선택 O && 메인메뉴 카테고리 X ==> 경고없음
+    // 메인메뉴 선택 O && 메인메뉴 카테고리 O && 서브메뉴 선택 X ==> 경고있음
+    // 메인메뉴 선택 O && 메인메뉴 카테고리 O && 서브메뉴 선택 O && 서브메뉴 카테고리 X ==> 경고없음
+    // 메인메뉴 선택 O && 메인메뉴 카테고리 O && 서브메뉴 선택 O && 서브메뉴 카테고리 O && 써드메뉴 선택 X ==> 경고있음
+    // 메인메뉴 선택 O && 메인메뉴 카테고리 O && 서브메뉴 선택 O && 서브메뉴 카테고리 O && 써드메뉴 선택 O ==> 경고없음
+
+    if (mainMenuCategories) {
+      if (mainMenuCategories.categories) {
+        if (subMenuCategories) {
+          if (subMenuCategories.categories) {
+            if (thirdMenuCategories) {
+              setCategoiySelectWarning(false);
+              return;
+            } else {
+              setCategoiySelectWarning(true);
+            }
+          } else {
+            setCategoiySelectWarning(false);
+            return;
+          }
+        } else {
+          setCategoiySelectWarning(true);
+        }
+      } else setCategoiySelectWarning(false);
+    } else setCategoiySelectWarning(false);
+  };
+
+  useEffect(() => {
+    warnSelectCategory();
+  });
+
   const [tradeLocation, setTradeLocation] = useState("");
 
   const [longitude, setLongitude] = useState("");
@@ -96,7 +130,6 @@ export default ({ data, user }: IndexProps) => {
             (el: any) => el.region_type === "H"
           );
           setTradeLocation(region.address_name);
-          // console.log(region.address_name);
         });
     } catch (error) {
       console.log(error);
@@ -179,48 +212,6 @@ export default ({ data, user }: IndexProps) => {
   };
 
   const [bunPay, setBunPay] = useState(true);
-
-  const [submitBtnClass, setScrollAnchor] = useState("");
-
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  function onScroll() {
-    setScrollPosition(window.scrollY);
-  }
-
-  useEffect(() => {
-    window.addEventListener("scroll", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
-
-  let scrollAnchor;
-
-  if (typeof document !== "undefined") {
-    scrollAnchor = document.getElementById("scrollAnchor");
-  }
-
-  let scrollAnchorPosition: number;
-
-  if (typeof document !== "undefined") {
-    scrollAnchorPosition = Math.floor(
-      window.pageYOffset + scrollAnchor!.getBoundingClientRect().top
-    );
-  }
-
-  const setsubmitBtnPosition = () => {
-    if (scrollPosition >= scrollAnchorPosition) {
-      setScrollAnchor("");
-    } else {
-      setScrollAnchor("fixed left-0 bottom-0");
-    }
-  };
-
-  useEffect(() => {
-    setsubmitBtnPosition();
-    console.log(scrollPosition, scrollAnchorPosition);
-  });
 
   return (
     <MainLayout categories={data.categories} user={user}>
@@ -318,7 +309,13 @@ export default ({ data, user }: IndexProps) => {
               카테고리 <span className="text-[#ff5058]">*</span>
             </div>
             <div>
-              <div className="border-[1px] border-[#dcdbe4] h-[19rem] flex">
+              <div
+                className={`${
+                  categoiySelectWarning
+                    ? "border-[#f57e00]"
+                    : "border-[#dcdbe4]"
+                } border-[1px] h-[19rem] flex`}
+              >
                 <div className="w-[284px] h-full">
                   <ul className="py-[0.5rem] w-full h-full pl-0 overflow-y-auto">
                     {data.categories.map((el) => {
@@ -345,7 +342,7 @@ export default ({ data, user }: IndexProps) => {
                 <div className="w-[284px] h-full border-r border-[#dcdbe4] flex justify-center items-center ">
                   {mainMenuCategories ? (
                     mainMenuCategories.categories ? (
-                      <ul className="py-[0.5rem] w-full h-full pl-0 overflow-y-auto">
+                      <ul className="py-[0.5rem] w-full h-full pl-0 overflow-y-auto mb-0">
                         {mainMenuCategories.categories.map((el) => {
                           return (
                             <li
@@ -411,9 +408,13 @@ export default ({ data, user }: IndexProps) => {
                   )}
                 </div>
               </div>
-              {/* <div className="warning_orange">
+              <div
+                className={`${
+                  categoiySelectWarning ? "" : "hidden"
+                } warning_orange`}
+              >
                 상세 카테고리를 선택해주세요.
-              </div> */}
+              </div>
               <div className="mt-[24px]">
                 <h2 className="text-[#ff5058] text-base">
                   선택한 카테고리 :&nbsp;
@@ -835,10 +836,9 @@ export default ({ data, user }: IndexProps) => {
             </div>
           </div>
         </div>
-        <div id="scrollAnchor">ㅋㅋ</div>
       </div>
       <div
-        className={`${submitBtnClass} h-[5.5rem] w-full bg-[#fafafd] shadow-[0_-1px_0_-0_rgba(234,233,241,1)]`}
+        className={`h-[5.5rem] w-full bg-[#fafafd] shadow-[0_-1px_0_-0_rgba(234,233,241,1)] sticky bottom-0 left-0`}
       >
         <div className="w-[1024px] h-full m-auto flex items-center justify-end">
           <button className="h-[3.5rem] w-[10rem] text-white text-xl font-bold bg-[#ff5058]">
