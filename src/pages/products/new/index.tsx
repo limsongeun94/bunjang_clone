@@ -65,6 +65,8 @@ export default ({ data, user }: IndexProps) => {
     : "";
 
   const [categoiySelectWarning, setCategoiySelectWarning] = useState(false);
+  const [submitBtnCategoryCondition, setSubmitBtnCategoryCondition] =
+    useState(false);
   const warnSelectCategory = () => {
     // 메인메뉴 선택 X ==> 경고없음
     // 메인메뉴 선택 O && 메인메뉴 카테고리 X ==> 경고없음
@@ -79,19 +81,25 @@ export default ({ data, user }: IndexProps) => {
           if (subMenuCategories.categories) {
             if (thirdMenuCategories) {
               setCategoiySelectWarning(false);
-              return;
+              setSubmitBtnCategoryCondition(true);
             } else {
               setCategoiySelectWarning(true);
             }
           } else {
             setCategoiySelectWarning(false);
-            return;
+            setSubmitBtnCategoryCondition(true);
           }
         } else {
           setCategoiySelectWarning(true);
         }
-      } else setCategoiySelectWarning(false);
-    } else setCategoiySelectWarning(false);
+      } else {
+        setCategoiySelectWarning(false);
+        setSubmitBtnCategoryCondition(true);
+      }
+    } else {
+      setCategoiySelectWarning(false);
+      setSubmitBtnCategoryCondition(true);
+    }
   };
 
   useEffect(() => {
@@ -213,6 +221,60 @@ export default ({ data, user }: IndexProps) => {
 
   const [bunPay, setBunPay] = useState(true);
 
+  const [productName, setProductName] = useState("");
+  const [quantity, setQuantity] = useState("1");
+
+  const [activeBtnClass, setActiveBtnClass] = useState(false);
+
+  const activeSubmitBtn = () => {
+    if (
+      images.length !== 0 &&
+      productName !== "" &&
+      submitBtnCategoryCondition === true &&
+      tradeLocation !== "" &&
+      money !== "" &&
+      description !== ""
+    ) {
+      setActiveBtnClass(true);
+    }
+  };
+
+  useEffect(() => {
+    activeSubmitBtn();
+  });
+
+  const onClickSubmit = () => {
+    console.log(images);
+    console.log(productName);
+    if (mainMenuCategories && subMenuCategories && thirdMenuCategories) {
+      console.log(
+        mainMenuCategories.title,
+        subMenuCategories.title,
+        thirdMenuCategories.title
+      );
+    }
+    console.log(tradeLocation);
+    if (usedNewCheck === "used") {
+      console.log("중고상품");
+    } else if (usedNewCheck === "new") {
+      console.log("새상품");
+    }
+    if (exchangeState === "notExchange") {
+      console.log("교환불가");
+    } else if (exchangeState === "exchange") {
+      console.log("교환가능");
+    }
+    console.log(money + "원");
+    console.log(description);
+    console.log(tagList);
+    console.log(quantity);
+    if (bunPay) {
+      console.log("안전결제 함");
+    } else {
+      console.log("안전결제 안함");
+    }
+  };
+
   return (
     <MainLayout categories={data.categories} user={user}>
       <div className="w-[1024px] mx-auto">
@@ -296,6 +358,7 @@ export default ({ data, user }: IndexProps) => {
                 type="text"
                 maxLength={40}
                 placeholder="상품 제목을 입력해주세요."
+                onChange={(e) => setProductName(e.target.value)}
               />
               <div className="ml-[1.5rem] text-[1rem]">
                 <span>0</span>/40
@@ -695,9 +758,11 @@ export default ({ data, user }: IndexProps) => {
                 <input
                   type="number"
                   placeholder="숫자만 입력해주세요"
+                  onChange={(e) => setQuantity(e.target.value)}
+                  value={quantity}
                   className="border-[1px] border-[#c3c2cc] h-[3rem] px-[1rem] w-[24ppx] mr-[1rem] focus-visible:outline-0 hover:border-[#1e1d29] focus:border-[#1e1d29]"
                 />
-                원
+                개
               </div>
             </div>
           </div>
@@ -716,7 +781,7 @@ export default ({ data, user }: IndexProps) => {
               <label
                 className={`${
                   bunPay ? "checkCheckBox" : "noneCheckCheckBox"
-                } mt-[1rem] bm-[1.5rem] flex items-center `}
+                }  bm-[1.5rem] flex items-center `}
               >
                 <input
                   type="checkbox"
@@ -839,7 +904,12 @@ export default ({ data, user }: IndexProps) => {
         className={`h-[5.5rem] w-full bg-[#fafafd] shadow-[0_-1px_0_-0_rgba(234,233,241,1)] sticky bottom-0 left-0`}
       >
         <div className="w-[1024px] h-full m-auto flex items-center justify-end">
-          <button className="h-[3.5rem] w-[10rem] text-white text-xl font-bold bg-[#ff5058]">
+          <button
+            onClick={onClickSubmit}
+            className={`${
+              activeBtnClass ? "" : "opacity-30 cursor-not-allowed"
+            } h-[3.5rem] w-[10rem] text-white text-xl font-bold bg-[#ff5058]`}
+          >
             등록하기
           </button>
         </div>
