@@ -4,6 +4,7 @@ import ProductCarousel from "@/components/ProductCarousel";
 import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
 import axios from "@/libs/axios";
+import { useEffect } from "react";
 
 interface IndexProps {
   data: {
@@ -15,6 +16,20 @@ interface IndexProps {
 }
 
 export default ({ data, user }: IndexProps) => {
+  const showMoreProduct = () => {
+    axios.get("/product", { params: { page: 1, size: 1 } }).then((res) => {
+      console.log(res.data);
+    });
+  };
+
+  useEffect(() => {
+    showMoreProduct();
+  }, []);
+
+  axios
+    .get("/product", { params: { page: 2, size: 50 } })
+    .then((res) => console.log(res.data));
+
   return (
     <MainLayout categories={data.categories} user={user}>
       <div className="w-[1024px] mx-auto ">
@@ -172,14 +187,14 @@ export default ({ data, user }: IndexProps) => {
             <div className="flex justify-between w-full text-lg font-semibold text-white">
               <button className="bg-[#cccccc] mr-[10px] h-[56px] flex justify-center items-center flex-1 ">
                 <img
-                  src="icons/zzim_heart_white.svg"
+                  src="/icons/zzim_heart_white.svg"
                   width="16px"
                   height="16px"
                 />
                 &nbsp;찜&nbsp;<span>0</span>
               </button>
               <button className=" mr-[10px] h-[56px] flex justify-center items-center flex-1 bg-[#ffa425]">
-                <img src="icons/talk_white.png" width="20px" height="19px" />
+                <img src="/icons/talk_white.png" width="20px" height="19px" />
                 &nbsp;번개톡
               </button>
               <button className=" h-[56px] flex-1 bg-[#f70000]">
@@ -301,11 +316,11 @@ export default ({ data, user }: IndexProps) => {
                   <div>7년전</div>
                 </div>
                 <div className="flex mb-[10px]">
-                  <img src="icons/star.png" width="15px" height="14px" />
-                  <img src="icons/star.png" width="15px" height="14px" />
-                  <img src="icons/star.png" width="15px" height="14px" />
-                  <img src="icons/star.png" width="15px" height="14px" />
-                  <img src="icons/star.png" width="15px" height="14px" />
+                  <img src="/icons/star.png" width="15px" height="14px" />
+                  <img src="/icons/star.png" width="15px" height="14px" />
+                  <img src="/icons/star.png" width="15px" height="14px" />
+                  <img src="/icons/star.png" width="15px" height="14px" />
+                  <img src="/icons/star.png" width="15px" height="14px" />
                 </div>
                 <div className="text-[#888888] text-[13px] leading-[1.4]">
                   너무 좋은 거래 했습니다.

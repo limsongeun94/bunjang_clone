@@ -30,7 +30,7 @@ export interface Product {
   name: string;
   price: string;
   update_time: number;
-  pid: number;
+  pid: string;
 }
 
 export interface SelectBox {

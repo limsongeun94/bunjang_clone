@@ -57,6 +57,13 @@ export default ({ data, user }: IndexProps) => {
     showMoreProduct();
   }, [inView]);
 
+  const onClickNewTap = (id: string) => {
+    const aTag = document.createElement("a");
+    aTag.setAttribute("href", "/products/" + id);
+    aTag.setAttribute("target", "_blank");
+    aTag.click();
+  };
+
   return (
     <MainLayout categories={data.categories} user={user}>
       <div className="w-[1024px] mx-auto">
@@ -72,6 +79,7 @@ export default ({ data, user }: IndexProps) => {
               return (
                 <div
                   key={product.pid}
+                  onClick={() => onClickNewTap(product.pid)}
                   className="flex-item-propduct w-[196px] h-[276px] mr-[11px] mb-[11px] border-[1px] border-[#eeeeee]"
                 >
                   <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee]">
@@ -102,6 +110,7 @@ export default ({ data, user }: IndexProps) => {
               return (
                 <div
                   key={product.pid}
+                  onClick={() => onClickNewTap(product.pid)}
                   className="flex-item-propduct w-[196px] h-[276px] mr-[11px] mb-[11px] border-[1px] border-[#eeeeee]"
                 >
                   <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee]">
