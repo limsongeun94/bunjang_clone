@@ -1,4 +1,5 @@
 import MainLayout from "@/layouts/MainLayout";
+import SellingTab from "@/components/SellingTab";
 import AddressSearchModal from "@/components/AddressSearchModal";
 import type { Banner, Category, Product, User } from "@/interface";
 import { withIronSessionSsr } from "iron-session/next";
@@ -278,15 +279,7 @@ export default ({ data, user }: IndexProps) => {
   return (
     <MainLayout categories={data.categories} user={user}>
       <div className="w-[1024px] mx-auto">
-        <div className="h-[4rem] border-b border-[#f4f4fa] flex items-center text-[13px]">
-          <div className="text-[#ff5058] cursor-pointer mr-[2rem] after:content-[''] after:w-[1px] after:h-[14px] after:border-r after:ml-[2rem]">
-            상품등록
-          </div>
-          <div className="cursor-pointer mr-[2rem] after:content-[''] after:w-[1px] after:h-[14px] after:border-r after:ml-[2rem]">
-            상품관리
-          </div>
-          <div className="cursor-pointer  mr-[2rem] ">구매/판매 내역</div>
-        </div>
+        <SellingTab tab="new" />
         <h2 className="h-[100px] text-[26px] leading-[100px] border-b-[2px] border-[#1e1d29] ">
           기본정보{" "}
           <span className="text-[#ff5058] text-[1rem] ml-[2rem]">

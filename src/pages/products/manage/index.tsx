@@ -1,4 +1,5 @@
 import MainLayout from "@/layouts/MainLayout";
+import SellingTab from "@/components/SellingTab";
 import type { Banner, Category, Product, User } from "@/interface";
 import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
@@ -17,15 +18,7 @@ export default ({ data, user }: IndexProps) => {
   return (
     <MainLayout categories={data.categories} user={user}>
       <div className="w-[1024px] mx-auto">
-        <div className="h-[4rem] border-b border-[#f4f4fa] flex items-center text-[13px]">
-          <div className="cursor-pointer mr-[2rem] after:content-[''] after:w-[1px] after:h-[14px] after:border-r after:ml-[2rem]">
-            상품등록
-          </div>
-          <div className="text-[#ff5058] cursor-pointer mr-[2rem] after:content-[''] after:w-[1px] after:h-[14px] after:border-r after:ml-[2rem]">
-            상품관리
-          </div>
-          <div className="cursor-pointer mr-[2rem] ">구매/판매 내역</div>
-        </div>
+        <SellingTab tab="manage" />
         <div className="mt-[2.5rem] mb-[2rem] flex">
           <form className="w-[400px] h-[3rem] relative mr-[16px]">
             <input

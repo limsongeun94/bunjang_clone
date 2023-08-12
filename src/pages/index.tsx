@@ -17,9 +17,9 @@ interface IndexProps {
 }
 
 export default ({ data, user }: IndexProps) => {
-  console.log(user);
-  // axios.get("/product", { params: { page: 2, size: 50 } });
-  // .then((res) => console.log(res.data));
+  // axios
+  //   .get("/product", { params: { page: 2, size: 50 } })
+  //   .then((res) => console.log(res.data));
 
   const banner_img: Banner[] = data.banners;
 

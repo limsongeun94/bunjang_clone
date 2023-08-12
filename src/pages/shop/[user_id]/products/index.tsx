@@ -18,7 +18,7 @@ export default ({ data, user }: IndexProps) => {
     <MainLayout categories={data.categories} user={user}>
       <div className="w-[1024px] mx-auto mt-[30px]">
         <div className="mb-[30px] flex">
-          <div className="w-[310px] h-[310px] bg-black flex flex-col justify-center items-center">
+          <div className="w-[310px] h-[310px] bg-[#b5b5b5] flex flex-col justify-center items-center bg-center bg-no-repeat bg-[length:310px_310px] bg-[url('/icons/shop_bg.png')]">
             <img
               src="/icons/shop.svg"
               width="100px"
