@@ -1,6 +1,7 @@
 import MainLayout from "@/layouts/MainLayout";
 import SellingTab from "@/components/SellingTab";
 import AddressSearchModal from "@/components/AddressSearchModal";
+import ProductSubmitModal from "@/components/ProductSubmitModal";
 import type { Banner, Category, Product, User } from "@/interface";
 import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
@@ -18,8 +19,6 @@ interface IndexProps {
 }
 
 export default ({ data, user }: IndexProps) => {
-  console.log(data.categories);
-
   const [images, setImages] = useState<string[]>([]);
 
   const onChangePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,6 +84,7 @@ export default ({ data, user }: IndexProps) => {
               setSubmitBtnCategoryCondition(true);
             } else {
               setCategoiySelectWarning(true);
+              setSubmitBtnCategoryCondition(false);
             }
           } else {
             setCategoiySelectWarning(false);
@@ -92,6 +92,7 @@ export default ({ data, user }: IndexProps) => {
           }
         } else {
           setCategoiySelectWarning(true);
+          setSubmitBtnCategoryCondition(false);
         }
       } else {
         setCategoiySelectWarning(false);
@@ -99,7 +100,7 @@ export default ({ data, user }: IndexProps) => {
       }
     } else {
       setCategoiySelectWarning(false);
-      setSubmitBtnCategoryCondition(true);
+      setSubmitBtnCategoryCondition(false);
     }
   };
 
@@ -232,9 +233,12 @@ export default ({ data, user }: IndexProps) => {
       images.length !== 0 &&
       productName !== "" &&
       submitBtnCategoryCondition === true &&
+      // !!mainMenuCategories &&
+      // !!subMenuCategories &&
+      // !!thirdMenuCategories &&
       tradeLocation !== "" &&
       money !== "" &&
-      description !== ""
+      description.length >= 10
     ) {
       setActiveBtnClass(true);
     }
@@ -245,36 +249,52 @@ export default ({ data, user }: IndexProps) => {
   });
 
   const onClickSubmit = () => {
-    console.log(images);
-    console.log(productName);
-    if (mainMenuCategories && subMenuCategories && thirdMenuCategories) {
-      console.log(
-        mainMenuCategories.title,
-        subMenuCategories.title,
-        thirdMenuCategories.title
-      );
-    }
-    console.log(tradeLocation);
-    if (usedNewCheck === "used") {
-      console.log("중고상품");
-    } else if (usedNewCheck === "new") {
-      console.log("새상품");
-    }
-    if (exchangeState === "notExchange") {
-      console.log("교환불가");
-    } else if (exchangeState === "exchange") {
-      console.log("교환가능");
-    }
-    console.log(money + "원");
-    console.log(description);
-    console.log(tagList);
-    console.log(quantity);
-    if (bunPay) {
-      console.log("안전결제 함");
-    } else {
-      console.log("안전결제 안함");
+    if (activeBtnClass) {
+      console.log(images);
+      console.log(productName);
+      if (mainMenuCategories && subMenuCategories && thirdMenuCategories) {
+        console.log(
+          mainMenuCategories.title,
+          subMenuCategories.title,
+          thirdMenuCategories.title
+        );
+      }
+      console.log(tradeLocation);
+      if (usedNewCheck === "used") {
+        console.log("중고상품");
+      } else if (usedNewCheck === "new") {
+        console.log("새상품");
+      }
+      if (exchangeState === "notExchange") {
+        console.log("교환불가");
+      } else if (exchangeState === "exchange") {
+        console.log("교환가능");
+      }
+      console.log(money + "원");
+      console.log(description);
+      console.log(tagList);
+      console.log(quantity);
+      if (bunPay) {
+        console.log("안전결제 함");
+      } else {
+        console.log("안전결제 안함");
+      }
+      setProductSubmitModal(true);
     }
   };
+
+  const [productSubmitModal, setProductSubmitModal] = useState(false);
+
+  useEffect(() => {
+    if (productSubmitModal) {
+      document.body.style.cssText = `overflow: hidden`;
+    } else {
+      document.body.style.cssText = `overflow: auto`;
+    }
+    return () => {
+      document.body.style.cssText = `overflow: auto`;
+    };
+  }, [productSubmitModal]);
 
   return (
     <MainLayout categories={data.categories} user={user}>
@@ -655,6 +675,7 @@ export default ({ data, user }: IndexProps) => {
                 value={description}
                 onChange={onChangeDescriptionInput}
                 ref={textareaRef}
+                maxLength={2000}
               />
               <div
                 onClick={() => {
@@ -907,6 +928,10 @@ export default ({ data, user }: IndexProps) => {
           </button>
         </div>
       </div>
+      <ProductSubmitModal
+        productSubmitModal={productSubmitModal}
+        setProductSubmitModal={setProductSubmitModal}
+      />
     </MainLayout>
   );
 };
