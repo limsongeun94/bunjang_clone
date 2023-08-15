@@ -9,6 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   // const dist = path.join(process.cwd(), 'data')
   // const data: Array<never> = JSON.parse(await fs.readFile(`${dist}/index_products.json`, 'utf8'))
+  //
 
   const ret = {
     page,
