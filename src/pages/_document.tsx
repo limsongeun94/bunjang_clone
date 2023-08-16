@@ -1,19 +1,13 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript } from "next/document";
 
 export default () => {
   return (
     <Html>
-      <Head>
-        {/* <meta
-          name="바람장터"
-          content="ㅇㅇㅇㅇ"
-         />
-         <title>바람장터</title> */}
-      </Head>
+      <Head></Head>
       <body>
         <Main />
         <NextScript />
       </body>
     </Html>
-  )
-}
+  );
+};

@@ -1,0 +1,17 @@
+/search/products?kewyword=쿠로미
+
+
+path            query
+/serch/products?keyword=쿠로미
+
+onClick={() => router.push("/serch/products?page=1&keyword=쿠로미)}
+
+
+
+
+search
+product.tsx || product/index.ts
+
+import { useSearchParams } from 'next/navigation'
+const page = searchParams.get('page')
+const keyword = searchParams.get('keyword')

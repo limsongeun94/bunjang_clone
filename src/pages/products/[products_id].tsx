@@ -214,7 +214,7 @@ export default ({ data, user }: IndexProps) => {
             <img src="/icons/twitter.png" width="16px" height="13px" />
           </button>
           <button className="w-[28px] h-[28px] bg-[#7e6e6c] flex justify-center items-center">
-            <img src="icons/url.png" width="25px" height="25px" />
+            <img src="/icons/url.png" width="25px" height="25px" />
           </button>
         </div>
         <div className="flex justify-between">
