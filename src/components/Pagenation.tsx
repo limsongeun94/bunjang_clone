@@ -19,9 +19,16 @@ export default (props: IndexProps) => {
   // 현재 페이지에 표시되는 페이지 버튼 숫자의 배열
   const [currentPageBtn, setCurrentPageBtn] = useState<number[]>(
     props.totalPageCnt > 10 ? tenPageArr : totalPageArr
+    // () => {
+    //   if (props.totalPageCnt > 10) {
+    //     return tenPageArr;
+    //   } else {
+    //     return totalPageArr;
+    //   }
+    // }
   );
 
-  console.log(currentPageBtn);
+  console.log("안녕", currentPageBtn);
 
   return (
     <div id="pagenation" className="pb-[100px]">
