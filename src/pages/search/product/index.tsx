@@ -4,6 +4,7 @@ import type { Banner, Category, Product, User } from "@/interface";
 import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
 import { useEffect, useState } from "react";
+import Pagenation from "@/components/Pagenation";
 
 interface IndexProps {
   data: {
@@ -18,9 +19,13 @@ export default ({ data, user }: IndexProps) => {
   const [productList, setProductList] = useState<Array<Product>>([]);
   const showMoreProduct = () => {
     axios.get("/product", { params: { page: 1, size: 100 } }).then((res) => {
+      // 원래는 size 100
       setProductList(res.data.list);
+      setTotalPage(res.data.pages);
+      console.log(res.data.total, res.data.pages);
     });
   };
+  const [totalPage, setTotalPage] = useState(0);
 
   const showDate = (update_time: number): string => {
     const myDate = new Date(update_time * 1000);
@@ -39,7 +44,7 @@ export default ({ data, user }: IndexProps) => {
 
   useEffect(() => {
     showMoreProduct();
-  }); // 여기에 [] 안에 쿼리 변환 들어가야함
+  }, []); // 여기에 [] 안에 쿼리 변환 들어가야함
 
   return (
     <MainLayout categories={data.categories} user={user}>
@@ -82,39 +87,40 @@ export default ({ data, user }: IndexProps) => {
               </div>
               <div className="relative cursor-pointer text-[13px]">고가순</div>
             </div>
-            <div className="flex flex-wrap">
-              {productList.map((product: Product) => {
-                return (
-                  <div
-                    key={product.pid}
-                    className="flex-item-propduct w-[196px] h-[276px] mr-[11px] mb-[11px] border-[1px] border-[#eeeeee]"
-                  >
-                    <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee]">
-                      <img
-                        className="w-[194px] h-[194px] object-cover"
-                        src={product.product_image}
-                      />
+          </div>
+          <div className="flex flex-wrap mb-[40px]">
+            {productList.map((product: Product) => {
+              return (
+                <div
+                  key={product.pid}
+                  className="flex-item-propduct w-[196px] h-[276px] mr-[11px] mb-[11px] border-[1px] border-[#eeeeee]"
+                >
+                  <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee]">
+                    <img
+                      className="w-[194px] h-[194px] object-cover"
+                      src={product.product_image}
+                    />
+                  </div>
+                  <div className="w-[194px] h-[80px] py-[15px] px-[10px] flex flex-col justify-between">
+                    <div className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">
+                      {product.name}
                     </div>
-                    <div className="w-[194px] h-[80px] py-[15px] px-[10px] flex flex-col justify-between">
-                      <div className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">
-                        {product.name}
+                    <div className="flex justify-between items-center">
+                      <div className="text-base font-semibold after-won">
+                        {product.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                       </div>
-                      <div className="flex justify-between items-center">
-                        <div className="text-base font-semibold after-won">
-                          {product.price
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                        </div>
-                        <div className="text-xs text-[#888888]">
-                          {showDate(product.update_time)}
-                        </div>
+                      <div className="text-xs text-[#888888]">
+                        {showDate(product.update_time)}
                       </div>
                     </div>
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
+          <Pagenation totalPageCnt={totalPage} />
         </div>
       </div>
     </MainLayout>

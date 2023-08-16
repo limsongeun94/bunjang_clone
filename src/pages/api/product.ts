@@ -15,6 +15,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     page,
     size,
     list: data.slice((page - 1) * size, page * size),
+    total: data.length,
+    pages: parseInt(data.length / size) + (data.length % size ? 1 : 0),
   };
 
   res.status(200).json(ret);
