@@ -19,3 +19,9 @@
   border: 1px solid #cccccc;
   background-color: white;
 }
+
+.current_pageBtn {
+  border: 1px solid rgb(255, 80, 88);
+  color: white;
+  background-color: rgb(255, 80, 88);
+}

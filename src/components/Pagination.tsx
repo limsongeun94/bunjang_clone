@@ -14,11 +14,17 @@ export default (props: IndexProps) => {
     last_num: 5,
   });
 
-  let currentPageArr = Array(num.last_num - num.first_num + 1)
-    .fill()
-    .map((el, i) => {
-      return num.first_num + i;
-    });
+  let [currentPageArr, setCurrentPageArr] = useState<number[]>([]);
+
+  useEffect(() => {
+    setCurrentPageArr(
+      Array(num.last_num - num.first_num + 1)
+        .fill()
+        .map((el, i) => {
+          return num.first_num + i;
+        })
+    );
+  }, [props.page]);
 
   useEffect(() => {
     props.lastPage < 5
@@ -80,7 +86,14 @@ export default (props: IndexProps) => {
       {num.last_num == props.lastPage
         ? currentPageArr.map((el, i) => {
             return (
-              <button className="pageBtn" style={{ marginRight: "0px" }}>
+              <button
+                onClick={() => {
+                  props.setPage(el);
+                  setActive(el);
+                }}
+                className="pageBtn"
+                style={{ marginRight: "0px" }}
+              >
                 {el}
               </button>
             );

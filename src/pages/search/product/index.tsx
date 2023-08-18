@@ -5,7 +5,7 @@ import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import Pagination from "@/components/Pagination";
+import { Paginator } from "@/libs/paginator";
 
 interface IndexProps {
   data: {
@@ -20,6 +20,10 @@ export default ({ data, user }: IndexProps) => {
   const searchParams = useSearchParams();
   const page = searchParams.get("page");
 
+  const [paginator] = useState<Paginator>(
+    new Paginator(parseInt(page as string), 5, { windowMode: "JUMPING" })
+  );
+
   const [productList, setProductList] = useState<Array<Product>>([]);
   const showMoreProduct = () => {
     axios.get("/product", { params: { page: page, size: 100 } }).then((res) => {
@@ -27,6 +31,7 @@ export default ({ data, user }: IndexProps) => {
       setProductList(res.data.list);
       setLastPage(res.data.pages);
       console.log(res.data.total, res.data.pages);
+      paginator.setPages(res.data.pages);
     });
   };
   const [lastPage, setLastPage] = useState(0);
@@ -129,7 +134,8 @@ export default ({ data, user }: IndexProps) => {
               );
             })}
           </div>
-          <Pagination page={page} lastPage={lastPage} setPage={onClickPage} />
+          {/* <Pagination page={page} lastPage={lastPage} setPage={onClickPage} /> */}
+          {/* <Pagination /> */}
         </div>
       </div>
     </MainLayout>
