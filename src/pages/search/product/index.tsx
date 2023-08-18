@@ -4,7 +4,8 @@ import type { Banner, Category, Product, User } from "@/interface";
 import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
 import { useEffect, useState } from "react";
-import Pagenation from "@/components/Pagenation";
+import { useSearchParams } from "next/navigation";
+import Pagination from "@/components/Pagination";
 
 interface IndexProps {
   data: {
@@ -16,16 +17,24 @@ interface IndexProps {
 }
 
 export default ({ data, user }: IndexProps) => {
+  const searchParams = useSearchParams();
+  const page = searchParams.get("page");
+
   const [productList, setProductList] = useState<Array<Product>>([]);
   const showMoreProduct = () => {
-    axios.get("/product", { params: { page: 1, size: 100 } }).then((res) => {
+    axios.get("/product", { params: { page: page, size: 100 } }).then((res) => {
       // 원래는 size 100
       setProductList(res.data.list);
-      setTotalPage(res.data.pages);
+      setLastPage(res.data.pages);
       console.log(res.data.total, res.data.pages);
     });
   };
-  const [totalPage, setTotalPage] = useState(0);
+  const [lastPage, setLastPage] = useState(0);
+  const onClickPage = (value: number) => {
+    const aTag = document.createElement("a");
+    aTag.setAttribute("href", "/search/product?page=" + value);
+    aTag.click();
+  };
 
   const showDate = (update_time: number): string => {
     const myDate = new Date(update_time * 1000);
@@ -44,7 +53,7 @@ export default ({ data, user }: IndexProps) => {
 
   useEffect(() => {
     showMoreProduct();
-  }, []); // 여기에 [] 안에 쿼리 변환 들어가야함
+  }, [page]); // 여기에 [] 안에 쿼리 변환 들어가야함
 
   return (
     <MainLayout categories={data.categories} user={user}>
@@ -120,7 +129,7 @@ export default ({ data, user }: IndexProps) => {
               );
             })}
           </div>
-          <Pagenation totalPageCnt={totalPage} />
+          <Pagination page={page} lastPage={lastPage} setPage={onClickPage} />
         </div>
       </div>
     </MainLayout>

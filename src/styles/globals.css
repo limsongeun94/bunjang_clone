@@ -1,6 +1,6 @@
 @import url(./my_input.css);
 @import url(./product_carousel.css);
-@import url(./pagenation.css);
+@import url(./pagination.css);
 
 @tailwind base;
 @tailwind components;

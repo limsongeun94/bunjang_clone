@@ -1,0 +1,21 @@
+.pageBtn,
+.prev_page_btn {
+  width: 33px;
+  height: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #cccccc;
+  background-color: white;
+  margin-right: 12px;
+}
+
+.next_page_btn {
+  width: 33px;
+  height: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #cccccc;
+  background-color: white;
+}
