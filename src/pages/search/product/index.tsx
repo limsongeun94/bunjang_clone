@@ -5,7 +5,7 @@ import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Paginator } from "@/libs/paginator";
+import Pagination from "@/components/Pagination_library";
 
 interface IndexProps {
   data: {
@@ -18,11 +18,7 @@ interface IndexProps {
 
 export default ({ data, user }: IndexProps) => {
   const searchParams = useSearchParams();
-  const page = searchParams.get("page");
-
-  const [paginator] = useState<Paginator>(
-    new Paginator(parseInt(page as string), 5, { windowMode: "JUMPING" })
-  );
+  const page = searchParams.get("page") || "1"; // (어쩌면 null) || (널인 경우 값)
 
   const [productList, setProductList] = useState<Array<Product>>([]);
   const showMoreProduct = () => {
@@ -31,7 +27,7 @@ export default ({ data, user }: IndexProps) => {
       setProductList(res.data.list);
       setLastPage(res.data.pages);
       console.log(res.data.total, res.data.pages);
-      paginator.setPages(res.data.pages);
+      // paginator.setPages(res.data.pages);
     });
   };
   const [lastPage, setLastPage] = useState(0);
@@ -136,6 +132,11 @@ export default ({ data, user }: IndexProps) => {
           </div>
           {/* <Pagination page={page} lastPage={lastPage} setPage={onClickPage} /> */}
           {/* <Pagination /> */}
+          <Pagination
+            page={page}
+            lastPage={lastPage}
+            onClickPage={onClickPage}
+          />
         </div>
       </div>
     </MainLayout>

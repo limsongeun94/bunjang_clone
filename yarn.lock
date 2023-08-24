@@ -143,6 +143,10 @@
     uncontrollable "^8.0.1"
     warning "^4.0.3"
 
+"@seoly/paginator@github:seoly0/javascript-paginator":
+  version "1.0.0"
+  resolved "git+ssh://git@github.com/seoly0/javascript-paginator.git#bd1134f2992a8eec26a1515f010166d2daa6c388"
+
 "@swc/helpers@^0.4.14":
   version "0.4.14"
   resolved "https://registry.npmjs.org/@swc/helpers/-/helpers-0.4.14.tgz"

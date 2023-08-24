@@ -8,6 +8,7 @@
   border: 1px solid #cccccc;
   background-color: white;
   margin-right: 12px;
+  color: rgb(155, 153, 169);
 }
 
 .next_page_btn {
@@ -18,6 +19,7 @@
   align-items: center;
   border: 1px solid #cccccc;
   background-color: white;
+  color: rgb(155, 153, 169);
 }
 
 .current_pageBtn {
