@@ -20,10 +20,7 @@ function App(props: IndexProps) {
     paginator.setTotal(props.lastPage);
     paginator.setCurrent(current);
     setItems(paginator.getItems());
-    console.log("안녕");
   }, [paginator, props.lastPage]);
-
-  console.log("커런트", current, paginator.getCurrent());
 
   const onClickPrevBtn = () => {
     paginator.prevPage();
@@ -69,14 +66,24 @@ function App(props: IndexProps) {
     setCurrent(paginator.getCurrent());
   };
 
+  console.log(paginator.getItems());
+
+  paginator.getItems().some((el) => el === parseInt(props.page));
+
   return (
     <div className="flex justify-center pb-[100px]">
-      <button className="prev_page_btn" onClick={onClickPrevWindowBtn}>
-        &lt;
-      </button>
+      {paginator.getItems().some((el) => el === 1) ? null : (
+        <button className="prev_page_btn" onClick={onClickPrevWindowBtn}>
+          &lt;
+        </button>
+      )}
       {items.map((x) => (
         <button
-          className="pageBtn"
+          className={`${
+            paginator.getItems().some((el) => el === props.lastPage)
+              ? "last_pageBtn"
+              : "pageBtn"
+          } pageBtn`}
           style={{
             backgroundColor: current === x ? "rgb(255, 80, 88)" : "",
             color: current === x ? "white" : "",
@@ -90,9 +97,11 @@ function App(props: IndexProps) {
           {x}
         </button>
       ))}
-      <button className="next_page_btn" onClick={onClickNextWindowBtn}>
-        &gt;
-      </button>
+      {paginator.getItems().some((el) => el === props.lastPage) ? null : (
+        <button className="next_page_btn" onClick={onClickNextWindowBtn}>
+          &gt;
+        </button>
+      )}
     </div>
   );
 }

@@ -27,3 +27,27 @@
   color: white;
   background-color: rgb(255, 80, 88);
 }
+
+.last_pageBtn {
+  width: 33px;
+  height: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #cccccc;
+  background-color: white;
+  margin-right: 12px;
+  color: rgb(155, 153, 169);
+}
+
+.last_pageBtn:last-child {
+  width: 33px;
+  height: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #cccccc;
+  background-color: white;
+  margin-right: 0px;
+  color: rgb(155, 153, 169);
+}
