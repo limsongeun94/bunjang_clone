@@ -5,6 +5,7 @@ import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
 import Pagination from "@/components/Pagination_library";
 
 interface IndexProps {
@@ -17,6 +18,8 @@ interface IndexProps {
 }
 
 export default ({ data, user }: IndexProps) => {
+  const router = useRouter();
+
   const searchParams = useSearchParams();
   const page = searchParams.get("page") || "1"; // (어쩌면 null) || (널인 경우 값)
 
@@ -31,11 +34,6 @@ export default ({ data, user }: IndexProps) => {
     });
   };
   const [lastPage, setLastPage] = useState(0);
-  const onClickPage = (value: number) => {
-    const aTag = document.createElement("a");
-    aTag.setAttribute("href", "/search/product?page=" + value);
-    aTag.click();
-  };
 
   const showDate = (update_time: number): string => {
     const myDate = new Date(update_time * 1000);
@@ -135,7 +133,9 @@ export default ({ data, user }: IndexProps) => {
           <Pagination
             page={page}
             lastPage={lastPage}
-            onClickPage={onClickPage}
+            onClickPage={(value) =>
+              router.push("/search/product?page=" + value)
+            }
           />
         </div>
       </div>
