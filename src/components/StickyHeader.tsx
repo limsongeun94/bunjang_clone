@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Category, User } from "@/interface";
 import dynamic from "next/dynamic";
-import { KeyboardEvent } from "react";
+import { KeyboardEvent, MouseEvent } from "react";
 
 interface LayoutProps {
   setLoginModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -69,13 +69,16 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
     : "";
 
   const [searchValue, setSearchValue] = useState("");
-  const onSearchEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.code === "Space" || e.key === "Enter") {
+  const onSearch = (
+    e: KeyboardEvent<HTMLInputElement> | MouseEvent<HTMLImageElement>
+  ) => {
+    const { key } = e as React.KeyboardEvent<HTMLInputElement>;
+    const { button } = e as MouseEvent<HTMLImageElement>;
+    if (key === "Enter") {
+      router.push("/search/product?page=1&q=" + searchValue);
+    } else if (button === 0) {
       router.push("/search/product?page=1&q=" + searchValue);
     }
-  };
-  const onSearchClick = () => {
-    router.push("/search/product?page=1&q=" + searchValue);
   };
 
   return (
@@ -95,10 +98,10 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
             placeholder="상품명, 지역명, @상점명 입력"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
-            onKeyUp={onSearchEnter}
+            onKeyUp={onSearch}
           />
           <img
-            onClick={onSearchClick}
+            onClick={onSearch}
             src="/icons/icon_search.png"
             className="cursor-pointer"
           />

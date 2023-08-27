@@ -35,6 +35,7 @@ export default ({ data, user }: IndexProps) => {
         el.name.includes(q)
       );
       setProductList(newList);
+      console.log(newList);
     });
   };
   const [lastPage, setLastPage] = useState(0);
@@ -57,6 +58,8 @@ export default ({ data, user }: IndexProps) => {
   useEffect(() => {
     showMoreProduct();
   }, [page, q]); // 여기에 [] 안에 쿼리 변환 들어가야함
+
+  console.log(data.categories);
 
   return (
     <MainLayout categories={data.categories} user={user}>
@@ -135,11 +138,11 @@ export default ({ data, user }: IndexProps) => {
           {/* <Pagination page={page} lastPage={lastPage} setPage={onClickPage} /> */}
           {/* <Pagination /> */}
           <Pagination
-            page={page}
             lastPage={lastPage}
             onClickPage={(value) =>
               router.push("/search/product?page=" + value + "&q=" + q)
             }
+            q={q}
           />
         </div>
       </div>

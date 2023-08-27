@@ -1,26 +1,32 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Paginator } from "@seoly/paginator"; // 라이브러리 새로 설치했으니 이거 말고 그거 써야해
 
 interface IndexProps {
   lastPage: number;
-  page: string;
   onClickPage: (x: number) => void;
+  q: string;
 }
 
 function App(props: IndexProps) {
+  const searchParams = useSearchParams();
+  const page = searchParams.get("page") || "1"; // (어쩌면 null) || (널인 경우 값)
+
   const [paginator] = useState<Paginator>(
-    new Paginator(parseInt(props.page as string), props.lastPage, {
+    new Paginator(parseInt(page as string), props.lastPage, {
       windowMode: "JUMPING",
     })
   );
-  const [current, setCurrent] = useState(parseInt(props.page as string));
+  const [current, setCurrent] = useState(parseInt(page as string));
   const [items, setItems] = useState<Array<number>>([]);
-
   useEffect(() => {
+    // console.log("안녕", page);
     paginator.setTotal(props.lastPage);
-    paginator.setCurrent(current);
+    paginator.setCurrent(parseInt(page));
+    setCurrent(paginator.getCurrent());
+    // console.log(paginator.getCurrent(), paginator.getItems());
     setItems(paginator.getItems());
-  }, [paginator, props.lastPage]);
+  }, [paginator, props.lastPage, props.q]);
 
   const onClickPrevBtn = () => {
     paginator.prevPage();
@@ -66,7 +72,7 @@ function App(props: IndexProps) {
     setCurrent(paginator.getCurrent());
   };
 
-  paginator.getItems().some((el) => el === parseInt(props.page));
+  paginator.getItems().some((el) => el === parseInt(page));
 
   return (
     <div className="flex justify-center pb-[100px]">
