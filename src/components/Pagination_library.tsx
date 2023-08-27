@@ -66,8 +66,6 @@ function App(props: IndexProps) {
     setCurrent(paginator.getCurrent());
   };
 
-  console.log(paginator.getItems());
-
   paginator.getItems().some((el) => el === parseInt(props.page));
 
   return (

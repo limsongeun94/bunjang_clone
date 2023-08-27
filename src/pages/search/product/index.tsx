@@ -22,15 +22,19 @@ export default ({ data, user }: IndexProps) => {
 
   const searchParams = useSearchParams();
   const page = searchParams.get("page") || "1"; // (어쩌면 null) || (널인 경우 값)
+  const q = searchParams.get("q") || "";
 
   const [productList, setProductList] = useState<Array<Product>>([]);
   const showMoreProduct = () => {
     axios.get("/product", { params: { page: page, size: 100 } }).then((res) => {
       // 원래는 size 100
-      setProductList(res.data.list);
+      // setProductList(res.data.list);
       setLastPage(res.data.pages);
-      console.log(res.data.total, res.data.pages);
-      // paginator.setPages(res.data.pages);
+      // console.log(res.data.total, res.data.pages);
+      const newList = res.data.list.filter((el: Product) =>
+        el.name.includes(q)
+      );
+      setProductList(newList);
     });
   };
   const [lastPage, setLastPage] = useState(0);
@@ -52,13 +56,13 @@ export default ({ data, user }: IndexProps) => {
 
   useEffect(() => {
     showMoreProduct();
-  }, [page]); // 여기에 [] 안에 쿼리 변환 들어가야함
+  }, [page, q]); // 여기에 [] 안에 쿼리 변환 들어가야함
 
   return (
     <MainLayout categories={data.categories} user={user}>
       <div className="pt-[30px] bg-[#f9f9f9]">
         <div className="w-[1024px] mx-auto">
-          <div className="w-full flex flex-wrap">
+          {/* <div className="w-full flex flex-wrap">
             <div className="w-[203px] h-[48px] bg-white mr-[1px] mb-[1px] text-xs px-[20px] leading-[48px]">
               더미1
             </div>
@@ -77,13 +81,13 @@ export default ({ data, user }: IndexProps) => {
             <div className="w-[203px] h-[48px] bg-white mr-[1px] mb-[1px] text-xs px-[20px] leading-[48px]">
               더미6
             </div>
-          </div>
+          </div> */}
           <div className="mt-[50px] mb-[24px] flex justify-between items-center">
             <div>
-              <span className="text-[#f70000]">00</span>의 검색결과
-              <span className="ml-[5px] text-[#888888]">0000개</span>
+              <span className="text-[#f70000]">{q}</span>의 검색결과
+              {/* <span className="ml-[5px] text-[#888888]">0000개</span> */}
             </div>
-            <div className="flex">
+            {/* <div className="flex">
               <div className="mr-[20px] relative cursor-pointer text-[13px] after:absolute after:content-[''] after:top-[4px] after:right-[-10px] after:w-[1px] after:h-[12px] after:border-r after:border-[#cccccc]">
                 정확도순
               </div>
@@ -94,7 +98,7 @@ export default ({ data, user }: IndexProps) => {
                 저가순
               </div>
               <div className="relative cursor-pointer text-[13px]">고가순</div>
-            </div>
+            </div> */}
           </div>
           <div className="flex flex-wrap mb-[40px]">
             {productList.map((product: Product) => {
@@ -134,7 +138,7 @@ export default ({ data, user }: IndexProps) => {
             page={page}
             lastPage={lastPage}
             onClickPage={(value) =>
-              router.push("/search/product?page=" + value)
+              router.push("/search/product?page=" + value + "&q=" + q)
             }
           />
         </div>

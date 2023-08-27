@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Category, User } from "@/interface";
 import dynamic from "next/dynamic";
+import { KeyboardEvent } from "react";
 
 interface LayoutProps {
   setLoginModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -67,6 +68,16 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
       : ""
     : "";
 
+  const [searchValue, setSearchValue] = useState("");
+  const onSearchEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === "Space" || e.key === "Enter") {
+      router.push("/search/product?page=1&q=" + searchValue);
+    }
+  };
+  const onSearchClick = () => {
+    router.push("/search/product?page=1&q=" + searchValue);
+  };
+
   return (
     <header className="bg-white sticky top-0 z-30 pt-[30px]">
       <div className="relative w-[1024px] mx-auto">
@@ -82,8 +93,15 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
           <input
             className="outline-none h-[16px] w-full"
             placeholder="상품명, 지역명, @상점명 입력"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            onKeyUp={onSearchEnter}
           />
-          <img src="/icons/icon_search.png" />
+          <img
+            onClick={onSearchClick}
+            src="/icons/icon_search.png"
+            className="cursor-pointer"
+          />
         </div>
         <div className="flex h-[26px]">
           <div
