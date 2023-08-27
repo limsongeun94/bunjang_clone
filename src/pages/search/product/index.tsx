@@ -59,8 +59,6 @@ export default ({ data, user }: IndexProps) => {
     showMoreProduct();
   }, [page, q]); // 여기에 [] 안에 쿼리 변환 들어가야함
 
-  console.log(data.categories);
-
   return (
     <MainLayout categories={data.categories} user={user}>
       <div className="pt-[30px] bg-[#f9f9f9]">
