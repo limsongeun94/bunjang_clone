@@ -16,7 +16,6 @@ interface IndexProps {
   };
   user: User;
 }
-// 야호
 
 export default ({ data, user }: IndexProps) => {
   const router = useRouter();
