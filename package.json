@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@seoly/paginator": "github:seoly0/javascript-paginator",
+    "@seoly/paginator": "github:seoly0dev/paginator",
     "@types/react-js-pagination": "^3.0.4",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
