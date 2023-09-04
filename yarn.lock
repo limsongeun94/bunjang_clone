@@ -143,9 +143,9 @@
     uncontrollable "^8.0.1"
     warning "^4.0.3"
 
-"@seoly/paginator@github:seoly0/javascript-paginator":
+"@seoly/paginator@github:seoly0dev/paginator":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/seoly0/javascript-paginator.git#bd1134f2992a8eec26a1515f010166d2daa6c388"
+  resolved "git+ssh://git@github.com/seoly0dev/paginator.git#7dd9689e65d1a6540984e10666fb097ae8daeb87"
 
 "@swc/helpers@^0.4.14":
   version "0.4.14"

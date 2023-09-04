@@ -35,7 +35,6 @@ export default ({ data, user }: IndexProps) => {
         el.name.includes(q)
       );
       setProductList(newList);
-      console.log(newList);
     });
   };
   const [lastPage, setLastPage] = useState(0);
@@ -53,6 +52,13 @@ export default ({ data, user }: IndexProps) => {
         ? myDate.getDate().toString()
         : "0" + myDate.getDate().toString())
     );
+  };
+
+  const onClickNewTap = (id: string) => {
+    const aTag = document.createElement("a");
+    aTag.setAttribute("href", "/products/" + id);
+    aTag.setAttribute("target", "_blank");
+    aTag.click();
   };
 
   useEffect(() => {
@@ -106,13 +112,32 @@ export default ({ data, user }: IndexProps) => {
               return (
                 <div
                   key={product.pid}
-                  className="flex-item-propduct w-[196px] h-[276px] mr-[11px] mb-[11px] border-[1px] border-[#eeeeee]"
+                  onClick={() => onClickNewTap(product.pid)}
+                  className="flex-item-propduct w-[196px] h-[276px] mr-[11px] mb-[11px] border-[1px] border-[#eeeeee] cursor-pointer"
                 >
-                  <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee]">
+                  <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee] relative">
                     <img
                       className="w-[194px] h-[194px] object-cover"
                       src={product.product_image}
                     />
+                    <div className="absolute bottom-[10px] left-[10px] flex gap-[5px]">
+                      {product.bun_pay_filter_enabled === true ? (
+                        <img
+                          src="/icons/bunpay.svg"
+                          width="35px"
+                          height="16px"
+                        />
+                      ) : (
+                        ""
+                      )}
+                      {product.free_shipping === true ? (
+                        <div className="px-[3px] py-[2px] leading-none rounded-[2px] text-[10px] text-white bg-black/[.4]">
+                          배송비포함
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
                   </div>
                   <div className="w-[194px] h-[80px] py-[15px] px-[10px] flex flex-col justify-between">
                     <div className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">
@@ -133,14 +158,11 @@ export default ({ data, user }: IndexProps) => {
               );
             })}
           </div>
-          {/* <Pagination page={page} lastPage={lastPage} setPage={onClickPage} /> */}
-          {/* <Pagination /> */}
           <Pagination
             lastPage={lastPage}
             onClickPage={(value) =>
               router.push("/search/product?page=" + value + "&q=" + q)
             }
-            q={q}
           />
         </div>
       </div>

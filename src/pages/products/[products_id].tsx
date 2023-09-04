@@ -4,7 +4,8 @@ import ProductCarousel from "@/components/ProductCarousel";
 import { withIronSessionSsr } from "iron-session/next";
 import { ironSessionOptions } from "@/libs/session";
 import axios from "@/libs/axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 interface IndexProps {
   data: {
@@ -16,19 +17,50 @@ interface IndexProps {
 }
 
 export default ({ data, user }: IndexProps) => {
-  const showMoreProduct = () => {
-    axios.get("/product", { params: { page: 1, size: 1 } }).then((res) => {
+  const router = useRouter();
+
+  const [product, setProduct] = useState({
+    ad: false,
+    brand: { id: 0, imageUrl: "", name: "" },
+    bunpayHope: false,
+    care: false,
+    category: { id: 0, imageUrl: "", name: "" },
+    description: "",
+    exchangeable: false,
+    exportNaverShopping: false,
+    imageCount: 0,
+    imageUrl: "",
+    includeShippingCost: false,
+    inspectionStatus: "NON_TARGET",
+    keywordLinks: [],
+    keywords: [],
+    metrics: {
+      favoriteCount: 0,
+      buntalkCount: 0,
+      viewCount: 0,
+      commentCount: 0,
+    },
+    name: "",
+    pid: 0,
+    price: 0,
+    qty: 1,
+    saleStatus: "SELLING",
+    showNaverShoppingLabel: false,
+    specLabels: [],
+    status: "USED",
+    updatedAt: "",
+    updatedBefore: "",
+  });
+  const showProduct = () => {
+    axios.get("/product/" + router.query.products_id).then((res) => {
       console.log(res.data);
+      setProduct(res.data);
     });
   };
 
   useEffect(() => {
-    showMoreProduct();
+    showProduct();
   }, []);
-
-  axios
-    .get("/product", { params: { page: 2, size: 50 } })
-    .then((res) => console.log(res.data));
 
   return (
     <MainLayout categories={data.categories} user={user}>
@@ -111,11 +143,18 @@ export default ({ data, user }: IndexProps) => {
           <div className="w-full">
             <div className="pb-[30px] border-b border-[#eeeeee]">
               <div className="text-2xl font-semibold leading-[1.4] mb-[25px]">
-                상품 이름
+                {product.name}
               </div>
-              <div className="text-[40px] font-medium">
-                300,000
+              <div className="text-[40px] font-medium ">
+                {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 <span className="ml-[5px] text-[28px] font-normal">원</span>
+                {product.bunpayHope === false ? (
+                  ""
+                ) : (
+                  <span className="inline-block ml-[10px]">
+                    <img className="inline-block" src="/icons/bunpay.svg" />
+                  </span>
+                )}
               </div>
             </div>
             <div className="flex justify-between mt-[15px] mb-[25px]">
@@ -127,7 +166,7 @@ export default ({ data, user }: IndexProps) => {
                     height="16px"
                     className="mr-[5px]"
                   />
-                  63
+                  {product.metrics.favoriteCount}
                 </div>
                 <div className="flex items-center text-[#cccccc] after:content-[''] after:w-px after:h-[12px] after:border-r-[1px] after:mx-[10px] after:box-border">
                   <img
@@ -136,7 +175,7 @@ export default ({ data, user }: IndexProps) => {
                     height="13px"
                     className="mr-[5px]"
                   />
-                  2599
+                  {product.metrics.viewCount}
                 </div>
                 <div className="flex items-center text-[#cccccc]">
                   <img
@@ -145,7 +184,7 @@ export default ({ data, user }: IndexProps) => {
                     height="16px"
                     className="mr-[5px]"
                   />
-                  14시간 전
+                  {product.updatedBefore}
                 </div>
               </div>
               <div className="flex items-center text-[#cccccc]">
@@ -163,19 +202,25 @@ export default ({ data, user }: IndexProps) => {
                 <div className="w-[90px] text-[#999999] mb-[25px] pl-[15px] before:content-[''] before:absolute before:top-[7px] before:left-[6px] before:w-[3px] before:h-[3px] before:rounded-[50%] before:bg-[#cccccc]">
                   상품상태
                 </div>
-                <div>중고</div>
+                <div>{product.status === "USED" ? "중고" : "새상품"}</div>
               </div>
               <div className="flex relative">
                 <div className="w-[90px] text-[#999999] mb-[25px] pl-[15px] before:content-[''] before:absolute before:top-[7px] before:left-[6px] before:w-[3px] before:h-[3px] before:rounded-[50%] before:bg-[#cccccc]">
                   교환여부
                 </div>
-                <div>교환불가능</div>
+                <div>
+                  {product.exchangeable === false ? "교환불가능" : "교환가능"}
+                </div>
               </div>
               <div className="flex relative">
                 <div className="w-[90px] text-[#999999] mb-[25px] pl-[15px] before:content-[''] before:absolute before:top-[7px] before:left-[6px] before:w-[3px] before:h-[3px] before:rounded-[50%] before:bg-[#cccccc]">
                   배송비
                 </div>
-                <div>배송비 별도</div>
+                <div>
+                  {product.includeShippingCost === true
+                    ? "배송비 포함"
+                    : "배송비 별도"}
+                </div>
               </div>
               <div className="flex relative">
                 <div className="w-[90px] text-[#999999] mb-[25px] pl-[15px] before:content-[''] before:absolute before:top-[7px] before:left-[6px] before:w-[3px] before:h-[3px] before:rounded-[50%] before:bg-[#cccccc]">
@@ -191,7 +236,7 @@ export default ({ data, user }: IndexProps) => {
                   width="16px"
                   height="16px"
                 />
-                &nbsp;찜&nbsp;<span>0</span>
+                &nbsp;찜&nbsp;<span>{product.metrics.favoriteCount}</span>
               </button>
               <button className=" mr-[10px] h-[56px] flex justify-center items-center flex-1 bg-[#ffa425]">
                 <img src="/icons/talk_white.png" width="20px" height="19px" />
@@ -223,12 +268,9 @@ export default ({ data, user }: IndexProps) => {
               상품정보
             </div>
             <div className="my-[40px] w-[663px]  text-sm leading-[1.5]">
-              비상계엄이 선포된 때에는 법률이 정하는 바에 의하여 영장제도,
-              언론·출판·집회·결사의 자유, 정부나 법원의 권한에 관하여 특별한
-              조치를 할 수 있다. 행정각부의 설치·조직과 직무범위는 법률로
-              정한다. 대한민국의 국민이 되는 요건은 법률로 정한다. 헌법개정안은
-              국회가 의결한 후 30일 이내에 국민투표에 붙여 국회의원선거권자
-              과반수의 투표와 투표자 과반수의 찬성을 얻어야 한다.
+              <pre className="description text-sm leading-[1.5]">
+                {product.description}
+              </pre>
             </div>
             <div className="flex border-y border-[#eeeeee] py-[20px]">
               <div className="w-[221px] border-r border-[#eeeeee]">
@@ -270,7 +312,19 @@ export default ({ data, user }: IndexProps) => {
                   상품태그
                 </div>
                 <div className="px-[15px] text-center text-[13px] text-[#666666] leading-normal">
-                  #산리오 #마이멜로디
+                  {product.keywords.map((el, i) => {
+                    return (
+                      <a
+                        key={i}
+                        className="mr-[5px] text-[#666666] no-underline hover:underline cursor-pointer"
+                        onClick={() =>
+                          router.push("/search/product?page=1&q=" + el)
+                        }
+                      >
+                        {"#" + el}
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             </div>

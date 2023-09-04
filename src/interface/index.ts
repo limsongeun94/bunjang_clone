@@ -31,6 +31,8 @@ export interface Product {
   price: string;
   update_time: number;
   pid: string;
+  bun_pay_filter_enabled: boolean;
+  free_shipping: boolean;
 }
 
 export interface SelectBox {

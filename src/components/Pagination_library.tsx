@@ -5,12 +5,12 @@ import { Paginator } from "@seoly/paginator"; // 라이브러리 새로 설치�
 interface IndexProps {
   lastPage: number;
   onClickPage: (x: number) => void;
-  q: string;
 }
 
 function App(props: IndexProps) {
   const searchParams = useSearchParams();
   const page = searchParams.get("page") || "1"; // (어쩌면 null) || (널인 경우 값)
+  const q = searchParams.get("q") || "1";
 
   const [paginator] = useState<Paginator>(
     new Paginator(parseInt(page as string), props.lastPage, {
@@ -26,7 +26,7 @@ function App(props: IndexProps) {
     setCurrent(paginator.getCurrent());
     // console.log(paginator.getCurrent(), paginator.getItems());
     setItems(paginator.getItems());
-  }, [paginator, props.lastPage, props.q]);
+  }, [paginator, props.lastPage, q]);
 
   const onClickPrevBtn = () => {
     paginator.prevPage();
