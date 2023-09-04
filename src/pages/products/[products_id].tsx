@@ -298,7 +298,7 @@ export default ({ data, user }: IndexProps) => {
                   카테고리
                 </div>
                 <div className="px-[15px] text-center text-[13px] text-[#666666] leading-normal">
-                  피규어
+                  {product.category.name}
                 </div>
               </div>
               <div className="w-[221px] border-r border-[#eeeeee]">
