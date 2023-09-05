@@ -188,3 +188,14 @@ input[type="number"] {
 .description {
   font-family: "Noto-Sans";
 }
+
+.big_img_div {
+  width: 550px;
+  height: 550px;
+  overflow: hidden;
+  margin-right: 20px;
+}
+
+.big_img_div:last-child {
+  margin-right: 0;
+}

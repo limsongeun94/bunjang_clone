@@ -6,6 +6,7 @@ import { ironSessionOptions } from "@/libs/session";
 import axios from "@/libs/axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import BigImgModal from "@/components/BigImgModal";
 
 interface IndexProps {
   data: {
@@ -28,6 +29,12 @@ export default ({ data, user }: IndexProps) => {
     description: "",
     exchangeable: false,
     exportNaverShopping: false,
+    geo: {
+      address: "",
+      label: "",
+      lat: 0,
+      lon: 0,
+    },
     imageCount: 0,
     imageUrl: "",
     includeShippingCost: false,
@@ -62,8 +69,38 @@ export default ({ data, user }: IndexProps) => {
     showProduct();
   }, []);
 
+  const [img_arr, setImg_arr] = useState<string[]>([]);
+  const madeImgArr = () => {
+    let arr = [];
+    for (let i = 1; i <= product.imageCount; i++) {
+      arr.push(product.imageUrl.replace("{cnt}", i.toString()));
+    }
+    setImg_arr([...arr]);
+  };
+  useEffect(() => {
+    madeImgArr();
+  }, [product]);
+
+  const [imgModal, setImgModal] = useState(false);
+
+  useEffect(() => {
+    if (imgModal) {
+      document.body.style.cssText = `overflow: hidden`;
+    } else {
+      document.body.style.cssText = `overflow: auto`;
+    }
+    return () => {
+      document.body.style.cssText = `overflow: auto`;
+    };
+  }, [imgModal]);
+
   return (
     <MainLayout categories={data.categories} user={user}>
+      <BigImgModal
+        imgModal={imgModal}
+        setImgModal={setImgModal}
+        img_arr={img_arr}
+      />
       <div className="w-[1024px] mx-auto ">
         <div className="text-xs flex items-center justify-start pt-[30px] pb-[20px] border-b border-[#3f3f3f]">
           <div className="flex items-center">
@@ -129,8 +166,11 @@ export default ({ data, user }: IndexProps) => {
         </div>
         <div className="flex py-[30px]">
           <div className="w-[430px] h-[430px] mr-[40px] relative">
-            <ProductCarousel />
-            <div className="absolute right-[20px] bottom-[20px] text-sm ml-[10px] py-[6px] px-[12px] rounded-[16px] bg-[#212121]/[0.35] flex items-center text-white w-max cursor-pointer">
+            <ProductCarousel img_arr={img_arr} />
+            <div
+              onClick={() => setImgModal(true)}
+              className="absolute right-[20px] bottom-[20px] text-sm ml-[10px] py-[6px] px-[12px] rounded-[16px] bg-[#212121]/[0.35] flex items-center text-white w-max cursor-pointer"
+            >
               <img
                 src="/icons/enlarge.png"
                 width="16px"
@@ -226,7 +266,7 @@ export default ({ data, user }: IndexProps) => {
                 <div className="w-[90px] text-[#999999] mb-[25px] pl-[15px] before:content-[''] before:absolute before:top-[7px] before:left-[6px] before:w-[3px] before:h-[3px] before:rounded-[50%] before:bg-[#cccccc]">
                   거래지역
                 </div>
-                <div>일심해장국</div>
+                <div>{product.geo ? product.geo.label : "전국"}</div>
               </div>
             </div>
             <div className="flex justify-between w-full text-lg font-semibold text-white">
@@ -284,7 +324,7 @@ export default ({ data, user }: IndexProps) => {
                   거래지역
                 </div>
                 <div className="px-[15px] text-center text-[13px] text-[#666666] leading-normal">
-                  서울시 도봉구 방학3동
+                  {product.geo ? product.geo.address : "전국"}
                 </div>
               </div>
               <div className="w-[221px] border-r border-[#eeeeee]">
