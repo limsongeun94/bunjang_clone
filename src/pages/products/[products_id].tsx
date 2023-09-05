@@ -102,7 +102,7 @@ export default ({ data, user }: IndexProps) => {
         img_arr={img_arr}
       />
       <div className="w-[1024px] mx-auto ">
-        <div className="text-xs flex items-center justify-start pt-[30px] pb-[20px] border-b border-[#3f3f3f]">
+        {/* <div className="text-xs flex items-center justify-start pt-[30px] pb-[20px] border-b border-[#3f3f3f]">
           <div className="flex items-center">
             <img
               src="/icons/home.png"
@@ -163,7 +163,7 @@ export default ({ data, user }: IndexProps) => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="flex py-[30px]">
           <div className="w-[430px] h-[430px] mr-[40px] relative">
             <ProductCarousel img_arr={img_arr} />
