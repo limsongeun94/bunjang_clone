@@ -21,6 +21,8 @@ export default ({ data, user }: IndexProps) => {
   //   .get("/product", { params: { page: 2, size: 50 } })
   //   .then((res) => console.log(res.data));
 
+  console.log(data.products);
+
   const banner_img: Banner[] = data.banners;
 
   const { ref, inView } = useInView();
@@ -80,13 +82,31 @@ export default ({ data, user }: IndexProps) => {
                 <div
                   key={product.pid}
                   onClick={() => onClickNewTap(product.pid)}
-                  className="flex-item-propduct w-[196px] h-[276px] mr-[11px] mb-[11px] border-[1px] border-[#eeeeee]"
+                  className="flex-item-propduct w-[196px] h-[276px] mr-[11px] mb-[11px] border-[1px] border-[#eeeeee] cursor-pointer"
                 >
-                  <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee]">
+                  <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee] relative">
                     <img
                       className="w-[194px] h-[194px] object-cover"
                       src={product.product_image}
                     />
+                    <div className="absolute bottom-[10px] left-[10px] flex gap-[5px]">
+                      {product.bun_pay_filter_enabled === true ? (
+                        <img
+                          src="/icons/bunpay.svg"
+                          width="35px"
+                          height="16px"
+                        />
+                      ) : (
+                        ""
+                      )}
+                      {product.free_shipping === true ? (
+                        <div className="px-[3px] py-[2px] leading-none rounded-[2px] text-[10px] text-white bg-black/[.4]">
+                          배송비포함
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
                   </div>
                   <div className="w-[194px] h-[80px] py-[15px] px-[10px] flex flex-col justify-between">
                     <div className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">
@@ -111,13 +131,31 @@ export default ({ data, user }: IndexProps) => {
                 <div
                   key={product.pid}
                   onClick={() => onClickNewTap(product.pid)}
-                  className="flex-item-propduct w-[196px] h-[276px] mr-[11px] mb-[11px] border-[1px] border-[#eeeeee]"
+                  className="flex-item-propduct w-[196px] h-[276px] mr-[11px] mb-[11px] border-[1px] border-[#eeeeee] cursor-pointer"
                 >
-                  <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee]">
+                  <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee] relative">
                     <img
                       className="w-[194px] h-[194px] object-cover"
                       src={product.product_image}
                     />
+                    <div className="absolute bottom-[10px] left-[10px] flex gap-[5px]">
+                      {product.bun_pay_filter_enabled === true ? (
+                        <img
+                          src="/icons/bunpay.svg"
+                          width="35px"
+                          height="16px"
+                        />
+                      ) : (
+                        ""
+                      )}
+                      {product.free_shipping === true ? (
+                        <div className="px-[3px] py-[2px] leading-none rounded-[2px] text-[10px] text-white bg-black/[.4]">
+                          배송비포함
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
                   </div>
                   <div className="w-[194px] h-[80px] py-[15px] px-[10px] flex flex-col justify-between">
                     <div className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">
