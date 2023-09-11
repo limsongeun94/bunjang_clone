@@ -167,6 +167,9 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
                 return (
                   <a
                     key={el.id}
+                    onClick={() =>
+                      router.push("/categories/" + el.id + "?page=1")
+                    }
                     onMouseEnter={() => setCurrentMainMenu(el.id)}
                     className="block pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
                   >
@@ -190,6 +193,10 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
                   ? menuCategories.categories.map((el) => {
                       return (
                         <a
+                          key={el.id}
+                          onClick={() =>
+                            router.push("/categories/" + el.id + "?page=1")
+                          }
                           onMouseEnter={() => setCurrentSubMenu(el.id)}
                           className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
                         >
@@ -214,7 +221,13 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
                 ? subMenuCategories.categories
                   ? subMenuCategories.categories.map((el) => {
                       return (
-                        <a className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer">
+                        <a
+                          key={el.id}
+                          onClick={() =>
+                            router.push("/categories/" + el.id + "?page=1")
+                          }
+                          className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
+                        >
                           {el.title}
                         </a>
                       );
