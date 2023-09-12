@@ -118,12 +118,19 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
             <img className="mr-[5px] " src="/icons/icon_resell.png" />
             <div>판매하기</div>
           </div>
-          <div className="flex ml-[30px] relative cursor-pointer">
+          <div
+            onClick={
+              loginState
+                ? () => router.push("/shop/" + user.id + "/products")
+                : () => setLoginModal(true)
+            }
+            className="flex ml-[30px] relative cursor-pointer"
+          >
             <div className="after-bar-header" />
             <img className="mr-[5px]" src="/icons/icon_my_shop.png" />
             <div>내상점</div>
           </div>
-          <div className="flex ml-[30px] relative cursor-pointer">
+          <div className="flex ml-[30px] relative cursor-not-allowed">
             <div className="after-bar-header" />
             <img className="mr-[5px]" src="/icons/icon_talk.png" />
             <div>번개톡</div>
@@ -167,6 +174,9 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
                 return (
                   <a
                     key={el.id}
+                    onClick={() =>
+                      router.push("/categories/" + el.id + "?page=1")
+                    }
                     onMouseEnter={() => setCurrentMainMenu(el.id)}
                     className="block pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
                   >
@@ -190,6 +200,10 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
                   ? menuCategories.categories.map((el) => {
                       return (
                         <a
+                          key={el.id}
+                          onClick={() =>
+                            router.push("/categories/" + el.id + "?page=1")
+                          }
                           onMouseEnter={() => setCurrentSubMenu(el.id)}
                           className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
                         >
@@ -214,7 +228,13 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
                 ? subMenuCategories.categories
                   ? subMenuCategories.categories.map((el) => {
                       return (
-                        <a className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer">
+                        <a
+                          key={el.id}
+                          onClick={() =>
+                            router.push("/categories/" + el.id + "?page=1")
+                          }
+                          className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
+                        >
                           {el.title}
                         </a>
                       );

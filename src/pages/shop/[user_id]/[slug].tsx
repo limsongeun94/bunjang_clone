@@ -45,7 +45,9 @@ export default ({ data, user }: IndexProps) => {
               height="100px"
               className="mb-[15px] cursor-pointer rounded-[50%]"
             />
-            <div className="text-base mb-[10px] text-white">상점이름</div>
+            <div className="text-base mb-[10px] text-white">
+              {user.name}의 상점
+            </div>
             <div className="flex">
               <img src="/icons/star.png" width="15px" height="14px" />
               <img src="/icons/star.png" width="15px" height="14px" />
@@ -60,7 +62,7 @@ export default ({ data, user }: IndexProps) => {
           <div className="flex-[1_0_0%] px-[30px] border-t border-r border-b border-[#eeeeee] h-[310px]">
             <div className="flex justify-between items-center">
               <div className="flex items-center text-lg font-semibold h-[75px]">
-                상점이름{" "}
+                {user.name}의 상점
                 <button className="ml-[10px] h-[20px] leading-[20px] text-center px-[5px] text-[#888888] border-[1px] border-[#eeeeee] text-[11px] font-normal cursor-pointer">
                   {" "}
                   상점명 수정
@@ -173,43 +175,39 @@ export default ({ data, user }: IndexProps) => {
           </div>
         </div>
         <div className={`${routerType === "products" ? "" : "hidden"}`}>
-          <div className="text-lg pt-[50px] pb-[20px] border-b border-[#eeeeee] flex justify-between items-center">
+          <div className="text-lg pt-[50px] pb-[20px] mb-[50px] border-b border-[#eeeeee] flex justify-between items-center">
             <div>
               상품
-              <span className="text-[#f72f33]">38</span>
+              <span className="text-[#f72f33]">0</span>
             </div>
-            <div
-              onMouseOver={() => setCategoriesFilter(true)}
-              onMouseOut={() => setCategoriesFilter(false)}
-              className="border-[1px] border-[#eeeeee] w-[140px] h-[28px] text-xs relative"
-            >
-              <div className="h-full pr-[10px] pl-[10px] flex items-center justify-between">
-                전체
-                <img
-                  src="/icons/down_arrow_category.png"
-                  width="10px"
-                  height="6px"
-                  alt="카테고리 화살표 아이콘"
-                />
-              </div>
-              <div
-                className={`${
-                  categoriesFilter ? "" : "hidden"
-                } absolute top-[27px] left-[-1px] w-[calc(100%+2px)] bg-white border-l border-b border-r border-[#eeeeee]`}
-              >
-                <div className="w-full h0[28px] px-[10px] leading-[28px] cursor-pointer">
-                  카테고리1
-                </div>
-                <div className="w-full h0[28px] px-[10px] leading-[28px] cursor-pointer">
-                  카테고리2
-                </div>
-                <div className="w-full h0[28px] px-[10px] leading-[28px] cursor-pointer">
-                  카테고리3
-                </div>
-                <div className="w-full h0[28px] px-[10px] leading-[28px] cursor-pointer">
-                  카테고리4
-                </div>
-              </div>
+          </div>
+        </div>
+        <div className={`${routerType === "reviews" ? "" : "hidden"}`}>
+          <div className="text-lg pt-[50px] pb-[20px] mb-[50px] border-b border-[#eeeeee] flex justify-between items-center">
+            <div>
+              상점후기
+              <span className="text-[#f72f33]">0</span>
+            </div>
+          </div>
+        </div>
+        <div className={`${routerType === "favorites" ? "" : "hidden"}`}>
+          <div className="text-lg pt-[50px] pb-[20px] mb-[50px] border-b border-[#eeeeee] flex justify-between items-center">
+            <div>
+              찜<span className="text-[#f72f33]">0</span>
+            </div>
+          </div>
+        </div>
+        <div className={`${routerType === "followings" ? "" : "hidden"}`}>
+          <div className="text-lg pt-[50px] pb-[20px] mb-[50px] border-b border-[#eeeeee] flex justify-between items-center">
+            <div>
+              팔로잉<span className="text-[#f72f33]">0</span>
+            </div>
+          </div>
+        </div>
+        <div className={`${routerType === "followers" ? "" : "hidden"}`}>
+          <div className="text-lg pt-[50px] pb-[20px] mb-[50px] border-b border-[#eeeeee] flex justify-between items-center">
+            <div>
+              팔로워<span className="text-[#f72f33]">0</span>
             </div>
           </div>
         </div>

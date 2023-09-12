@@ -1,7 +1,16 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
 
 export default () => {
+  const router = useRouter();
+
+  const searchParams = useSearchParams();
+  const tab = searchParams.get("tab") || "purchases"; // (어쩌면 null) || (널인 경우 값)
+
   const [filter, setFilter] = useState(false);
+
+  console.log(tab);
 
   return (
     <div className="h-full">
@@ -28,13 +37,34 @@ export default () => {
         </header>
         <div className="overflow-scroll h-[calc(100%-3.125rem)]">
           <nav className="flex">
-            <div className="w-4/12 h-[2.875rem] leading-[2.875rem] text-center text-[1.125rem] font-semibold border-b-[2px] border-[#1e1d29]">
+            <div
+              onClick={() => router.push("/products/transaction?tab=purchases")}
+              className={`w-4/12 h-[2.875rem] leading-[2.875rem] text-center text-[1.125rem] cursor-pointer ${
+                tab === "purchases"
+                  ? "font-semibold border-b-[2px] border-[#1e1d29]"
+                  : "text-[#72707f] border-b border-[#eae9f1] "
+              }  `}
+            >
               구매
             </div>
-            <div className="w-4/12 h-[2.875rem] leading-[2.875rem] text-center text-[1.125rem] text-[#72707f] border-b border-[#eae9f1]">
+            <div
+              onClick={() => router.push("/products/transaction?tab=orders")}
+              className={`w-4/12 h-[2.875rem] leading-[2.875rem] text-center text-[1.125rem]  cursor-pointer ${
+                tab === "orders"
+                  ? "font-semibold border-b-[2px] border-[#1e1d29]"
+                  : "text-[#72707f] border-b border-[#eae9f1] "
+              }`}
+            >
               판매
             </div>
-            <div className="w-4/12 h-[2.875rem] leading-[2.875rem] text-center text-[1.125rem] text-[#72707f] border-b border-[#eae9f1]">
+            <div
+              onClick={() => router.push("/products/transaction?tab=deposits")}
+              className={`w-4/12 h-[2.875rem] leading-[2.875rem] text-center text-[1.125rem] cursor-pointer ${
+                tab === "deposits"
+                  ? "font-semibold border-b-[2px] border-[#1e1d29]"
+                  : "text-[#72707f] border-b border-[#eae9f1] "
+              }`}
+            >
               정산
             </div>
           </nav>
@@ -73,44 +103,51 @@ export default () => {
                 </svg>
               </button>
             </nav>
-            <div>
-              <div className="mt-[16px] px-[1rem] ">
-                <div className="flex items-center ">
-                  <div className="h-[96px] w-[96px] relative">
-                    <img src="/무제1.jpg" width="96px" height="96px" />
-                    <span className="absolute left-0 top-0 w-full h-full flex flex-col justify-center items-center bg-[#1e1d29]/50 text-[0.875rem] font-semibold text-white">
-                      <img
-                        src="https://assets.bunjang.co.kr/img/trade/ic-circle-tick@3x.png"
-                        width="20px"
-                        height="20px"
-                        className="mb-[0.25rem]"
-                      />
-                      거래완료
-                    </span>
+
+            {tab === "purchases" ? (
+              <div>
+                <div className="mt-[16px] px-[1rem] ">
+                  <div className="flex items-center ">
+                    <div className="h-[96px] w-[96px] relative">
+                      <img src="/무제1.jpg" width="96px" height="96px" />
+                      <span className="absolute left-0 top-0 w-full h-full flex flex-col justify-center items-center bg-[#1e1d29]/50 text-[0.875rem] font-semibold text-white">
+                        <img
+                          src="https://assets.bunjang.co.kr/img/trade/ic-circle-tick@3x.png"
+                          width="20px"
+                          height="20px"
+                          className="mb-[0.25rem]"
+                        />
+                        거래완료
+                      </span>
+                    </div>
+                    <div className="flex flex-col justify-center ml-[0.5rem] ">
+                      <span className="text-[0.875rem]">
+                        노리다케 바튼 바톤 찻찬 티잔
+                      </span>
+                      <span className="text-[0.8125rem] leading-[0.8125rem] py-[4px]">
+                        <strong className="mr-[2px] font-semibold text-[1rem]">
+                          12,000
+                        </strong>
+                        원
+                      </span>
+                      <span className="text-[0.75rem] leading-[1rem]">
+                        Rarina / 번개페이 안전결제
+                      </span>
+                      <span className="text-[0.75rem] leading-[1rem]">
+                        2023.07.27 (오전 09:02)
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex flex-col justify-center ml-[0.5rem] ">
-                    <span className="text-[0.875rem]">
-                      노리다케 바튼 바톤 찻찬 티잔
-                    </span>
-                    <span className="text-[0.8125rem] leading-[0.8125rem] py-[4px]">
-                      <strong className="mr-[2px] font-semibold text-[1rem]">
-                        12,000
-                      </strong>
-                      원
-                    </span>
-                    <span className="text-[0.75rem] leading-[1rem]">
-                      Rarina / 번개페이 안전결제
-                    </span>
-                    <span className="text-[0.75rem] leading-[1rem]">
-                      2023.07.27 (오전 09:02)
-                    </span>
-                  </div>
+                  <button className="mt-[0.5rem] w-full leading-[3rem] text-[0.875rem] text-center font-semibold border-[1px] border-[#dcdbe4] rounded-[2px]">
+                    후기 작성
+                  </button>
                 </div>
-                <button className="mt-[0.5rem] w-full leading-[3rem] text-[0.875rem] text-center font-semibold border-[1px] border-[#dcdbe4] rounded-[2px]">
-                  후기 작성
-                </button>
               </div>
-            </div>
+            ) : tab === "orders" ? (
+              <div>판매 내역이 없습니다.</div>
+            ) : (
+              <div>정산 내역이 없습니다.</div>
+            )}
           </div>
         </div>
       </div>
