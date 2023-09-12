@@ -118,12 +118,19 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
             <img className="mr-[5px] " src="/icons/icon_resell.png" />
             <div>판매하기</div>
           </div>
-          <div className="flex ml-[30px] relative cursor-pointer">
+          <div
+            onClick={
+              loginState
+                ? () => router.push("/shop/" + user.id + "/products")
+                : () => setLoginModal(true)
+            }
+            className="flex ml-[30px] relative cursor-pointer"
+          >
             <div className="after-bar-header" />
             <img className="mr-[5px]" src="/icons/icon_my_shop.png" />
             <div>내상점</div>
           </div>
-          <div className="flex ml-[30px] relative cursor-pointer">
+          <div className="flex ml-[30px] relative cursor-not-allowed">
             <div className="after-bar-header" />
             <img className="mr-[5px]" src="/icons/icon_talk.png" />
             <div>번개톡</div>

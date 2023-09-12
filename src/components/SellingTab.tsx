@@ -15,7 +15,7 @@ export default ({ tab }: IndexProps) => {
 
   const onClickNewTap = () => {
     const aTag = document.createElement("a");
-    aTag.setAttribute("href", "/products/transaction/purchases");
+    aTag.setAttribute("href", "/products/transaction?tab=purchases");
     aTag.setAttribute("target", "_blank");
     aTag.click();
   };
