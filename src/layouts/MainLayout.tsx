@@ -30,6 +30,9 @@ export default function MainLayout({
   return (
     // 이 div를 렐러티브로, floa
     <div className="relative">
+      <div className="absolute left-[20px] top-[20px] text-indigo-700">
+        해당 사이트는 포트폴리오용 카피 사이트입니다.
+      </div>
       <TopHeader setLoginModal={setLoginModal} user={user} />
       <StickyHeader
         categories={categories}
