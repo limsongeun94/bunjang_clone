@@ -10,8 +10,6 @@ export default () => {
 
   const [filter, setFilter] = useState(false);
 
-  console.log(tab);
-
   return (
     <div className="h-full">
       <div className="w-[640px] h-full m-auto">

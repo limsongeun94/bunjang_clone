@@ -60,7 +60,6 @@ export default ({ data, user }: IndexProps) => {
   });
   const showProduct = () => {
     axios.get("/product/" + router.query.products_id).then((res) => {
-      console.log(res.data);
       setProduct(res.data);
     });
   };

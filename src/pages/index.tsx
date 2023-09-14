@@ -21,7 +21,7 @@ export default ({ data, user }: IndexProps) => {
   //   .get("/product", { params: { page: 2, size: 50 } })
   //   .then((res) => console.log(res.data));
 
-  console.log(data.products);
+  // console.log(data.products);
 
   const banner_img: Banner[] = data.banners;
 
@@ -87,7 +87,7 @@ export default ({ data, user }: IndexProps) => {
                   <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee] relative">
                     <img
                       className="w-[194px] h-[194px] object-cover"
-                      src={product.product_image}
+                      src={product.product_image.replace("{res}", "194")}
                     />
                     <div className="absolute bottom-[10px] left-[10px] flex gap-[5px]">
                       {product.bun_pay_filter_enabled === true ? (
@@ -136,7 +136,7 @@ export default ({ data, user }: IndexProps) => {
                   <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee] relative">
                     <img
                       className="w-[194px] h-[194px] object-cover"
-                      src={product.product_image}
+                      src={product.product_image.replace("{res}", "194")}
                     />
                     <div className="absolute bottom-[10px] left-[10px] flex gap-[5px]">
                       {product.bun_pay_filter_enabled === true ? (

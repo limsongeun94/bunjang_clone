@@ -142,7 +142,7 @@ export default ({ data, user }: IndexProps) => {
           setTradeLocation(region.address_name);
         });
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 

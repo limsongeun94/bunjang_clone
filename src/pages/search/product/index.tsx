@@ -118,7 +118,7 @@ export default ({ data, user }: IndexProps) => {
                   <div className="w-[194px] h-[194px] border-b-[1px] border-[#eeeeee] relative">
                     <img
                       className="w-[194px] h-[194px] object-cover"
-                      src={product.product_image}
+                      src={product.product_image.replace("{res}", "194")}
                     />
                     <div className="absolute bottom-[10px] left-[10px] flex gap-[5px]">
                       {product.bun_pay_filter_enabled === true ? (
