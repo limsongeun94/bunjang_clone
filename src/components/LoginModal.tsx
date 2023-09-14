@@ -24,7 +24,7 @@ const LoginModal = ({ loginModal, setLoginModal }: LayoutProps) => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-[#f7f7f7] w-[420px] h-[506px] relative"
+        className="bg-[#f7f7f7] w-[420px]  relative"
       >
         <button
           onClick={() => setLoginModal(false)}
@@ -48,9 +48,9 @@ const LoginModal = ({ loginModal, setLoginModal }: LayoutProps) => {
             <button
               onMouseEnter={() => setHoverKakao("/icons/kakaotalk_white.png")}
               onMouseLeave={() => setHoverKakao("/icons/kakaotalk.png")}
-              className="bg-white  hover:text-white hover:font-bold relative text-[#212121] w-[280px] h-[38px] mb-[15px]  text-center leading-[38px] text-sm "
+              className="bg-white  hover:text-white hover:font-bold relative text-[#212121] w-[280px] h-[38px] mb-[15px]  text-center leading-[38px] text-sm"
             >
-              <div className="hover:bg-[#3b1e1e]">
+              <div className="hover:bg-[#3b1e1e] ">
                 <img
                   src={hoverKakao}
                   width="24px"
@@ -124,7 +124,14 @@ const LoginModal = ({ loginModal, setLoginModal }: LayoutProps) => {
               </div>
             </button>
           </div>
-          <div className="text-left px-[32px] pt-[56px] pb-[24px]">
+          <div className="px-[32px] py-[30px] text-[13px]">
+            실제 서비스 이용을 위해서는
+            <br /> <span className="text-[#f70000]">
+              이메일로 이용하기
+            </span>{" "}
+            버튼을 클릭해주세요.
+          </div>
+          <div className="text-left px-[32px] pb-[24px]">
             <p className="text-xs text-[#999999] border-t-[1px] border-[#e5e5e5] pt-[16px]">
               도움이 필요하면{" "}
               <a href="mailto:help@bunjang.co.kr" className="text-[#999999]">
