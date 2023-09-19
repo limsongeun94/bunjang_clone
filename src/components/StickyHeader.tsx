@@ -188,7 +188,7 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
           </div>
           <div
             className={`${
-              menuCategories ? "block" : "hidden"
+              menuCategories?.categories ? "block" : "hidden"
             } absolute top-[70px] left-[238px]  bg-white border-l-[1px] border-t-[1px] border-[#eeeeee] w-[239px] ${menuHeightClass}`}
           >
             <div className="w-full h-[40px] font-bold text-sm leading-[40px] pl-[30px] border-b-[1px] border-[#eeeeee]">
@@ -217,7 +217,7 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
           </div>
           <div
             className={`${
-              subMenuCategories ? "block" : "hidden"
+              subMenuCategories?.categories ? "block" : "hidden"
             } absolute top-[70px] left-[476px]  bg-white border-l-[1px] border-t-[1px] border-[#eeeeee] w-[239px] ${menuHeightClass}`}
           >
             <div className="w-full h-[40px] font-bold text-sm leading-[40px] pl-[30px] border-b-[1px] border-[#eeeeee]">
