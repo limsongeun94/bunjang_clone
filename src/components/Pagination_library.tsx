@@ -20,7 +20,6 @@ function App(props: IndexProps) {
   const [current, setCurrent] = useState(parseInt(page as string));
   const [items, setItems] = useState<Array<number>>([]);
   useEffect(() => {
-    // console.log("안녕", page);
     paginator.setTotal(props.lastPage);
     paginator.setCurrent(parseInt(page));
     setCurrent(paginator.getCurrent());
