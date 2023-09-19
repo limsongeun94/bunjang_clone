@@ -76,31 +76,36 @@ function App(props: IndexProps) {
 
   return (
     <div className="flex justify-center pb-[100px]">
-      {paginator.getItems().some((el) => el === 1) ? null : (
+      {paginator.getItems().some((el) => el === 1) ||
+      paginator.getItems().some((el) => el === 0) ? null : (
         <button className="prev_page_btn" onClick={onClickPrevWindowBtn}>
           &lt;
         </button>
       )}
-      {items.map((x) => (
-        <button
-          className={`${
-            paginator.getItems().some((el) => el === props.lastPage)
-              ? "last_pageBtn"
-              : "pageBtn"
-          } pageBtn`}
-          style={{
-            backgroundColor: current === x ? "rgb(255, 80, 88)" : "",
-            color: current === x ? "white" : "",
-          }}
-          key={x}
-          onClick={() => {
-            onClickToBtn(x);
-            props.onClickPage(x);
-          }}
-        >
-          {x}
-        </button>
-      ))}
+      {props.lastPage === 0 ? (
+        <button className="pageBtn">0</button>
+      ) : (
+        items.map((x) => (
+          <button
+            className={`${
+              paginator.getItems().some((el) => el === props.lastPage)
+                ? "last_pageBtn"
+                : "pageBtn"
+            } pageBtn`}
+            style={{
+              backgroundColor: current === x ? "rgb(255, 80, 88)" : "",
+              color: current === x ? "white" : "",
+            }}
+            key={x}
+            onClick={() => {
+              onClickToBtn(x);
+              props.onClickPage(x);
+            }}
+          >
+            {x}
+          </button>
+        ))
+      )}
       {paginator.getItems().some((el) => el === props.lastPage) ? null : (
         <button className="next_page_btn" onClick={onClickNextWindowBtn}>
           &gt;
