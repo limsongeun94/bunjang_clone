@@ -11,7 +11,7 @@
 $ npm run build
 
 ## 데모
-[https://bunjang-clone.vercel.app/]https://bunjang-clone.vercel.app/
+[https://bunjang-clone.vercel.app/](https://bunjang-clone.vercel.app/)
 
 ## 멤버 구성
 * [seoly0](https://github.com/seoly0) - API 구축
