@@ -7,7 +7,7 @@
 [https://bunjang-clone.vercel.app/](https://bunjang-clone.vercel.app/)
 
 ## 멤버 구성
-* [seoly0](https://github.com/seoly0) - API 구축
+* [seoly0](https://github.com/seoly0) - API 구현
 * [limsongeun94](https://github.com/limsongeun94) - 메인, 게시글 목록, 게시글 상세보기, 검색 목록, 판매글 올리기 등 각 화면 구현, API 연동 구현
 
 ## 주요 기능
