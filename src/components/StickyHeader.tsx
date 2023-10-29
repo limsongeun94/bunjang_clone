@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { Category, User } from "@/interface";
 import dynamic from "next/dynamic";
@@ -81,6 +81,21 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
     }
   };
 
+  let timeoutId = useRef<number | null>(null);
+
+  const handleOnMouseEnterMainMenu = (id: string) => {
+    timeoutId.current = window.setTimeout(() => {
+      setCurrentMainMenu(id);
+    }, 150);
+  };
+
+  const handleOnMouseLeaveMainMenu = () => {
+    console.log("hahahah");
+    if (timeoutId.current) {
+      window.clearTimeout(timeoutId.current as number);
+    }
+  };
+
   return (
     <header className="bg-white sticky top-0 z-30 pt-[30px]">
       <div className="relative w-[1024px] mx-auto">
@@ -160,6 +175,7 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
           onMouseLeave={() => {
             setMenuOpenState(false);
             setCurrentMainMenu("");
+            // handleOnMouseLeaveMainMenu();
           }}
           className={menuOpenState ? "block" : "hidden"}
         >
@@ -177,8 +193,17 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
                     onClick={() =>
                       router.push("/categories/" + el.id + "?page=1")
                     }
-                    onMouseEnter={() => setCurrentMainMenu(el.id)}
-                    className="block pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
+                    // onMouseEnter={() => setCurrentMainMenu(el.id)}
+                    onMouseEnter={() => handleOnMouseEnterMainMenu(el.id)}
+                    onMouseLeave={handleOnMouseLeaveMainMenu}
+                    className={
+                      "flex items-center pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer" +
+                      ` ${
+                        el.id == currentMainMenu
+                          ? "bg-red-500 text-white"
+                          : null
+                      }`
+                    }
                   >
                     {el.title}
                   </a>
@@ -205,7 +230,14 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
                             router.push("/categories/" + el.id + "?page=1")
                           }
                           onMouseEnter={() => setCurrentSubMenu(el.id)}
-                          className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
+                          className={
+                            "pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer" +
+                            ` ${
+                              el.id == currentSubMenu
+                                ? "text-red-600 !underline"
+                                : null
+                            }`
+                          }
                         >
                           {el.title}
                         </a>
