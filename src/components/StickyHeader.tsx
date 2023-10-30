@@ -224,7 +224,7 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
                     // onMouseEnter={() => setCurrentMainMenu(el.id)}
                     onMouseEnter={() => handleOnMouseEnterMainMenu(el.id)}
                     onMouseLeave={handleOnMouseLeaveMainMenu}
-                    className={`flex items-center pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer" 
+                    className={`flex items-center pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer 
                        ${
                          el.id == currentMainMenu
                            ? "bg-red-500 text-white"
@@ -257,7 +257,7 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
                           }
                           onMouseEnter={() => handleOnMouseEnter2ndMenu(el.id)}
                           onMouseLeave={handleOnMouseLeave2ndMenu}
-                          className={`pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
+                          className={`pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer
                              ${
                                el.id == currentSubMenu
                                  ? "text-red-600 !underline"
