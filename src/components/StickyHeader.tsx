@@ -57,10 +57,11 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
     }
   }, [user]);
 
-  const [menuOpenState, setMenuOpenState] = useState<boolean>(false);
+  const [menuOpenState, setMenuOpenState] = useState<boolean>(false); // 메뉴 열지 말지 선택하는 state
 
-  const [currentMainMenu, setCurrentMainMenu] = useState<string>("");
-  const [currentSubMenu, setCurrentSubMenu] = useState<string>("");
+  const [currentMainMenu, setCurrentMainMenu] = useState<string>(""); // 선택한 메인메뉴의 id
+  const [currentSubMenu, setCurrentSubMenu] = useState<string>(""); // 선택한 2nd메뉴의 id
+  const [current3rdMenu, setCurrent3rdMenu] = useState<string>(""); // 선택한 3rd메뉴의 id
   const menuCategories = categories.find((el) => el.id === currentMainMenu);
   const subMenuCategories = menuCategories
     ? menuCategories.categories
@@ -90,9 +91,36 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
   };
 
   const handleOnMouseLeaveMainMenu = () => {
-    console.log("hahahah");
     if (timeoutId.current) {
       window.clearTimeout(timeoutId.current as number);
+    }
+  };
+
+  let timeoust2ndId = useRef<number | null>(null);
+
+  const handleOnMouseEnter2ndMenu = (id: string) => {
+    timeoust2ndId.current = window.setTimeout(() => {
+      setCurrentSubMenu(id);
+    }, 150);
+  };
+
+  const handleOnMouseLeave2ndMenu = () => {
+    if (timeoust2ndId.current) {
+      window.clearTimeout(timeoust2ndId.current as number);
+    }
+  };
+
+  let timeoust3rdId = useRef<number | null>(null);
+
+  const handleOnMouseEnter3rdMenu = (id: string) => {
+    timeoust3rdId.current = window.setTimeout(() => {
+      setCurrent3rdMenu(id);
+    }, 150);
+  };
+
+  const handleOnMouseLeave3rdMenu = () => {
+    if (timeoust3rdId.current) {
+      window.clearTimeout(timeoust3rdId.current as number);
     }
   };
 
@@ -196,14 +224,12 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
                     // onMouseEnter={() => setCurrentMainMenu(el.id)}
                     onMouseEnter={() => handleOnMouseEnterMainMenu(el.id)}
                     onMouseLeave={handleOnMouseLeaveMainMenu}
-                    className={
-                      "flex items-center pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer" +
-                      ` ${
-                        el.id == currentMainMenu
-                          ? "bg-red-500 text-white"
-                          : null
-                      }`
-                    }
+                    className={`flex items-center pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer" 
+                       ${
+                         el.id == currentMainMenu
+                           ? "bg-red-500 text-white"
+                           : null
+                       }`}
                   >
                     {el.title}
                   </a>
@@ -229,15 +255,14 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
                           onClick={() =>
                             router.push("/categories/" + el.id + "?page=1")
                           }
-                          onMouseEnter={() => setCurrentSubMenu(el.id)}
-                          className={
-                            "pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer" +
-                            ` ${
-                              el.id == currentSubMenu
-                                ? "text-red-600 !underline"
-                                : null
-                            }`
-                          }
+                          onMouseEnter={() => handleOnMouseEnter2ndMenu(el.id)}
+                          onMouseLeave={handleOnMouseLeave2ndMenu}
+                          className={`pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
+                             ${
+                               el.id == currentSubMenu
+                                 ? "text-red-600 !underline"
+                                 : null
+                             }`}
                         >
                           {el.title}
                         </a>
@@ -265,7 +290,13 @@ const StickyHeader = ({ categories, user, setLoginModal }: LayoutProps) => {
                           onClick={() =>
                             router.push("/categories/" + el.id + "?page=1")
                           }
-                          className="pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer"
+                          onMouseEnter={() => handleOnMouseEnter3rdMenu(el.id)}
+                          onMouseLeave={handleOnMouseLeave3rdMenu}
+                          className={`${
+                            el.id == current3rdMenu
+                              ? "text-red-600 !underline"
+                              : null
+                          } pl-[30px] pr-[30px] no-underline text-[#212121] text-sm h-[30px] cursor-pointer`}
                         >
                           {el.title}
                         </a>
